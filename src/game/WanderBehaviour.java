@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by: Riordan D. Alfredo
+ * Created by:
  * @author Riordan D. Alfredo
  * Modified by: Chong Jun Hao
  *
