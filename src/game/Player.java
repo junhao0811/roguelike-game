@@ -27,7 +27,23 @@ public class Player extends Actor {
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.setIntrinsicWeapon(new BareFist());
     }
-
+    
+    /**
+     * A method for returning the string representation of the player.
+     * It displays the player's name and its current hit points, along with its maximum health hit points.
+     * Moreover, it also displays the player's current stamina, along with its maximum stamina.
+     */
+    @Override
+    public String toString() {
+        // (HP: 100/100, STA: 50/50)
+        return name + " (HP: " +
+            this.getAttribute(BaseActorAttributes.HEALTH) + "/" +
+            this.getAttributeMaximum(BaseActorAttributes.HEALTH) + ", STA: " +
+            this.getAttribute(BaseActorAttributes.STAMINA) + "/" +
+            this.getAttributeMaximum(BaseActorAttributes.STAMINA) +
+            ")";
+    }
+    
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         // Handle multi-turn Actions
