@@ -51,7 +51,7 @@ public class Application {
             }
         }
 
-        Player player = new Player("Farmer", '@', 100);
+        Player player = new Player("Farmer", '@', 100, 200);
         world.addPlayer(player, gameMap.at(23, 10));
 
         // game setup
