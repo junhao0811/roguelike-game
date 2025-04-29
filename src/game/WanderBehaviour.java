@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by:
+ * Created by: Riordan D. Alfredo
  * @author Riordan D. Alfredo
- * Modified by: Chong Jun Hao
  *
  */
 public class WanderBehaviour implements Behaviour {
