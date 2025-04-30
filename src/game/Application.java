@@ -1,5 +1,6 @@
 package game;
 
+import edu.monash.fit2099.demo.huntsman.HuntsmanSpider;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,10 @@ public class Application {
 
         GameMap gameMap = new GameMap("Valley of the Inheritree", groundFactory, map);
         world.addGameMap(gameMap);
-
+        
+        gameMap.at(22, 13).addActor(new SpiritGoat());
+        gameMap.at(24, 13).addActor(new OmenSheep());
+        
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
