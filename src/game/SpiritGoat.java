@@ -23,12 +23,8 @@ public class SpiritGoat extends Actor {
     
     /**
      * Constructor.
-     *
-     * @param name        Name to call the spirit goat in the UI
-     * @param displayChar Character to represent the spirit goat in the UI
-     * @param hitPoints   Spirit goat's starting number of hitpoints
      */
-    public SpiritGoat(String name, char displayChar, int hitPoints) {
+    public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
         this.behaviours.put(0, new WanderBehaviour()); // Highest priority
     }

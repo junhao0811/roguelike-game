@@ -23,12 +23,8 @@ public class OmenSheep extends Actor {
     
     /**
      * Constructor.
-     *
-     * @param name        Name to call the omen sheep in the UI
-     * @param displayChar Character to represent the omen sheep in the UI
-     * @param hitPoints   Omen sheep's starting number of hitpoints
      */
-    public OmenSheep(String name, char displayChar, int hitPoints) {
+    public OmenSheep() {
         super("Omen Sheep", 'm', 75);
         this.behaviours.put(0, new WanderBehaviour()); // Highest priority
     }
