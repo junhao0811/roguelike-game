@@ -433,7 +433,7 @@ $(function() {
     });
     $("ul.sub-nav-list-small li a").click(collapse);
     $("input#search-input").focus(collapse);
-    $("main").click(collapse);
+    $("game.main").click(collapse);
     $("section[id] > :header, :header[id], :header:has(a[id])").each(function(idx, el) {
         // Create anchor links for headers with an associated id attribute
         var hdr = $(el);

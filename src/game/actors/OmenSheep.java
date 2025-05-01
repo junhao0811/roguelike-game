@@ -1,4 +1,4 @@
-package game;
+package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -8,24 +8,27 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+import game.actions.AttackAction;
+import game.Status;
+import game.behaviours.WanderBehaviour;
 import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Class representing a Spirit Goat. Created by: Chong Jun Hao
+ * Class representing an Omen Sheep. Created by: Chong Jun Hao
  *
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends Actor {
+public class OmenSheep extends Actor {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
     /**
      * Constructor.
      */
-    public SpiritGoat() {
-        super("Spirit Goat", 'y', 50);
+    public OmenSheep() {
+        super("Omen Sheep", 'm', 75);
         this.behaviours.put(0, new WanderBehaviour()); // Highest priority
     }
     
@@ -54,7 +57,7 @@ public class SpiritGoat extends Actor {
     }
     
     /**
-     * The spirit goat can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     * The omen sheep can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
      *
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
@@ -71,3 +74,4 @@ public class SpiritGoat extends Actor {
         return actions;
     }
 }
+

@@ -1,6 +1,14 @@
 package game;
 
-import edu.monash.fit2099.demo.huntsman.HuntsmanSpider;
+import game.displays.FancyMessage;
+import game.items.Talisman;
+import game.grounds.Blight;
+import game.grounds.Floor;
+import game.actors.OmenSheep;
+import game.actors.Player;
+import game.grounds.Soil;
+import game.actors.SpiritGoat;
+import game.grounds.Wall;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +18,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 
 /**
- * The main class to setup and run the game.
+ * The game.main class to setup and run the game.
  * @author Adrian Kristanto
  */
 public class Application {
