@@ -2,12 +2,15 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+
 import game.Ability;
 import game.weapons.BareFist;
 import game.Status;
@@ -33,6 +36,15 @@ public class Player extends Actor {
     }
     
     /**
+     * Restore the current actor's stamina with the given stamina points.
+     *
+     * @param points the stamina points that the actor receives
+     */
+    public void restoreStamina(int points) {
+        this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, points);
+    }
+    
+    /**
      * A method for returning the string representation of the player.
      * It displays the player's name and its current hit points, along with its maximum health hit points.
      * Moreover, it also displays the player's current stamina, along with its maximum stamina.
@@ -54,6 +66,13 @@ public class Player extends Actor {
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
 
+        // Handle death logic
+        if (!this.isConscious()) {
+            display.println(this.unconscious(map));
+            display.println("YOU DIED");
+            return new DoNothingAction();
+        }
+        
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);

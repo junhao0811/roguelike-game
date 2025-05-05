@@ -1,4 +1,4 @@
-package game.actors;
+package game.actors.creatures;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -20,15 +20,15 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends Actor {
+public abstract class Creature extends Actor {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
     /**
      * Constructor.
      */
-    public SpiritGoat() {
-        super("Spirit Goat", 'y', 50);
+    public Creature(String name, char displayChar, int hitPoints) {
+        super(name, displayChar, hitPoints);
         this.behaviours.put(0, new WanderBehaviour()); // Highest priority
     }
     
@@ -42,22 +42,28 @@ public class SpiritGoat extends Actor {
      * @param display    the I/O object to which messages may be written
      * @return the valid action that can be performed in that iteration or null if no valid action
      * is found
-     * @see edu.monash.fit2099.demo.huntsman.HuntsmanSpider#playTurn(ActionList, Action, GameMap,
-     * Display)
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null) {
-                return action;
+        // Check if the actor is unconscious due to natural causes or accident
+        if (!this.isConscious()) {
+            display.println(this.unconscious(map));
+        }
+        
+        // Check if this actor is still on the map
+        if (map.locationOf(this) != null) {
+            for (Behaviour behaviour : behaviours.values()) {
+                Action action = behaviour.getAction(this, map);
+                if (action != null) {
+                    return action;
+                }
             }
         }
         return new DoNothingAction();
     }
     
     /**
-     * The spirit goat can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     * The creature can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
      *
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
