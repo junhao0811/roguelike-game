@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.capabilities.SproutEffect;
 import game.grounds.crops.Inheritree;
 import game.grounds.Soil;
 
@@ -13,7 +14,7 @@ import game.grounds.Soil;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class InheritreeSeed extends Seed {
+public class InheritreeSeed extends Seed implements SproutEffect {
     /**
      * Constructor.
      */
@@ -30,9 +31,18 @@ public class InheritreeSeed extends Seed {
     @Override
     public void plant(Actor actor, GameMap map) {
         super.plant(actor, map);
-        Location atLocation = map.locationOf(actor);
-        Inheritree inheritree = new Inheritree();
-        atLocation.setGround(inheritree);
-        inheritree.cureSurrounding(atLocation); // SRP
+        this.sprout(actor, map);
+        map.locationOf(actor).setGround(new Inheritree());
+    }
+    
+    @Override
+    public void sprout(Actor actor, GameMap map) {
+        for (Exit exit : map.locationOf(actor).getExits()) {
+            Location nearby = exit.getDestination();
+            // change this logic to adhere to SOLID principles
+            if (nearby.getGround().getDisplayChar() == 'x') {
+                nearby.setGround(new Soil());
+            }
+        }
     }
 }
