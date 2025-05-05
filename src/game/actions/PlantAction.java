@@ -39,21 +39,17 @@ public class PlantAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Ground ground = map.locationOf(actor).getGround();
-        if (!seed.canPlant(ground)) {
-            return seed + " cannot be planted here";
-        }
         seed.plant(actor, map);
         return seed + " has been planted";
     }
     
     /**
      * Describe what action will be performed if this Action is chosen in the menu.
-     *
+     * @param actor The actor performing the action
      * @return the action description to be displayed on the menu
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " plants " + seed;
+        return actor + " plants the " + seed;
     }
 }

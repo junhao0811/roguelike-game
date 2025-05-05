@@ -19,6 +19,8 @@ public abstract class Seed extends Item implements Plantable {
     
     /**
      * Constructor.
+     *
+     * @param name the name of the seed
      */
     public Seed(String name) {
         super(name, '*', true);
@@ -26,6 +28,9 @@ public abstract class Seed extends Item implements Plantable {
     
     /**
      * Plant the seed in the ground.
+     *
+     * @param actor the actor performing the action.
+     * @param map  the map the actor is on.
      */
     public void plant(Actor actor, GameMap map) {
         actor.removeItemFromInventory(this); // OCP
