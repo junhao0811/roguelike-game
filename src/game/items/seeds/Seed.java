@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 
+import game.Ability;
 import game.actions.PlantAction;
 import game.capabilities.Plantable;
 
@@ -60,7 +61,7 @@ public abstract class Seed extends Item implements Plantable {
     public ActionList allowableActions(Actor actor, GameMap map) {
         ActionList actions = new ActionList();
         Ground ground = map.locationOf(actor).getGround();
-        if (canPlant(ground)) {
+        if (actor.hasCapability(Ability.PLANT_CROPS) && this.canPlant(ground)) {
             actions.add(getPlantAction());
         }
         return actions;

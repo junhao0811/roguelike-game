@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.grounds.Inheritree;
+import game.grounds.crops.Inheritree;
 import game.grounds.Soil;
 
 /**
@@ -31,6 +31,7 @@ public class InheritreeSeed extends Seed {
     public void plant(Actor actor, GameMap map) {
         super.plant(actor, map);
         map.locationOf(actor).setGround(new Inheritree());
+        // should I move this logic?
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location tile = exit.getDestination();
             if (tile.getGround().getDisplayChar() == 'x') {

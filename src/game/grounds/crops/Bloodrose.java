@@ -1,6 +1,4 @@
-package game.grounds;
-
-import edu.monash.fit2099.engine.positions.Ground;
+package game.grounds.crops;
 
 /**
  * A class representing the "Bloodrose" crop in the valley
@@ -8,7 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class Bloodrose extends Ground {
+public class Bloodrose extends Crop {
     
     /**
      * Constructor
