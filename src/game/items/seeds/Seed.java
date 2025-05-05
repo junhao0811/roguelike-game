@@ -3,8 +3,8 @@ package game.items.seeds;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
 
 import game.actions.PlantAction;
 import game.capabilities.Plantable;
@@ -27,12 +27,10 @@ public abstract class Seed extends Item implements Plantable {
     /**
      * Plant the seed in the ground.
      */
-    @Override
-    public void plant(Actor actor) {
+    public void plant(Actor actor, GameMap map) {
         actor.removeItemFromInventory(this); // OCP
     }
     
-    @Override
     public boolean canPlant(Ground ground) {
         return ground.getDisplayChar() == '.';
     }
@@ -42,22 +40,23 @@ public abstract class Seed extends Item implements Plantable {
      *
      * @return a new PlantAction
      */
-    public PlantAction getPlantAction(Ground ground) {
-        return new PlantAction(this, ground);
+    public PlantAction getPlantAction() {
+        return new PlantAction(this);
     }
     
     /**
      * List of allowable actions that can be performed on the seed
      *
-     * @param location
+     * @param actor the Actor acting
+     * @param map   the GameMap the Actor is on
      * @return an unmodifiable list of Actions
      */
     @Override
-    public ActionList allowableActions(Location location) {
+    public ActionList allowableActions(Actor actor, GameMap map) {
         ActionList actions = new ActionList();
-        Ground ground = location.getGround();
+        Ground ground = map.locationOf(actor).getGround();
         if (canPlant(ground)) {
-            actions.add(getPlantAction(ground));
+            actions.add(getPlantAction());
         }
         return actions;
     }

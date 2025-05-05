@@ -1,6 +1,7 @@
 package game.capabilities;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 
 /**
@@ -14,7 +15,7 @@ public interface Plantable {
     /**
      * Plant the object in the soil.
      */
-    void plant(Actor actor);
+    void plant(Actor actor, GameMap map);
     
     /**
      * Check if the object can be planted based on the ground.

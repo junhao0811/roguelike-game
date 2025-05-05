@@ -21,18 +21,12 @@ public class PlantAction extends Action {
     private Seed seed;
     
     /**
-     * The Ground to plant the Seed on
-     */
-    private Ground ground;
-    
-    /**
      * Constructor.
      *
      * @param seed the Seed to be planted
      */
-    public PlantAction(Seed seed, Ground ground) {
+    public PlantAction(Seed seed) {
         this.seed = seed;
-        this.ground = ground;
     }
     
     /**
@@ -45,10 +39,11 @@ public class PlantAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+        Ground ground = map.locationOf(actor).getGround();
         if (!seed.canPlant(ground)) {
             return seed + " cannot be planted here";
         }
-        seed.plant(actor);
+        seed.plant(actor, map);
         return seed + " has been planted";
     }
     
