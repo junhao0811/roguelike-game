@@ -30,13 +30,9 @@ public class InheritreeSeed extends Seed {
     @Override
     public void plant(Actor actor, GameMap map) {
         super.plant(actor, map);
-        map.locationOf(actor).setGround(new Inheritree());
-        // should I move this logic?
-        for (Exit exit : map.locationOf(actor).getExits()) {
-            Location tile = exit.getDestination();
-            if (tile.getGround().getDisplayChar() == 'x') {
-                tile.setGround(new Soil());
-            }
-        }
+        Location atLocation = map.locationOf(actor);
+        Inheritree inheritree = new Inheritree();
+        atLocation.setGround(inheritree);
+        inheritree.cureSurrounding(atLocation); // SRP
     }
 }
