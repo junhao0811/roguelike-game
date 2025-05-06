@@ -21,6 +21,7 @@ public class CrimsonRot extends StatusEffect {
      */
     public CrimsonRot() {
         super("Crimson Rot");
+        this.countdownTimer = Integer.MAX_VALUE;
     }
     
     /**
@@ -39,9 +40,9 @@ public class CrimsonRot extends StatusEffect {
      */
     @Override
     public void tick(Location location, Actor actor) {
-        countdownTimer--;
         if (countdownTimer <= 0) {
             new Display().println(actor.unconscious(location.map()));
         }
+        countdownTimer--;
     }
 }
