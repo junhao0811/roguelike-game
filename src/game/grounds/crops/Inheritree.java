@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 
-import game.actors.Player;
 import game.capabilities.BloomEffect;
 
 /**
@@ -31,13 +30,10 @@ public class Inheritree extends Crop implements BloomEffect {
             if (nearby.containsAnActor()) {
                 Actor actor = nearby.getActor();
                 actor.heal(5);
-                actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, 5);
+                if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
+                    actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, 5);
+                }
             }
         }
-    }
-    
-    @Override
-    public void tick(Location location) {
-        this.bloom(location);
     }
 }

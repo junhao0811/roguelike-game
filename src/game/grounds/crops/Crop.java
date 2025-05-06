@@ -5,9 +5,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.capabilities.BloomEffect;
 
 public abstract class Crop extends Ground implements BloomEffect {
-    
-    private int counter;
-    
     /**
      * Constructor.
      *
@@ -15,14 +12,15 @@ public abstract class Crop extends Ground implements BloomEffect {
      */
     public Crop(char displayChar, String name) {
         super(displayChar, name);
-        counter = 0;
     }
     
-    @Override
-    public void bloom(Location location) {}
-    
+    /**
+     * This method is called every turn to allow the crop to bloom.
+     *
+     * @param location the location of the crop
+     */
     @Override
     public void tick(Location location) {
-        counter += 1;
+        this.bloom(location);
     }
 }
