@@ -14,7 +14,7 @@ import game.capabilities.BloomEffect;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class Inheritree extends Crop implements BloomEffect {
+public class Inheritree extends Crop {
     
     /**
      * Constructor
