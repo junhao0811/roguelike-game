@@ -1,17 +1,41 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
+import game.Ability;
 import game.Status;
+import game.capabilities.Curable;
 
 /**
  * A class representing a blight covering the ground of the valley.
  *
- * @author Adrian Kristanto
+ * @author Adrian Kristanto, modified by Chong Jun Hao
  */
-public class Blight extends Ground {
+public class Blight extends Ground implements Curable {
     
+    /**
+     * Constructor.
+     */
     public Blight() {
         super('x', "Blight");
+        this.addCapability(Ability.RECEIVE_CURE);
+    }
+    
+    /**
+     * Cures the blight using a Talisman, revealing the soil underneath it, thus allowing the Farmer
+     * to plant crops on it
+     *
+     * @param actor the actor performing the action.
+     * @param map   the map the actor is on.
+     */
+    public void cure(Actor actor, GameMap map) {
+        if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
+            actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE,
+                50);
+        }
+        map.locationOf(actor).setGround(new Soil());
     }
 }
