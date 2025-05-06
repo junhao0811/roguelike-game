@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.capabilities.BloomEffect;
 
+/**
+ * Abstract class representing a crop in the game.
+ */
 public abstract class Crop extends Ground implements BloomEffect {
     /**
      * Constructor.

@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Class representing a Spirit Goat. Created by: Chong Jun Hao
+ * Class representing a Creature. Created by: Chong Jun Hao
  *
  * @author Chong Jun Hao
  * @version 22.0.1
