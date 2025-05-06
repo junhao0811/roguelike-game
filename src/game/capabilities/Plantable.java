@@ -19,12 +19,4 @@ public interface Plantable {
      * @param map   the map the actor is on
      */
     void plant(Actor actor, GameMap map);
-    
-    /**
-     * Check if the object can be planted based on the ground.
-     *
-     * @param ground the ground to perform checking with
-     * @return true if the object can be planted, false otherwise
-     */
-    boolean canPlant(Ground ground);
 }

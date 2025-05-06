@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+import game.capabilities.Plantable;
 import game.items.seeds.Seed;
 
 /**
@@ -17,7 +18,7 @@ public class PlantAction extends Action {
     /**
      * The Seed to be planted
      */
-    private Seed seed;
+    private Plantable seed;
     
     /**
      * Constructor.
