@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
-import game.capabilities.SproutEffect;
 import game.grounds.crops.Inheritree;
 import game.grounds.Soil;
 
@@ -18,7 +17,7 @@ import game.grounds.Soil;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class InheritreeSeed extends Seed implements SproutEffect {
+public class InheritreeSeed extends Seed {
     /**
      * Constructor.
      */

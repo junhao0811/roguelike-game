@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.capabilities.SproutEffect;
 import game.grounds.crops.Bloodrose;
 
 /**
@@ -14,7 +13,7 @@ import game.grounds.crops.Bloodrose;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class BloodroseSeed extends Seed implements SproutEffect {
+public class BloodroseSeed extends Seed {
     
     /**
      * Constructor.
