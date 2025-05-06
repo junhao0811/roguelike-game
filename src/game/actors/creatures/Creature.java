@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.Status;
 import game.behaviours.WanderBehaviour;
+import game.capabilities.Curable;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -20,7 +21,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public abstract class Creature extends Actor {
+public abstract class Creature extends Actor implements Curable {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     

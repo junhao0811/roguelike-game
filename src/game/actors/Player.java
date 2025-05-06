@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
@@ -17,9 +16,11 @@ import game.Status;
 
 /**
  * Class representing the Player.
+ *
  * @author Adrian Kristanto
  */
 public class Player extends Actor {
+    
     /**
      * Constructor.
      *
@@ -36,9 +37,10 @@ public class Player extends Actor {
     }
     
     /**
-     * A method for returning the string representation of the player.
-     * It displays the player's name and its current hit points, along with its maximum health hit points.
-     * Moreover, it also displays the player's current stamina, along with its maximum stamina.
+     * A method for returning the string representation of the player. It displays the player's name
+     * and its current hit points, along with its maximum health hit points. Moreover, it also
+     * displays the player's current stamina, along with its maximum stamina.
+     *
      * @return a string representation of the player
      */
     @Override
@@ -54,9 +56,10 @@ public class Player extends Actor {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         // Handle multi-turn Actions
-        if (lastAction.getNextAction() != null)
+        if (lastAction.getNextAction() != null) {
             return lastAction.getNextAction();
-
+        }
+        
         // Handle death logic
         if (!this.isConscious()) {
             display.println(this.unconscious(map));
