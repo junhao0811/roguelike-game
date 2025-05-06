@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import game.Ability;
 import game.actions.PlantAction;
 import game.capabilities.Plantable;
+import game.capabilities.SproutEffect;
 
 /**
  * Seed is an abstract class that represents a seed item in the game.
@@ -16,7 +17,7 @@ import game.capabilities.Plantable;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public abstract class Seed extends Item implements Plantable {
+public abstract class Seed extends Item implements Plantable, SproutEffect {
     
     /**
      * Constructor.
@@ -35,6 +36,7 @@ public abstract class Seed extends Item implements Plantable {
      */
     public void plant(Actor actor, GameMap map) {
         actor.removeItemFromInventory(this); // OCP
+        this.sprout(actor, map);
     }
     
     public boolean canPlant(Ground ground) {

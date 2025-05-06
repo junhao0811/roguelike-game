@@ -1,6 +1,9 @@
 package game.items.seeds;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.StatusEffect;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.capabilities.SproutEffect;
 import game.grounds.crops.Bloodrose;
@@ -30,7 +33,11 @@ public class BloodroseSeed extends Seed implements SproutEffect {
     @Override
     public void plant(Actor actor, GameMap map) {
         super.plant(actor, map);
-        this.sprout(actor, map);
+        for (StatusEffect statusEffect : actor.getStatusEffects()) {
+            if (statusEffect.toString().contains("Crimson Rot")) {
+                actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 75);
+            }
+        }
         map.locationOf(actor).setGround(new Bloodrose());
     }
     
