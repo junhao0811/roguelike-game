@@ -1,6 +1,8 @@
 package game.grounds.crops;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 
@@ -29,9 +31,7 @@ public class Inheritree extends Crop implements BloomEffect {
             if (nearby.containsAnActor()) {
                 Actor actor = nearby.getActor();
                 actor.heal(5);
-                if (actor instanceof Player) {
-                    ((Player) actor).restoreStamina(5);
-                }
+                actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, 5);
             }
         }
     }

@@ -36,15 +36,6 @@ public class Player extends Actor {
     }
     
     /**
-     * Restore the current actor's stamina with the given stamina points.
-     *
-     * @param points the stamina points that the actor receives
-     */
-    public void restoreStamina(int points) {
-        this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, points);
-    }
-    
-    /**
      * A method for returning the string representation of the player.
      * It displays the player's name and its current hit points, along with its maximum health hit points.
      * Moreover, it also displays the player's current stamina, along with its maximum stamina.
