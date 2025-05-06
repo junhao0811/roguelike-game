@@ -1,16 +1,19 @@
 package game;
 
+import game.actors.creatures.Creature;
 import game.displays.FancyMessage;
 import game.items.Talisman;
 import game.grounds.Blight;
 import game.grounds.Floor;
 import game.actors.creatures.OmenSheep;
+import game.actors.CrimsonRot;
 import game.actors.Player;
 import game.grounds.Soil;
 import game.actors.creatures.SpiritGoat;
 import game.grounds.Wall;
 import game.items.seeds.BloodroseSeed;
 import game.items.seeds.InheritreeSeed;
+import game.items.seeds.Seed;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,8 +56,13 @@ public class Application {
         GameMap gameMap = new GameMap("Valley of the Inheritree", groundFactory, map);
         world.addGameMap(gameMap);
         
-        gameMap.at(22, 13).addActor(new SpiritGoat());
-        gameMap.at(24, 13).addActor(new OmenSheep());
+        Creature spiritGoat = new SpiritGoat();
+        gameMap.at(22, 13).addActor(spiritGoat);
+        spiritGoat.addStatusEffect(new CrimsonRot(10));
+        
+        Creature omenSheep = new OmenSheep();
+        gameMap.at(24, 13).addActor(omenSheep);
+        omenSheep.addStatusEffect(new CrimsonRot(15));
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {
@@ -69,12 +77,18 @@ public class Application {
         Player player = new Player("Farmer", '@', 100, 200);
         world.addPlayer(player, gameMap.at(23, 10));
         
+        // Add CrimsonRot status effect to player
+        player.addStatusEffect(new CrimsonRot());
+        
         // game setup
         gameMap.at(24, 11).addItem(new Talisman());
         
         // game test where the "Farmer" starts with one seed of "Inheritree" and one seed of "Bloodrose" in their inventory
-        player.addItemToInventory(new InheritreeSeed());
-        player.addItemToInventory(new BloodroseSeed());
+        Seed inheritreeSeed = new InheritreeSeed();
+        player.addItemToInventory(inheritreeSeed);
+        
+        Seed bloodroseSeed = new BloodroseSeed();
+        player.addItemToInventory(bloodroseSeed);
         
         world.run();
     }
