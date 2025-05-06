@@ -5,5 +5,7 @@ package game;
  * you can attach Ability.WALL_JUMP to the player class
  */
 public enum Ability {
-    PLANT_CROPS,
+    ACCEPT_SEED,
+    TO_CURE,
+    RECEIVE_CURE
 }
