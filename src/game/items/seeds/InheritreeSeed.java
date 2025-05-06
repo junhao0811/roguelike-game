@@ -27,7 +27,7 @@ public class InheritreeSeed extends Seed implements SproutEffect {
     }
     
     /**
-     * After planting the InheritreeSeed on a soil, the ground should be changed to a Inheritree (t) instead of soil (.) at the Farmer's particular location on the game map, and it will convert the surrounding eight tiles from blights (x) to soil (.), and this only happens once.
+     * After planting the InheritreeSeed on a soil, the ground should be changed to a Inheritree (t) instead of soil (.) at the Farmer's particular location on the game map, and it will cure all cursed grounds in the surrounding locations.
      *
      * @param actor the actor performing the action.
      * @param map   the map the actor is on.

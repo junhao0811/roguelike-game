@@ -25,7 +25,7 @@ import edu.monash.fit2099.engine.positions.World;
 /**
  * The game.main class to setup and run the game.
  *
- * @author Adrian Kristanto
+ * @author Adrian Kristanto, modified by Chong Jun Hao
  */
 public class Application {
     
@@ -56,6 +56,7 @@ public class Application {
         GameMap gameMap = new GameMap("Valley of the Inheritree", groundFactory, map);
         world.addGameMap(gameMap);
         
+        // Add spirit goat and omen sheep to the game map, with CrimsonRot status effect
         Creature spiritGoat = new SpiritGoat();
         gameMap.at(22, 13).addActor(spiritGoat);
         spiritGoat.addStatusEffect(new CrimsonRot(10));

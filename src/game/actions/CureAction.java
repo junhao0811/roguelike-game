@@ -7,6 +7,9 @@ import game.capabilities.Curable;
 
 /**
  * Class representing an action to cure
+ *
+ * @author Chong Jun Hao
+ * @version 22.0.1
  */
 public class CureAction extends Action {
     
@@ -25,7 +28,7 @@ public class CureAction extends Action {
      * This method is called when the action is executed.
      *
      * @param actor The actor performing the action
-     * @param map The map the actor is on
+     * @param map   The map the actor is on
      * @return A string describing the result of the action
      */
     public String execute(Actor actor, GameMap map) {

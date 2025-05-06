@@ -6,7 +6,7 @@ import game.Status;
 
 /**
  * A class representing the soil in the valley
- * @author Adrian Kristanto
+ * @author Adrian Kristanto, modified by Chong Jun Hao
  */
 public class Soil extends Ground {
     public Soil() {

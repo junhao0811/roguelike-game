@@ -24,8 +24,7 @@ public class BloodroseSeed extends Seed implements SproutEffect {
     }
     
     /**
-     * After planting the BloodRoseSeed on a soil, the ground should be changed to a Bloodrose (w)
-     * instead of soil (.) at the Farmer's particular location on the game map.
+     * After planting the BloodroseSeed on a soil, the ground should be changed to a Bloodrose (w) instead of soil (.) at the Farmer's particular location on the game map, and it will hurt the Farmer.
      *
      * @param actor the actor performing the action.
      * @param map   the map the actor is on.

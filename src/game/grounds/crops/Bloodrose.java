@@ -19,6 +19,12 @@ public class Bloodrose extends Crop {
         super('w', "Bloodrose");
     }
     
+    /**
+     * This method is called when the crop blooms.
+     * It will hurt all actors in the nearby locations.
+     *
+     * @param location The location of the crop
+     */
     @Override
     public void bloom(Location location) {
         for (Exit exit : location.getExits()) {

@@ -23,6 +23,13 @@ public class Inheritree extends Crop implements BloomEffect {
         super('t', "Inheritree");
     }
     
+    /**
+     * This method is called when the crop blooms.
+     * It will heal all actors in the nearby locations.
+     * It will also increase the stamina of the actors by 5.
+     *
+     * @param location The location of the crop
+     */
     @Override
     public void bloom(Location location) {
         for (Exit exit : location.getExits()) {

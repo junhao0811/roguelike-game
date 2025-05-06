@@ -82,6 +82,7 @@ public abstract class Creature extends Actor implements Curable {
             actions.add(new AttackAction(this, direction));
         }
         
+        // Check if the actor if he has the item which has the ability to cure
         for (Item item : otherActor.getItemInventory()) {
             if (item.hasCapability(Ability.TO_CURE)) {
                 actions.add(new CureAction(this));

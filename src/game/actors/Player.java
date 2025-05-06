@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
-import game.Ability;
 import game.weapons.BareFist;
 import game.Status;
 
@@ -52,6 +51,16 @@ public class Player extends Actor {
             ")";
     }
     
+    /**
+     * Determines and performs the player's action during their turn, including handling ongoing
+     * multi-turn actions, death, and presenting a menu of available actions.
+     *
+     * @param actions The list of actions the player can take this turn.
+     * @param lastAction The action executed by the player in the previous turn, which may have a follow-up action.
+     * @param map The game map the player is currently on.
+     * @param display The display used for output to the player.
+     * @return The action chosen by the player to be performed on this turn.
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         // Handle multi-turn Actions

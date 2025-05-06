@@ -9,6 +9,7 @@ public abstract class Crop extends Ground implements BloomEffect {
      * Constructor.
      *
      * @param displayChar character to display for this type of terrain
+     * @param name name of the crop
      */
     public Crop(char displayChar, String name) {
         super(displayChar, name);
