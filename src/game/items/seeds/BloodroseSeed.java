@@ -35,7 +35,9 @@ public class BloodroseSeed extends Seed implements SproutEffect {
         super.plant(actor, map);
         for (StatusEffect statusEffect : actor.getStatusEffects()) {
             if (statusEffect.toString().contains("Crimson Rot")) {
-                actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 75);
+                if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
+                    actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 75);
+                }
             }
         }
         map.locationOf(actor).setGround(new Bloodrose());

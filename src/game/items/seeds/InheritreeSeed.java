@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Ability;
 import game.capabilities.SproutEffect;
 import game.grounds.crops.Inheritree;
 import game.grounds.Soil;
@@ -36,7 +37,9 @@ public class InheritreeSeed extends Seed implements SproutEffect {
         super.plant(actor, map);
         for (StatusEffect statusEffect : actor.getStatusEffects()) {
             if (statusEffect.toString().contains("Crimson Rot")) {
-                actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 25);
+                if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
+                    actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 25);
+                }
             }
         }
         map.locationOf(actor).setGround(new Inheritree());
@@ -46,8 +49,7 @@ public class InheritreeSeed extends Seed implements SproutEffect {
     public void sprout(Actor actor, GameMap map) {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location nearby = exit.getDestination();
-            // change this logic to adhere to SOLID principles
-            if (nearby.getGround().getDisplayChar() == 'x') {
+            if (nearby.getGround().hasCapability(Ability.RECEIVE_CURE)) {
                 nearby.setGround(new Soil());
             }
         }

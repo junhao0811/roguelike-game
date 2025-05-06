@@ -39,10 +39,6 @@ public abstract class Seed extends Item implements Plantable, SproutEffect {
         this.sprout(actor, map);
     }
     
-    public boolean canPlant(Ground ground) {
-        return ground.getDisplayChar() == '.';
-    }
-    
     /**
      * Create and return an action to plant this Seed.
      *
@@ -63,7 +59,7 @@ public abstract class Seed extends Item implements Plantable, SproutEffect {
     public ActionList allowableActions(Actor actor, GameMap map) {
         ActionList actions = new ActionList();
         Ground ground = map.locationOf(actor).getGround();
-        if (actor.hasCapability(Ability.PLANT_CROPS) && this.canPlant(ground)) {
+        if (ground.hasCapability(Ability.ACCEPT_SEED)) {
             actions.add(getPlantAction());
         }
         return actions;
