@@ -6,10 +6,13 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+import game.Ability;
 import game.actions.AttackAction;
 import game.Status;
+import game.actions.CureAction;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
 import java.util.Map;
@@ -77,6 +80,12 @@ public abstract class Creature extends Actor implements Curable {
         ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
+        }
+        
+        for (Item item : otherActor.getItemInventory()) {
+            if (item.hasCapability(Ability.TO_CURE)) {
+                actions.add(new CureAction(this));
+            }
         }
         return actions;
     }

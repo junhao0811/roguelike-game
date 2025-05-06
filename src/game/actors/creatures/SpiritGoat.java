@@ -1,5 +1,6 @@
 package game.actors.creatures;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -29,9 +30,10 @@ public class SpiritGoat extends Creature {
     
     /**
      * Resets the countdown timer back to 10 when it is being cured
+     * @param actor unused here
      * @param map the gamemap the actor is currently on
      */
-    public void cure(GameMap map) {
+    public void cure(Actor actor, GameMap map) {
         // Retrieves all status effects the spirit goat currently has right now
         List<StatusEffect> statusEffects = this.getStatusEffects();
         StatusEffect crimsonRot = null;

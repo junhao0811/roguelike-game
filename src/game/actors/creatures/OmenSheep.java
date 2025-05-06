@@ -1,5 +1,6 @@
 package game.actors.creatures;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -28,7 +29,15 @@ public class OmenSheep extends Creature {
         this.behaviours.put(0, new WanderBehaviour()); // Highest priority
     }
     
-    public void cure(GameMap map) {
+    /**
+     * Cures the environment by replacing nearby ground with Inheritree instances.
+     * This action applies to the locations surrounding the current actor's position
+     * in the provided game map.
+     *
+     * @param actor the actor initiating the cure action
+     * @param map the game map where the cure action is performed
+     */
+    public void cure(Actor actor, GameMap map) {
         for (Exit exit : map.locationOf(this).getExits()) {
             Location nearby = exit.getDestination();
             if (nearby.canActorEnter(this)) {
