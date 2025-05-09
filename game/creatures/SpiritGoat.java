@@ -11,10 +11,12 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.statuseffect.CrimsonRot;
 import game.behaviour.WanderBehaviour;
+import game.behaviour.ReproduceBehaviour;
 import game.ability.Ability;
 import game.actions.AttackAction;
 import game.actions.CureAction;
 import game.interfaces.Curable;
+import game.interfaces.Reproducable;
 import game.status.Status;
 
 import java.util.Map;
@@ -28,7 +30,7 @@ import java.util.TreeMap;
  *
  * @author Ng Jun Xian
  */
-public class SpiritGoat extends Actor implements Curable {
+public class SpiritGoat extends Actor implements Curable, Reproducable{
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
 
@@ -36,11 +38,14 @@ public class SpiritGoat extends Actor implements Curable {
      * Constructor for SpiritGoat.
      * Creates a Spirit Goat with the character 'y', 50 hit points, and a wander behavior.
      * Adds a CrimsonEffect as a StatusEffect and initialise the countdown from 15
+     * Includes ReproduceBehaviour with higher priority than WanderBehaviour
      */
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
-        this.behaviours.put(999, new WanderBehaviour());
-        this.addStatusEffect(new CrimsonRot(10));
+        this.behaviours.put(800, new ReproduceBehaviour(this));  // Higher priority for reproduction
+        //this.behaviours.put(999, new WanderBehaviour());
+        this.addStatusEffect(new CrimsonRot(100));
+        this.addCapability(Ability.PRODUCE_OFF_SPRING);
     }
 
     /**
@@ -85,9 +90,26 @@ public class SpiritGoat extends Actor implements Curable {
             }
         }
         this.removeStatusEffect(crimsonRot);
-        this.addStatusEffect(new CrimsonRot(10));
+        this.addStatusEffect(new CrimsonRot(100));
         System.out.println("The Spirit Goat's energy is restored!");
         return true;
+    }
+
+    /**
+     * Allows a Spirit Goat to reproduce and create a new Spirit Goat in a surrounding location.
+     * The ReproduceBehaviour class has already checked that conditions are suitable for reproduction.
+     *
+     * @param actor the actor reproducing (the parent Spirit Goat)
+     * @param location the location where the offspring will be placed
+     * @param map the game map containing the Spirit Goat
+     */
+    @Override
+    public void reproduce(Actor actor, Location location, GameMap map) {
+        // Create and add new Spirit Goat at the specified location
+        // The location has already been validated by ReproduceBehaviour
+        SpiritGoat offspring = new SpiritGoat();
+        location.addActor(offspring);
+        System.out.println("A new Spirit Goat is born near the Inheritree!");
     }
 
     /**

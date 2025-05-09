@@ -10,4 +10,7 @@ public enum Status {
     HOSTILE_TO_ENEMY,
     PLANTABLE_GROUND,//req 2
     CURSED,
+    GRACED,
+    HATCHABLE,
+    EDIBLE
 }

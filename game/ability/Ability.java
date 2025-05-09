@@ -8,5 +8,6 @@ package game.ability;
  */
 public enum Ability {
     PLANTING, //req 2
-    CURING
+    CURING,
+    PRODUCE_OFF_SPRING,
 }

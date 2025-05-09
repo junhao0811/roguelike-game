@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.interfaces.effects.HealingEffect;
+import game.status.Status;
 
 /**
  * A class representing the Inheritree crop.
@@ -24,6 +25,7 @@ public class Inheritree extends Crop implements HealingEffect {
      */
     public Inheritree() {
         super('t', "Inheritree");
+        this.addCapability(Status.GRACED);
     }
 
     /**

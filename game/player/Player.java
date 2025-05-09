@@ -4,14 +4,17 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Menu;
+
 import game.items.seeds.BloodroseSeed;
 import game.items.seeds.InheritreeSeed;
 import game.status.Status;
 import game.weapons.BareFist;
+
 
 /**
  * Class representing the Player.
@@ -56,6 +59,7 @@ public class Player extends Actor {
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
     }
+    
     public String toString() { //req 1
         return super.toString() + " (" + this.getAttribute(BaseActorAttributes.STAMINA) + "/" + this.getAttributeMaximum(BaseActorAttributes.STAMINA) + ")";
     }
