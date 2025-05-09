@@ -22,7 +22,7 @@ import game.actions.HatchAction;
 public class OmenSheepEgg extends Item implements Hatchable, Edible {
     
     private int age;
-    private static final int HATCHING_AGE = 3;
+    private static final int HATCHING_AGE = 100;
     private static final int HEALTH_INCREASE = 10;
     
     /**

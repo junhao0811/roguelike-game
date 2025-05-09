@@ -31,15 +31,13 @@ public class ReproduceAction extends Action {
 
     /**
      * Executes the reproduction action by calling the reproduce method of the Reproducable entity.
-     * The actor parameter is the reproducer itself, which is passed to the reproduce method.
      *
-     * @param actor the actor performing the action (the parent)
+     * @param actor the actor performing the action
      * @param map the game map where the action is performed
      * @return a description of the action result
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        // Pass the actor (parent), target location, and map to reproduce
         reproducer.reproduce(actor, targetLocation, map);
         return actor + " produces offspring!";
     }

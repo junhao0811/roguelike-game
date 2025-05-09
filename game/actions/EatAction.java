@@ -40,7 +40,7 @@ public class EatAction extends Action {
         boolean success = edible.eaten(actor);
         if (success) {
             actor.removeItemFromInventory(item);
-            return actor + " eats the " + item + ".";
+            return menuDescription(actor);
         }
         return actor + " couldn't eat the " + item;
     }
