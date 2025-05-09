@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ability.Ability;
 import game.actions.ReproduceAction;
 import game.interfaces.Reproducable;
 import game.status.Status;
@@ -42,7 +43,7 @@ public class ReproduceBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
         // Ensure the actor is the same as our reproducible entity
-        if (actor != reproducable) {
+        if (!actor.hasCapability(Ability.PRODUCE_OFF_SPRING)) {
             return null;
         }
         

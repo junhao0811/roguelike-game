@@ -70,8 +70,6 @@ public class SpiritGoat extends Actor implements Curable, Reproducable{
         return new DoNothingAction();
     }
 
-
-
     /**
      * Cures the Spirit Goat by resetting its countdown timer.
      * This method is called when an actor with CURING ability uses a Talisman on the Spirit Goat.
