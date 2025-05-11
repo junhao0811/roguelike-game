@@ -6,9 +6,12 @@ package game;
  *
  * @author Chong Jun Hao
  * @version 22.0.1
+ * modified by: Ng Jun Xian
  */
 public enum Ability {
     ACCEPT_SEED,
     TO_CURE,
-    RECEIVE_CURE
+    RECEIVE_CURE,
+    PLANTING,
+    CURING,
 }
