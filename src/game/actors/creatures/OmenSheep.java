@@ -37,13 +37,15 @@ public class OmenSheep extends Creature {
      * @param actor the actor initiating the cure action
      * @param map the game map where the cure action is performed
      */
-    public void cure(Actor actor, GameMap map) {
+    public boolean cure(Actor actor, GameMap map) {
         for (Exit exit : map.locationOf(this).getExits()) {
             Location nearby = exit.getDestination();
             if (nearby.canActorEnter(this)) {
                 nearby.setGround(new Inheritree());
             }
         }
+        System.out.println("Inheritree has been planted around the Omen Sheep!");
+        return true;
     }
 }
 

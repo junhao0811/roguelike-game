@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.grounds.crops.Bloodrose;
+import game.grounds.crops.Crop;
 
 /**
  * A class representing the "Bloodrose" seed in the valley.
@@ -21,24 +22,35 @@ public class BloodroseSeed extends Seed {
     public BloodroseSeed() {
         super("Bloodrose Seed");
     }
-    
+
     /**
-     * After planting the BloodroseSeed on a soil, the ground should be changed to a Bloodrose (w) instead of soil (.) at the Farmer's particular location on the game map, and it will hurt the Farmer.
+     * Returns the stamina cost required to plant this seed.
      *
-     * @param actor the actor performing the action.
-     * @param map   the map the actor is on.
+     * @return the stamina cost (75 points)
      */
     @Override
-    public void plant(Actor actor, GameMap map) {
-        super.plant(actor, map);
-        for (StatusEffect statusEffect : actor.getStatusEffects()) {
-            if (statusEffect.toString().contains("Crimson Rot")) {
-                if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
-                    actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 75);
-                }
-            }
-        }
-        map.locationOf(actor).setGround(new Bloodrose());
+    public int getStaminaCost() {
+        return 75; // Bloodrose costs 75 stamina to plant
+    }
+
+    /**
+     * Creates and returns a new Bloodrose crop.
+     *
+     * @return a new instance of the Bloodrose crop
+     */
+    @Override
+    public Crop createCrop() {
+        return new Bloodrose();
+    }
+
+    /**
+     * Returns the string representation of this seed.
+     *
+     * @return the name of this seed ("Bloodrose Seed")
+     */
+    @Override
+    public String toString() {
+        return "Bloodrose Seed";
     }
     
     @Override

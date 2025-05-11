@@ -17,5 +17,5 @@ public interface Curable {
      * @param actor the actor performing the action
      * @param map   the map the actor is on
      */
-    void cure(Actor actor, GameMap map);
+    boolean cure(Actor actor, GameMap map);
 }

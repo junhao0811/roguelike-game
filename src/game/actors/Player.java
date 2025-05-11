@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
+import game.displays.FancyMessage;
 import game.weapons.BareFist;
 import game.Status;
 
@@ -71,7 +72,14 @@ public class Player extends Actor {
         // Handle death logic
         if (!this.isConscious()) {
             display.println(this.unconscious(map));
-            display.println("YOU DIED");
+            for (String line : FancyMessage.YOU_DIED.split("\n")) {
+                new Display().println(line);
+                try {
+                    Thread.sleep(200);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
             return new DoNothingAction();
         }
         

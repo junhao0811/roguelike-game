@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.Status;
+import game.grounds.crops.Crop;
 import game.grounds.crops.Inheritree;
 import game.grounds.Soil;
 
@@ -25,26 +26,37 @@ public class InheritreeSeed extends Seed {
     public InheritreeSeed() {
         super("Inheritree Seed");
     }
-    
+
     /**
-     * After planting the InheritreeSeed on a soil, the ground should be changed to a Inheritree (t) instead of soil (.) at the Farmer's particular location on the game map, and it will cure all cursed grounds in the surrounding locations.
+     * Returns the stamina cost required to plant this seed.
      *
-     * @param actor the actor performing the action.
-     * @param map   the map the actor is on.
+     * @return the stamina cost (25 points)
      */
     @Override
-    public void plant(Actor actor, GameMap map) {
-        super.plant(actor, map);
-        for (StatusEffect statusEffect : actor.getStatusEffects()) {
-            if (statusEffect.toString().contains("Crimson Rot")) {
-                if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
-                    actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 25);
-                }
-            }
-        }
-        map.locationOf(actor).setGround(new Inheritree());
+    public int getStaminaCost() {
+        return 25; // Inheritree costs 25 stamina to plant
     }
-    
+
+    /**
+     * Creates and returns a new Inheritree crop.
+     *
+     * @return a new instance of Inheritree crop
+     */
+    @Override
+    public Crop createCrop() {
+        return new Inheritree();
+    }
+
+    /**
+     * Returns the string representation of this seed.
+     *
+     * @return the name of this seed ("Inheritree Seed")
+     */
+    @Override
+    public String toString() {
+        return "Inheritree Seed";
+    }
+
     @Override
     public void sprout(Actor actor, GameMap map) {
         for (Exit exit : map.locationOf(actor).getExits()) {

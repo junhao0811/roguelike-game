@@ -39,7 +39,7 @@ public class PlantAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        seed.plant(actor, map);
+        seed.plant(actor, map.locationOf(actor));
         return seed + " has been planted";
     }
     

@@ -2,15 +2,19 @@ package game.items.seeds;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 
+import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.Status;
 import game.actions.PlantAction;
 import game.capabilities.Plantable;
 import game.capabilities.Sproutable;
+import game.grounds.crops.Crop;
 
 /**
  * Seed is an abstract class that represents a seed item in the game.
@@ -28,17 +32,52 @@ public abstract class Seed extends Item implements Plantable, Sproutable {
     public Seed(String name) {
         super(name, '*', true);
     }
-    
+
     /**
-     * Plant the seed in the ground.
+     * Returns the stamina cost required to plant this seed.
      *
-     * @param actor the actor performing the action.
-     * @param map  the map the actor is on.
+     * @return the stamina cost as an integer
      */
-    public void plant(Actor actor, GameMap map) {
-        actor.removeItemFromInventory(this);
-        this.sprout(actor, map);
-        this.addCapability(Ability.PLANT);
+    public abstract int getStaminaCost();
+
+    /**
+     * Creates and returns a new crop corresponding to this seed type.
+     *
+     * @return the crop that grows from this seed
+     */
+    public abstract Crop createCrop();
+
+    /**
+     * Plants this seed at the specified location if the actor has enough stamina.
+     * Consumes stamina from the actor, removes the seed from inventory,
+     * and places the corresponding crop at the location.
+     *
+     * @param actor the actor planting the seed
+     * @param location the location to plant the seed
+     * @return true if planting was successful, false otherwise
+     */
+    public boolean plant(Actor actor, Location location) {
+
+        if (actor.hasCapability(Ability.PLANT)) {
+            int staminaCost = getStaminaCost();
+
+            if (actor.hasAttribute(BaseActorAttributes.STAMINA) &&
+                    actor.getAttribute(BaseActorAttributes.STAMINA) >= staminaCost) {
+
+                actor.removeItemFromInventory(this);
+
+                location.setGround(createCrop());
+
+                actor.modifyAttribute(BaseActorAttributes.STAMINA,
+                        ActorAttributeOperations.DECREASE, staminaCost);
+
+                System.out.println(staminaCost + " stamina is consumed for planting " + this);
+                System.out.println("Attempt to plant is successful.");
+                return true;
+            }
+        }
+        System.out.println("Attempt to plant is unsuccessful. Insufficient stamina.");
+        return false;
     }
     
     /**
