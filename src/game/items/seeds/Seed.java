@@ -30,6 +30,7 @@ public abstract class Seed extends Item implements Plantable, Sproutable {
      */
     public Seed(String name) {
         super(name, '*', true);
+        this.addCapability(Ability.PLANT);
     }
 
     /**
