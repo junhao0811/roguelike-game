@@ -11,6 +11,6 @@ import game.Status;
 public class Soil extends Ground {
     public Soil() {
         super('.', "Soil");
-        this.addCapability(Ability.ACCEPT_SEED);
+        this.addCapability(Status.PLANTABLE_GROUND);
     }
 }

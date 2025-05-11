@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-
 import game.Ability;
 import game.actions.AttackAction;
 import game.Status;
@@ -33,7 +32,7 @@ public abstract class Creature extends Actor implements Curable {
      */
     public Creature(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.behaviours.put(0, new WanderBehaviour()); // Highest priority
+        this.behaviours.put(999, new WanderBehaviour()); // Highest priority
     }
     
     /**
@@ -81,12 +80,9 @@ public abstract class Creature extends Actor implements Curable {
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
         }
-        
         // Check if the actor if he has the item which has the ability to cure
-        for (Item item : otherActor.getItemInventory()) {
-            if (item.hasCapability(Ability.TO_CURE)) {
-                actions.add(new CureAction(this));
-            }
+        if (otherActor.hasCapability(Ability.CURING)) {
+            actions.add(new CureAction(this));
         }
         return actions;
     }

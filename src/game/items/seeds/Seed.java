@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 
 import game.Ability;
+import game.Status;
 import game.actions.PlantAction;
 import game.capabilities.Plantable;
 import game.capabilities.SproutEffect;
@@ -37,6 +38,7 @@ public abstract class Seed extends Item implements Plantable, SproutEffect {
     public void plant(Actor actor, GameMap map) {
         actor.removeItemFromInventory(this); // OCP
         this.sprout(actor, map);
+        this.addCapability(Ability.PLANTING);
     }
     
     /**
@@ -59,7 +61,7 @@ public abstract class Seed extends Item implements Plantable, SproutEffect {
     public ActionList allowableActions(Actor actor, GameMap map) {
         ActionList actions = new ActionList();
         Ground ground = map.locationOf(actor).getGround();
-        if (ground.hasCapability(Ability.ACCEPT_SEED)) {
+        if (ground.hasCapability(Status.PLANTABLE_GROUND)) {
             actions.add(getPlantAction());
         }
         return actions;

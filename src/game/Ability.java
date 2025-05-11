@@ -9,9 +9,6 @@ package game;
  * modified by: Ng Jun Xian
  */
 public enum Ability {
-    ACCEPT_SEED,
-    TO_CURE,
-    RECEIVE_CURE,
     PLANTING,
     CURING,
 }

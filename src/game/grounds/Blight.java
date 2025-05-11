@@ -1,11 +1,15 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.Status;
+import game.actions.CureAction;
 import game.capabilities.Curable;
 
 /**
@@ -20,7 +24,7 @@ public class Blight extends Ground implements Curable {
      */
     public Blight() {
         super('x', "Blight");
-        this.addCapability(Ability.RECEIVE_CURE);
+        this.addCapability(Status.CURSED);
     }
     
     /**
@@ -36,5 +40,15 @@ public class Blight extends Ground implements Curable {
                 50);
         }
         map.locationOf(actor).setGround(new Soil());
+    }
+
+    public ActionList allowableActions(Actor owner, Location location, String direction) {
+        ActionList actions = super.allowableActions(owner, location, direction);
+
+        if (owner.hasCapability(Ability.CURING)) {
+            actions.add(new CureAction(this));
+        }
+
+        return actions;
     }
 }
