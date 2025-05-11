@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 
-import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.Status;
 import game.actions.PlantAction;
@@ -53,10 +52,10 @@ public abstract class Seed extends Item implements Plantable, Sproutable {
      * and places the corresponding crop at the location.
      *
      * @param actor the actor planting the seed
-     * @param location the location to plant the seed
+     * @param map   the map the actor is on
      * @return true if planting was successful, false otherwise
      */
-    public boolean plant(Actor actor, Location location) {
+    public boolean plant(Actor actor, GameMap map) {
 
         if (actor.hasCapability(Ability.PLANT)) {
             int staminaCost = getStaminaCost();
@@ -66,7 +65,7 @@ public abstract class Seed extends Item implements Plantable, Sproutable {
 
                 actor.removeItemFromInventory(this);
 
-                location.setGround(createCrop());
+                map.locationOf(actor).setGround(createCrop());
 
                 actor.modifyAttribute(BaseActorAttributes.STAMINA,
                         ActorAttributeOperations.DECREASE, staminaCost);

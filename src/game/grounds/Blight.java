@@ -35,25 +35,24 @@ public class Blight extends Ground implements Curable {
      * @param map   the map the actor is on.
      */
     public boolean cure(Actor actor, GameMap map) {
-        if (actor.hasAttribute(BaseActorAttributes.STAMINA) &&
-                actor.getAttribute(BaseActorAttributes.STAMINA) >= 50) {
-
+        if (actor.hasAttribute(BaseActorAttributes.STAMINA)
+            && actor.getAttribute(BaseActorAttributes.STAMINA) >= 50) {
             actor.modifyAttribute(BaseActorAttributes.STAMINA,
-                    ActorAttributeOperations.DECREASE,
-                    50);
+                ActorAttributeOperations.DECREASE,
+                50);
             map.locationOf(actor).setGround(new Soil());
             System.out.println(actor + " cured the blight!");
             return true;
         }
-        System.out.println(actor + " does not have enough stamina to cure the blight!");
+        System.out.println(actor + " does not have enough stamina to cure the blight :(");
         return false;
     }
-
+    
     /**
      * List of allowable actions that can be performed on the blight
      *
-     * @param owner the Actor acting
-     * @param location the Location the Actor is in
+     * @param owner     the Actor acting
+     * @param location  the Location the Actor is in
      * @param direction the direction of the Ground from the Actor
      * @return an unmodifiable list of Actions
      */

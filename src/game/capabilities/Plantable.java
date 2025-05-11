@@ -17,7 +17,7 @@ public interface Plantable {
      * Plant the object in the soil.
      *
      * @param actor the actor performing the action
-     * @param location  the map the actor is on
+     * @param map   the map the actor is on
      */
-    boolean plant(Actor actor, Location location);
+    boolean plant(Actor actor, GameMap map);
 }

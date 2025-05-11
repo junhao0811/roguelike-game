@@ -26,7 +26,7 @@ public class OmenSheep extends Creature {
      */
     public OmenSheep() {
         super("Omen Sheep", 'm', 75);
-        this.behaviours.put(0, new WanderBehaviour()); // Highest priority
+        this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
     }
     
     /**

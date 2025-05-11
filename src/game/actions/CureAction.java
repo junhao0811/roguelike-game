@@ -39,11 +39,11 @@ public class CureAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         boolean cured = curable.cure(actor, map);
-        if (cured){
-            return actor + " used the Talisman on the " + curable + " at " + direction;
+        if (cured) {
+            return actor + " used the Talisman to cure" + curable + " at " + direction;
         }
         else{
-            return actor + " is unable use the Talisman on the " + curable + " at " + direction;
+            return actor + " failed to use the Talisman to cure " + curable + " at " + direction;
         }
     }
 

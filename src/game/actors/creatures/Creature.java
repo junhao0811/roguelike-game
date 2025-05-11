@@ -31,7 +31,7 @@ public abstract class Creature extends Actor implements Curable {
      */
     public Creature(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.behaviours.put(999, new WanderBehaviour()); // Highest priority
+        this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
     }
     
     /**

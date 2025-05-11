@@ -25,7 +25,7 @@ public class SpiritGoat extends Creature {
      */
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
-        this.behaviours.put(0, new WanderBehaviour()); // Highest priority
+        this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
     }
     
     /**
