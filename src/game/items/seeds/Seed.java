@@ -65,6 +65,8 @@ public abstract class Seed extends Item implements Plantable, Sproutable {
                     actor.getAttribute(BaseActorAttributes.STAMINA) >= staminaCost) {
 
                 actor.removeItemFromInventory(this);
+                
+                this.sprout(actor, map);
 
                 map.locationOf(actor).setGround(createCrop());
 
@@ -72,11 +74,10 @@ public abstract class Seed extends Item implements Plantable, Sproutable {
                         ActorAttributeOperations.DECREASE, staminaCost);
 
                 System.out.println(staminaCost + " stamina is consumed for planting " + this);
-                System.out.println("Attempt to plant is successful.");
                 return true;
             }
         }
-        System.out.println("Attempt to plant is unsuccessful. Insufficient stamina.");
+        System.out.println("Insufficient stamina\nAttempt to plant is unsuccessful :(");
         return false;
     }
     

@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actors.CrimsonRot;
 import game.behaviours.WanderBehaviour;
 import java.util.List;
@@ -31,9 +32,9 @@ public class SpiritGoat extends Creature {
     /**
      * Resets the countdown timer back to 10 when it is being cured
      * @param actor unused here
-     * @param map the gamemap the actor is currently on
+     * @param location unused here
      */
-    public boolean cure(Actor actor, GameMap map) {
+    public boolean cure(Actor actor, Location location) {
         // Retrieves all status effects the spirit goat currently has right now
         List<StatusEffect> statusEffects = this.getStatusEffects();
         StatusEffect crimsonRot = null;
@@ -49,7 +50,7 @@ public class SpiritGoat extends Creature {
         this.removeStatusEffect(crimsonRot);
         this.addStatusEffect(new CrimsonRot(10));
 
-        System.out.println("The Spirit Goat's energy is restored!");
+        System.out.println("The Spirit Goat's energy has been restored!");
         return true;
     }
 }

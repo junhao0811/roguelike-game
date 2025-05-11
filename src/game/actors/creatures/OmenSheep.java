@@ -35,10 +35,10 @@ public class OmenSheep extends Creature {
      * in the provided game map.
      *
      * @param actor the actor initiating the cure action
-     * @param map the game map where the cure action is performed
+     * @param location the location of the actor
      */
-    public boolean cure(Actor actor, GameMap map) {
-        for (Exit exit : map.locationOf(this).getExits()) {
+    public boolean cure(Actor actor, Location location) {
+        for (Exit exit : location.getExits()) {
             Location nearby = exit.getDestination();
             if (nearby.canActorEnter(this)) {
                 nearby.setGround(new Inheritree());
