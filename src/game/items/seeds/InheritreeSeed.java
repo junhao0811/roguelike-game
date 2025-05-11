@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.Status;
 import game.grounds.crops.Inheritree;
 import game.grounds.Soil;
 
@@ -48,7 +49,7 @@ public class InheritreeSeed extends Seed {
     public void sprout(Actor actor, GameMap map) {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location nearby = exit.getDestination();
-            if (nearby.getGround().hasCapability(Ability.RECEIVE_CURE)) {
+            if (nearby.getGround().hasCapability(Status.CURSED)) {
                 nearby.setGround(new Soil());
             }
         }

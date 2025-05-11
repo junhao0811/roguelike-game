@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Ability;
 import game.actions.AttackAction;
@@ -81,7 +80,7 @@ public abstract class Creature extends Actor implements Curable {
             actions.add(new AttackAction(this, direction));
         }
         // Check if the actor if he has the item which has the ability to cure
-        if (otherActor.hasCapability(Ability.CURING)) {
+        if (otherActor.hasCapability(Ability.CURE)) {
             actions.add(new CureAction(this));
         }
         return actions;

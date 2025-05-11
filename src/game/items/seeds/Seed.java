@@ -10,7 +10,7 @@ import game.Ability;
 import game.Status;
 import game.actions.PlantAction;
 import game.capabilities.Plantable;
-import game.capabilities.SproutEffect;
+import game.capabilities.Sproutable;
 
 /**
  * Seed is an abstract class that represents a seed item in the game.
@@ -18,7 +18,7 @@ import game.capabilities.SproutEffect;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public abstract class Seed extends Item implements Plantable, SproutEffect {
+public abstract class Seed extends Item implements Plantable, Sproutable {
     
     /**
      * Constructor.
@@ -36,9 +36,9 @@ public abstract class Seed extends Item implements Plantable, SproutEffect {
      * @param map  the map the actor is on.
      */
     public void plant(Actor actor, GameMap map) {
-        actor.removeItemFromInventory(this); // OCP
+        actor.removeItemFromInventory(this);
         this.sprout(actor, map);
-        this.addCapability(Ability.PLANTING);
+        this.addCapability(Ability.PLANT);
     }
     
     /**
@@ -61,7 +61,7 @@ public abstract class Seed extends Item implements Plantable, SproutEffect {
     public ActionList allowableActions(Actor actor, GameMap map) {
         ActionList actions = new ActionList();
         Ground ground = map.locationOf(actor).getGround();
-        if (ground.hasCapability(Status.PLANTABLE_GROUND)) {
+        if (ground.hasCapability(Status.PLANTING_TERRAIN)) {
             actions.add(getPlantAction());
         }
         return actions;

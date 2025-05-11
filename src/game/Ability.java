@@ -9,6 +9,6 @@ package game;
  * modified by: Ng Jun Xian
  */
 public enum Ability {
-    PLANTING,
-    CURING,
+    PLANT,
+    CURE,
 }

@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public interface BloomEffect {
+public interface Bloomable {
     
     /**
      * Bloom the object in the soil.

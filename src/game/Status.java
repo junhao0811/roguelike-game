@@ -8,6 +8,6 @@ package game;
  */
 public enum Status {
     HOSTILE_TO_ENEMY,
-    PLANTABLE_GROUND,
+    PLANTING_TERRAIN,
     CURSED,
 }
