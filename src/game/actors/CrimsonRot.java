@@ -43,8 +43,9 @@ public class CrimsonRot extends StatusEffect {
      */
     @Override
     public void tick(Location location, Actor actor) {
+        Display display = new Display();
         if (countdownTimer <= 0) {
-            new Display().println(actor.unconscious(location.map()));
+            display.println(actor.unconscious(location.map()));
         }
         countdownTimer--;
     }

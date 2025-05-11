@@ -52,7 +52,7 @@ public class Blight extends Ground implements Curable {
      * List of allowable actions that can be performed on the blight
      *
      * @param owner     the Actor acting
-     * @param location  the Location the Actor is in
+     * @param location  the Location the blight is in
      * @param direction the direction of the Ground from the Actor
      * @return an unmodifiable list of Actions
      */
@@ -60,7 +60,7 @@ public class Blight extends Ground implements Curable {
     public ActionList allowableActions(Actor owner, Location location, String direction) {
         ActionList actions = super.allowableActions(owner, location, direction);
         if (owner.hasCapability(Ability.CURE)) {
-            actions.add(new CureAction(this, direction));
+            actions.add(new CureAction(this, direction, location));
         }
         return actions;
     }

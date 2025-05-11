@@ -35,7 +35,8 @@ public class OmenSheep extends Creature {
      * in the provided game map.
      *
      * @param actor the actor initiating the cure action
-     * @param location the location of the actor
+     * @param location the location of the actor1
+     *
      */
     public boolean cure(Actor actor, Location location) {
         for (Exit exit : location.getExits()) {

@@ -16,16 +16,17 @@ public class CureAction extends Action {
 
     private Curable curable;
     private String direction;
-
+    private Location location;
     /**
      * Constructor for CureAction.
      *
      * @param curable the target that can be cured
      * @param direction the direction from the actor to the curable target
      */
-    public CureAction(Curable curable, String direction) {
+    public CureAction(Curable curable, String direction, Location location) {
         this.curable = curable;
         this.direction = direction;
+        this.location = location;
     }
 
     /**
@@ -38,7 +39,7 @@ public class CureAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        boolean cured = curable.cure(actor, map.locationOf(actor));
+        boolean cured = curable.cure(actor, location);
         if (cured) {
             return actor + " cures " + curable + " at " + direction;
         }
