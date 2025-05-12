@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.actors.StatusEffect;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
@@ -11,6 +12,7 @@ import game.actions.CureAction;
 import game.actors.CrimsonRot;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
+import game.capabilities.Reproducible;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends Npc implements Curable {
+public class SpiritGoat extends Npc implements Curable, Reproducible {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
@@ -57,6 +59,12 @@ public class SpiritGoat extends Npc implements Curable {
 
         System.out.println("The Spirit Goat's energy has been restored!");
         return true;
+    }
+
+    public void reproduce(Actor actor, GameMap map){
+        SpiritGoat offSpring = new SpiritGoat();
+        map.addActor(offSpring, map.locationOf(this));
+        new Display().println("An offspring of Spirit Goat has been born near the Inheritree!");
     }
 
     /**
