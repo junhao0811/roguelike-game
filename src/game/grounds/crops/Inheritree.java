@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
 
 /**
  * A class representing the "Inheritree" crop in the valley
@@ -19,6 +20,7 @@ public class Inheritree extends Crop {
      */
     public Inheritree() {
         super('t', "Inheritree");
+        this.addCapability(Status.BLESSED);
     }
     
     /**
