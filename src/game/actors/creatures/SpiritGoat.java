@@ -1,12 +1,17 @@
 package game.actors.creatures;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Ability;
+import game.actions.CureAction;
 import game.actors.CrimsonRot;
 import game.behaviours.WanderBehaviour;
+import game.capabilities.Curable;
+
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,7 +22,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends Creature {
+public class SpiritGoat extends Npc implements Curable {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
@@ -52,5 +57,23 @@ public class SpiritGoat extends Creature {
 
         System.out.println("The Spirit Goat's energy has been restored!");
         return true;
+    }
+
+    /**
+     * The creature can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return actions that can be performed by the other actor
+     * @see edu.monash.fit2099.demo.huntsman.HuntsmanSpider#allowableActions(Actor, String, GameMap)
+     */
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        // Check if the actor if he has the item which has the ability to cure
+        if (otherActor.hasCapability(Ability.CURE)) {
+            actions.add(new CureAction(this, direction, map.locationOf(this)));
+        }
+        return actions;
     }
 }

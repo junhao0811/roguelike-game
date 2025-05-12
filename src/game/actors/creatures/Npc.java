@@ -7,12 +7,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Ability;
 import game.actions.AttackAction;
 import game.Status;
-import game.actions.CureAction;
 import game.behaviours.WanderBehaviour;
-import game.capabilities.Curable;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,14 +20,14 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public abstract class Creature extends Actor implements Curable {
+public abstract class Npc extends Actor {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
     /**
      * Constructor.
      */
-    public Creature(String name, char displayChar, int hitPoints) {
+    public Npc(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
     }
@@ -78,10 +76,6 @@ public abstract class Creature extends Actor implements Curable {
         ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
-        }
-        // Check if the actor if he has the item which has the ability to cure
-        if (otherActor.hasCapability(Ability.CURE)) {
-            actions.add(new CureAction(this, direction, map.locationOf(this)));
         }
         return actions;
     }
