@@ -59,7 +59,7 @@ public class Application {
         // Add spirit goat and omen sheep to the game map, with CrimsonRot status effect
         Npc spiritGoat = new SpiritGoat();
         gameMap.at(22, 13).addActor(spiritGoat);
-        spiritGoat.addStatusEffect(new CrimsonRot(10));
+//        spiritGoat.addStatusEffect(new CrimsonRot(10));
         
         Npc omenSheep = new OmenSheep();
         gameMap.at(27, 13).addActor(omenSheep);

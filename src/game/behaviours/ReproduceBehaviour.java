@@ -38,27 +38,38 @@ public class ReproduceBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
         ArrayList<Action> actions = new ArrayList<>();
-        ArrayList<Location> validLocations = new ArrayList<>();
 
-        // Check if the actor can reproduce
-        if (actor != reproducible) {
+        boolean nearBlessedEntity = false;
+        // Check all exits from the current location
+        for (Exit exit : map.locationOf(actor).getExits()) {
+            Location destination = exit.getDestination();
+            // Check if the destination location is valid for reproduction
+            if (destination.getGround().hasCapability(Status.BLESSED)) {
+                nearBlessedEntity = true;
+                break;
+            }
+        }
+
+        // If the actor is not near a blessed entity, return null
+        if (!nearBlessedEntity) {
             return null;
         }
 
         // Check all exits from the current location
+        ArrayList<Location> validLocations = new ArrayList<>();
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
-            // Check if the destination is valid for reproduction
-            if (destination.canActorEnter(actor) && !destination.containsAnActor() && destination.getGround().hasCapability(Status.BLESSED)) {
-                // Add the destination to the list of valid locations
+            if (destination.canActorEnter(actor) && !destination.containsAnActor()) {
                 validLocations.add(destination);
             }
         }
-        // If there are valid locations, create a ReproduceAction for one of them
+
+        // If there are valid locations, create a ReproduceAction for one random location
         if (!validLocations.isEmpty()) {
             // Randomly select a valid location
-            Location location = validLocations.get(random.nextInt(validLocations.size()));
-            actions.add(new ReproduceAction(reproducible, location));
+            Location reproduceAt = validLocations.get(random.nextInt(validLocations.size()));
+            actions.add(new ReproduceAction(reproducible, reproduceAt));
+
         }
 
         // If there are valid actions, return one of them

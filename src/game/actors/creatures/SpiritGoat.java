@@ -1,6 +1,8 @@
 package game.actors.creatures;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.actors.StatusEffect;
@@ -34,7 +36,7 @@ public class SpiritGoat extends Npc implements Curable, Reproducible {
      */
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
-        this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
+        //this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
         this.behaviours.put(888, new ReproduceBehaviour(this));
     }
 
@@ -64,10 +66,22 @@ public class SpiritGoat extends Npc implements Curable, Reproducible {
         return true;
     }
 
-    public void reproduce(Actor actor, GameMap map) {
+    public void reproduce(Actor actor, Location location) {
         SpiritGoat offSpring = new SpiritGoat();
-        map.addActor(offSpring, map.locationOf(this));
+        location.addActor(offSpring);
         new Display().println("An offspring of Spirit Goat has been born near the Inheritree!");
+    }
+
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        for (Behaviour behaviour : behaviours.values()) {
+            Action action = behaviour.getAction(this, map);
+            if (action != null) {
+                return action;
+            }
+        }
+
+        return new DoNothingAction();
     }
 
     /**

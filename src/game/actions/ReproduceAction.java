@@ -11,16 +11,16 @@ import game.capabilities.Reproducible;
  */
 public class ReproduceAction extends Action {
     private Reproducible reproducible;
-    private Location reproduceToLocation;
+    private Location reproduceAt;
 
     /**
      * Constructor to create an Action that will reproduce an offspring at a given direction
      *
      * @param reproducible the Reproducible object that will reproduce
      */
-    public ReproduceAction(Reproducible reproducible, Location reproduceToLocation) {
+    public ReproduceAction(Reproducible reproducible, Location reproduceAt) {
         this.reproducible = reproducible;
-        this.reproduceToLocation = reproduceToLocation;
+        this.reproduceAt = reproduceAt;
     }
 
     /**
@@ -32,7 +32,7 @@ public class ReproduceAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        reproducible.reproduce(actor, map);
+        reproducible.reproduce(actor, reproduceAt);
         return menuDescription(actor);
     }
 
