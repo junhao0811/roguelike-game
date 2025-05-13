@@ -1,8 +1,11 @@
 package game.actors.creatures;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -20,7 +23,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class OmenSheep extends Npc implements Curable {
+public class OmenSheep extends NonPlayableCharacter implements Curable {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
@@ -31,7 +34,37 @@ public class OmenSheep extends Npc implements Curable {
         super("Omen Sheep", 'm', 75);
         this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
     }
-    
+
+    /**
+     * At each turn, select a valid action to perform.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in
+     *                   conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return the valid action that can be performed in that iteration or null if no valid action
+     * is found
+     */
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        // Check if the actor is unconscious due to natural causes or accident
+        if (!this.isConscious()) {
+            display.println(this.unconscious(map));
+        }
+
+        // Check if this actor is still on the map
+        if (map.locationOf(this) != null) {
+            for (Behaviour behaviour : behaviours.values()) {
+                Action action = behaviour.getAction(this, map);
+                if (action != null) {
+                    return action;
+                }
+            }
+        }
+        return new DoNothingAction();
+    }
+
     /**
      * Cures the environment by replacing nearby ground with Inheritree instances.
      * This action applies to the locations surrounding the current actor's position

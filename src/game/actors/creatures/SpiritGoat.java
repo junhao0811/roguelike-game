@@ -13,7 +13,6 @@ import game.Ability;
 import game.actions.CureAction;
 import game.actors.CrimsonRot;
 import game.behaviours.ReproduceBehaviour;
-import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
 import game.capabilities.Reproducible;
 
@@ -27,7 +26,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends Npc implements Curable, Reproducible {
+public class SpiritGoat extends NonPlayableCharacter implements Curable, Reproducible {
 
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
@@ -72,15 +71,33 @@ public class SpiritGoat extends Npc implements Curable, Reproducible {
         new Display().println("An offspring of Spirit Goat has been born near the Inheritree!");
     }
 
+    /**
+     * At each turn, select a valid action to perform.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in
+     *                   conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return the valid action that can be performed in that iteration or null if no valid action
+     * is found
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null) {
-                return action;
-            }
+        // Check if the actor is unconscious due to natural causes or accident
+        if (!this.isConscious()) {
+            display.println(this.unconscious(map));
         }
 
+        // Check if this actor is still on the map
+        if (map.locationOf(this) != null) {
+            for (Behaviour behaviour : behaviours.values()) {
+                Action action = behaviour.getAction(this, map);
+                if (action != null) {
+                    return action;
+                }
+            }
+        }
         return new DoNothingAction();
     }
 

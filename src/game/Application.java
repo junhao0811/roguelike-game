@@ -1,6 +1,6 @@
 package game;
 
-import game.actors.creatures.Npc;
+import game.actors.creatures.NonPlayableCharacter;
 import game.displays.FancyMessage;
 import game.items.Talisman;
 import game.grounds.Blight;
@@ -57,11 +57,11 @@ public class Application {
         world.addGameMap(gameMap);
         
         // Add spirit goat and omen sheep to the game map, with CrimsonRot status effect
-        Npc spiritGoat = new SpiritGoat();
+        NonPlayableCharacter spiritGoat = new SpiritGoat();
         gameMap.at(22, 13).addActor(spiritGoat);
 //        spiritGoat.addStatusEffect(new CrimsonRot(10));
         
-        Npc omenSheep = new OmenSheep();
+        NonPlayableCharacter omenSheep = new OmenSheep();
         gameMap.at(27, 13).addActor(omenSheep);
         omenSheep.addStatusEffect(new CrimsonRot(15));
         
