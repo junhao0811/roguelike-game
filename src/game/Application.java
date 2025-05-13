@@ -1,15 +1,15 @@
 package game;
 
-import game.actors.creatures.NonPlayableCharacter;
+import game.actors.npc.NonPlayableCharacter;
 import game.displays.FancyMessage;
 import game.items.Talisman;
 import game.grounds.Blight;
 import game.grounds.Floor;
-import game.actors.creatures.OmenSheep;
+import game.actors.npc.OmenSheep;
 import game.actors.CrimsonRot;
 import game.actors.Player;
 import game.grounds.Soil;
-import game.actors.creatures.SpiritGoat;
+import game.actors.npc.SpiritGoat;
 import game.grounds.Wall;
 import game.items.seeds.BloodroseSeed;
 import game.items.seeds.InheritreeSeed;
