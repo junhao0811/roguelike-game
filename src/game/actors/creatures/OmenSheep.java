@@ -35,7 +35,7 @@ public class OmenSheep extends NonPlayableCharacter implements Curable, Reproduc
      */
     public OmenSheep() {
         super("Omen Sheep", 'm', 75);
-        this.behaviours.put(888, new ReproduceBehaviour(this));
+        this.behaviours.put(0, new ReproduceBehaviour(this));
         this.behaviours.put(999, new WanderBehaviour());
         this.addCapability(Ability.PRODUCE_EGG);
     }

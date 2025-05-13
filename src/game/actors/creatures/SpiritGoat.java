@@ -36,7 +36,7 @@ public class SpiritGoat extends NonPlayableCharacter implements Curable, Reprodu
      */
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
-        this.behaviours.put(888, new ReproduceBehaviour(this));
+        this.behaviours.put(0, new ReproduceBehaviour(this));
         this.behaviours.put(999, new WanderBehaviour());
         this.addCapability(Ability.PRODUCE_OFFSPRING);
     }
