@@ -37,6 +37,18 @@ public class ProduceOffspringBehaviour extends Action implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
+        return this;
+    }
+
+    /**
+     * Allow the Actor to reproduce.
+     *
+     * @param actor The actor performing the action.
+     * @param map   The map the actor is on.
+     * @return a description of the ReproduceAction suitable for the menu.
+     */
+    @Override
+    public String execute(Actor actor, GameMap map) {
         boolean nearBlessedEntity = false;
         ArrayList<Location> validLocations = new ArrayList<>();
 
@@ -63,28 +75,11 @@ public class ProduceOffspringBehaviour extends Action implements Behaviour {
         // If there are valid locations, randomly select one
         if (!validLocations.isEmpty()) {
             reproduceAt = validLocations.get(random.nextInt(validLocations.size()));
-            return this ; // Return this behaviour as the action
-        }
-
-        return null; // No valid reproduction action found
-    }
-
-    /**
-     * Allow the Actor to reproduce.
-     *
-     * @param actor The actor performing the action.
-     * @param map   The map the actor is on.
-     * @return a description of the ReproduceAction suitable for the menu.
-     */
-    @Override
-    public String execute(Actor actor, GameMap map) {
-        if (reproduceAt != null) {
-            // Call the reproduce method on the Reproducible object
             reproducible.reproduce(actor, reproduceAt);
-            return actor + " successfully reproduces >o<";
-        } else {
-            return actor + " is unable to reproduce.";
+            return menuDescription(actor); // Return this behaviour as the action
         }
+
+        return actor + " is unable to reproduce."; // No valid reproduction action found
     }
 
     /**
