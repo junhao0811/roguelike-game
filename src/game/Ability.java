@@ -11,4 +11,5 @@ package game;
 public enum Ability {
     PLANT,
     CURE,
+    HATCH
 }

@@ -12,20 +12,21 @@ import game.capabilities.Reproducible;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ReproduceBehaviour implements Behaviour {
+public class ProduceOffspringBehaviour extends Action implements Behaviour {
 
     private final Random random = new Random();
     private final Reproducible reproducible;
+    private Location reproduceAt;
 
     /**
-     * Constructor to create a ReproduceBehaviour.
+     * Constructor to create a ProduceOffspringBehaviour.
      *
      * @param reproducible the Reproducible object that will reproduce
      */
-    public ReproduceBehaviour(Reproducible reproducible) {
+    public ProduceOffspringBehaviour(Reproducible reproducible) {
         this.reproducible = reproducible;
     }
-
+    
     /**
      * Returns a ReproduceAction to reproduce at a random location, if possible.
      * If no reproduction is possible, returns null.
@@ -77,5 +78,29 @@ public class ReproduceBehaviour implements Behaviour {
         } else {
             return null;
         }
+    }
+    
+    /**
+     * Allow the Actor to be reproduced.
+     *
+     * @param actor The actor performing the action.
+     * @param map   The map the actor is on.
+     * @return a description of the ReproduceAction suitable for the menu.
+     */
+    @Override
+    public String execute(Actor actor, GameMap map) {
+        reproducible.reproduce(actor, reproduceAt);
+        return menuDescription(actor);
+    }
+    
+    /**
+     * Returns a description of this reproduction suitable to display in the menu.
+     *
+     * @param actor The actor performing the action.
+     * @return a String, e.g. "SpiritGoat gives birth to an offspring at North"
+     */
+    @Override
+    public String menuDescription(Actor actor) {
+        return actor + " reproduces successfully >o<";
     }
 }

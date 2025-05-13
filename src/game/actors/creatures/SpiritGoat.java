@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.actions.CureAction;
 import game.actors.CrimsonRot;
-import game.behaviours.ReproduceBehaviour;
+import game.behaviours.ProduceOffspringBehaviour;
 import game.capabilities.Curable;
 import game.capabilities.Reproducible;
 
@@ -36,7 +36,7 @@ public class SpiritGoat extends NonPlayableCharacter implements Curable, Reprodu
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
         //this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
-        this.behaviours.put(888, new ReproduceBehaviour(this));
+        this.behaviours.put(888, new ProduceOffspringBehaviour(this));
     }
 
     /**
