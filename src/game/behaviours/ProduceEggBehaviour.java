@@ -5,13 +5,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.ReproduceAction;
+
 import game.capabilities.Reproducible;
 
 public class ProduceEggBehaviour extends Action implements Behaviour {
-    private final Reproducible reproducible;
+    private Reproducible reproducible;
     private int counter;
-    
+
     /**
      * Constructor to create a ProduceEggBehaviour.
      *
@@ -21,7 +21,7 @@ public class ProduceEggBehaviour extends Action implements Behaviour {
         this.reproducible = reproducible;
         this.counter = 0;
     }
-    
+
     /**
      * Returns a ReproduceAction to reproduce at a random location, if possible.
      * If no reproduction is possible, returns null.
@@ -32,11 +32,10 @@ public class ProduceEggBehaviour extends Action implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        
         counter += 1;
-        return counter % 7 == 0 ? new ReproduceAction(reproducible, map.locationOf(actor)) : null;
+        return counter % 7 == 0 ? new this : null;
     }
-    
+
     @Override
     public String execute(Actor actor, GameMap map) {
         for(Exit exit : map.locationOf(actor).getExits()){
@@ -47,7 +46,7 @@ public class ProduceEggBehaviour extends Action implements Behaviour {
         };
         return actor + " is unable to clone";
     }
-    
+
     @Override
     public String menuDescription(Actor actor) {
         return null;
