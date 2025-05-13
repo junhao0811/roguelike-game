@@ -11,9 +11,12 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.actions.CureAction;
+import game.behaviours.ReproduceBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
+import game.capabilities.Reproducible;
 import game.grounds.crops.Inheritree;
+import game.items.Egg;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -23,7 +26,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class OmenSheep extends NonPlayableCharacter implements Curable {
+public class OmenSheep extends NonPlayableCharacter implements Curable, Reproducible {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
@@ -32,7 +35,9 @@ public class OmenSheep extends NonPlayableCharacter implements Curable {
      */
     public OmenSheep() {
         super("Omen Sheep", 'm', 75);
-        this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
+        this.behaviours.put(888, new ReproduceBehaviour(this));
+        this.behaviours.put(999, new WanderBehaviour());
+        this.addCapability(Ability.PRODUCE_EGG);
     }
 
     /**
@@ -53,6 +58,11 @@ public class OmenSheep extends NonPlayableCharacter implements Curable {
         }
         System.out.println("Inheritree has been planted around the Omen Sheep!");
         return true;
+    }
+    
+    public void reproduce(Actor actor, Location location) {
+        location.addItem(new Egg());
+        new Display().println(this + " has produced an Egg!");
     }
 
     /**

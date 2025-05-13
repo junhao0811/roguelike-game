@@ -12,7 +12,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.actions.CureAction;
 import game.actors.CrimsonRot;
-import game.behaviours.ProduceOffspringBehaviour;
+import game.behaviours.ReproduceBehaviour;
+import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
 import game.capabilities.Reproducible;
 
@@ -35,8 +36,9 @@ public class SpiritGoat extends NonPlayableCharacter implements Curable, Reprodu
      */
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
-        //this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
-        this.behaviours.put(888, new ProduceOffspringBehaviour(this));
+        this.behaviours.put(888, new ReproduceBehaviour(this));
+        this.behaviours.put(999, new WanderBehaviour());
+        this.addCapability(Ability.PRODUCE_OFFSPRING);
     }
 
     /**
@@ -68,7 +70,7 @@ public class SpiritGoat extends NonPlayableCharacter implements Curable, Reprodu
     public void reproduce(Actor actor, Location location) {
         SpiritGoat offSpring = new SpiritGoat();
         location.addActor(offSpring);
-        new Display().println("An offspring of Spirit Goat has been born near the Inheritree!");
+        new Display().println("An offspring of " + this + " has been born!");
     }
 
     /**
