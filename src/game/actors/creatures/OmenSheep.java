@@ -36,6 +36,26 @@ public class OmenSheep extends NonPlayableCharacter implements Curable {
     }
 
     /**
+     * Cures the environment by replacing nearby ground with Inheritree instances.
+     * This action applies to the locations surrounding the current actor's position
+     * in the provided game map.
+     *
+     * @param actor the actor initiating the cure action
+     * @param location the location of the actor1
+     *
+     */
+    public boolean cure(Actor actor, Location location) {
+        for (Exit exit : location.getExits()) {
+            Location nearby = exit.getDestination();
+            if (nearby.canActorEnter(this)) {
+                nearby.setGround(new Inheritree());
+            }
+        }
+        System.out.println("Inheritree has been planted around the Omen Sheep!");
+        return true;
+    }
+
+    /**
      * At each turn, select a valid action to perform.
      *
      * @param actions    collection of possible Actions for this Actor
@@ -63,26 +83,6 @@ public class OmenSheep extends NonPlayableCharacter implements Curable {
             }
         }
         return new DoNothingAction();
-    }
-
-    /**
-     * Cures the environment by replacing nearby ground with Inheritree instances.
-     * This action applies to the locations surrounding the current actor's position
-     * in the provided game map.
-     *
-     * @param actor the actor initiating the cure action
-     * @param location the location of the actor1
-     *
-     */
-    public boolean cure(Actor actor, Location location) {
-        for (Exit exit : location.getExits()) {
-            Location nearby = exit.getDestination();
-            if (nearby.canActorEnter(this)) {
-                nearby.setGround(new Inheritree());
-            }
-        }
-        System.out.println("Inheritree has been planted around the Omen Sheep!");
-        return true;
     }
 
     /**
