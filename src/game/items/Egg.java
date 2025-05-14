@@ -2,11 +2,13 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.actors.npc.Npc;
+import game.capabilities.Hatchable;
 
 /**
  * A class representing an Egg that an actor can pick up and drop. The egg has the ability to hatch
@@ -17,13 +19,13 @@ import game.actors.npc.Npc;
  */
 public class Egg extends Item {
     
-    private Npc creature;
+    private Hatchable creature;
     private int counter;
     
     /**
      * Constructor.
      */
-    public Egg(Npc creature) {
+    public Egg(Hatchable creature) {
         super("Egg", '0', true);
         this.creature = creature;
         this.counter = 0;
@@ -48,9 +50,11 @@ public class Egg extends Item {
     @Override
     public void tick(Location currentLocation) {
         counter++;
-        if (creature.hasCapability(Ability.HATCH) && isReadyToHatch()) {
+        if (isReadyToHatch()) {
             currentLocation.removeItem(this);
-            currentLocation.addActor(creature);
+            Npc newCreature = creature.hatch();
+            currentLocation.addActor(newCreature);
+            new Display().println("A new " + newCreature + " has hatched from the Egg!");
         }
     }
     

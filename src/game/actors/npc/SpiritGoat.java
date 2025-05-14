@@ -15,6 +15,7 @@ import game.actors.CrimsonRot;
 import game.behaviours.ReproduceBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
+import game.capabilities.Hatchable;
 import game.capabilities.Reproducible;
 
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends Npc implements Curable, Reproducible {
+public class SpiritGoat extends Npc implements Curable, Reproducible, Hatchable {
 
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
@@ -39,7 +40,6 @@ public class SpiritGoat extends Npc implements Curable, Reproducible {
         this.behaviours.put(0, new ReproduceBehaviour(this));
         this.behaviours.put(999, new WanderBehaviour());
         this.addCapability(Ability.PRODUCE_OFFSPRING);
-        this.addCapability(Ability.HATCH);
     }
 
     /**
@@ -72,6 +72,10 @@ public class SpiritGoat extends Npc implements Curable, Reproducible {
         SpiritGoat offSpring = new SpiritGoat();
         location.addActor(offSpring);
         new Display().println("An offspring of " + this + " has been born!");
+    }
+    
+    public Npc hatch() {
+        return new SpiritGoat();
     }
 
     /**

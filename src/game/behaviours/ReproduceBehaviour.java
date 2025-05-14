@@ -131,7 +131,7 @@ public class ReproduceBehaviour extends Action implements Behaviour {
     public String produceEgg(Actor actor, GameMap map) {
         // Simply reproduce at the current location
         reproducible.reproduce(actor, map.locationOf(actor));
-        return actor + " lays an egg.";
+        return menuDescription(actor);
     }
     
     /**
@@ -143,9 +143,9 @@ public class ReproduceBehaviour extends Action implements Behaviour {
     @Override
     public String menuDescription(Actor actor) {
         if (actor.hasCapability(Ability.PRODUCE_OFFSPRING)) {
-            return actor + " successfully reproduces >o<";
+            return actor + " successfully reproduces";
         } else {
-            return actor + " lays an egg >o<";
+            return actor + " lays an egg";
         }
     }
 }

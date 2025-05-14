@@ -13,6 +13,5 @@ public enum Ability {
     CURE,
     PRODUCE_OFFSPRING,
     PRODUCE_EGG,
-    HATCH,
     EAT
 }

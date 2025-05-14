@@ -14,6 +14,7 @@ import game.actions.CureAction;
 import game.behaviours.ReproduceBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
+import game.capabilities.Hatchable;
 import game.capabilities.Reproducible;
 import game.grounds.crops.Inheritree;
 import game.items.Egg;
@@ -26,7 +27,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class OmenSheep extends Npc implements Curable, Reproducible {
+public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
@@ -38,7 +39,6 @@ public class OmenSheep extends Npc implements Curable, Reproducible {
         this.behaviours.put(0, new ReproduceBehaviour(this));
         this.behaviours.put(999, new WanderBehaviour());
         this.addCapability(Ability.PRODUCE_EGG);
-        this.addCapability(Ability.HATCH);
     }
 
     /**
@@ -63,7 +63,10 @@ public class OmenSheep extends Npc implements Curable, Reproducible {
     
     public void reproduce(Actor actor, Location location) {
         location.addItem(new Egg(this));
-        new Display().println(this + " has produced an Egg!");
+    }
+    
+    public Npc hatch() {
+        return new OmenSheep();
     }
 
     /**
