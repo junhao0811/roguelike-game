@@ -49,13 +49,13 @@ public class Egg extends Item {
      */
     @Override
     public void tick(Location currentLocation) {
-        counter++;
         if (isReadyToHatch()) {
             currentLocation.removeItem(this);
             Npc newCreature = creature.hatch();
             currentLocation.addActor(newCreature);
-            new Display().println("A new " + newCreature + " has hatched from the Egg!");
+            new Display().println("A new " + newCreature + " hatches from the Egg!");
         }
+        counter++;
     }
     
     /**
