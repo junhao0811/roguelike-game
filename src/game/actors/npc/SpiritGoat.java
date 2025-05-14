@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
@@ -18,9 +19,12 @@ import game.capabilities.Curable;
 import game.capabilities.Hatchable;
 import game.capabilities.Reproducible;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
+
 
 /**
  * Class representing a Spirit Goat. Created by: Chong Jun Hao
@@ -31,6 +35,7 @@ import java.util.TreeMap;
 public class SpiritGoat extends Npc implements Curable, Reproducible, Hatchable {
 
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    private final Random random = new Random();
 
     /**
      * Constructor.
@@ -68,10 +73,37 @@ public class SpiritGoat extends Npc implements Curable, Reproducible, Hatchable 
         return true;
     }
 
+    /**
+     * Creates an offspring at a random valid location around the actor.
+     * This contains all the logic for finding a valid location and placing the offspring.
+     *
+     * @param actor    the parent actor
+     * @param location the actor's current location
+     */
     public void reproduce(Actor actor, Location location) {
-        SpiritGoat offSpring = new SpiritGoat();
-        location.addActor(offSpring);
-        new Display().println("An offspring of " + this + " has spawned");
+        // Find all valid locations around the actor
+        ArrayList<Location> validLocations = new ArrayList<>();
+        for (Exit exit : location.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.canActorEnter(actor) && !destination.containsAnActor()) {
+                validLocations.add(destination);
+            }
+        }
+
+        // If no valid locations found, don't reproduce
+        if (validLocations.isEmpty()) {
+            new Display().println(actor + " tries to reproduce but finds no space for offspring");
+            return;
+        }
+
+        // Select a random valid location
+        Location birthLocation = validLocations.get(random.nextInt(validLocations.size()));
+
+        // Create and place the offspring
+        SpiritGoat offspring = new SpiritGoat();
+        birthLocation.addActor(offspring);
+
+        new Display().println("An offspring of " + actor + " has spawned");
     }
     
     public Npc hatch() {

@@ -8,18 +8,17 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.Status;
+import game.actions.ReproduceAction;
 import game.capabilities.Reproducible;
 
-import java.util.ArrayList;
-import java.util.Random;
+/**
+ * A behavior that determines when an actor should reproduce
+ */
+public class ReproduceBehaviour implements Behaviour {
 
-public class ReproduceBehaviour extends Action implements Behaviour {
-    
-    private final Random random = new Random();
     private Reproducible reproducible;
-    private Location reproduceAt;
     private int counter;
-    
+
     /**
      * Constructor to create a ReproduceBehaviour.
      *
@@ -29,123 +28,43 @@ public class ReproduceBehaviour extends Action implements Behaviour {
         this.reproducible = reproducible;
         this.counter = 0;
     }
-    
+
     /**
-     * Returns this action to handle reproduction, either by producing offspring or laying eggs.
+     * Returns a ReproduceAction when an actor should reproduce.
+     * For actors with PRODUCE_OFFSPRING: checks if near a blessed entity
+     * For actors with PRODUCE_EGG: checks if counter is at a multiple of 7
      *
      * @param actor the Actor enacting the behaviour
      * @param map   the map that actor is currently on
-     * @return an Action for reproduction, or null if not possible
+     * @return a ReproduceAction if conditions are met, otherwise null
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         if (actor.hasCapability(Ability.PRODUCE_OFFSPRING)) {
-            // Check if offspring production is possible
-            if (canProduceOffspring(actor, map)) {
-                return this;
+            // Check if actor is near any blessed entity
+            Location actorLocation = map.locationOf(actor);
+            boolean nearBlessedEntity = false;
+
+            for (Exit exit : actorLocation.getExits()) {
+                Location destination = exit.getDestination();
+                if (destination.getGround().hasCapability(Status.BLESSED)) {
+                    nearBlessedEntity = true;
+                    break;
+                }
             }
-        } else if (actor.hasCapability(Ability.PRODUCE_EGG)) {
-            // Increment counter for egg-laying logic
+
+            if (nearBlessedEntity) {
+                return new ReproduceAction(reproducible);
+            }
+        }
+        else if (actor.hasCapability(Ability.PRODUCE_EGG)) {
+            // Increment counter and check if it's time to lay egg
             counter++;
-            // Check if it's time to lay an egg (every 7 turns)
             if (counter % 7 == 0) {
-                return this;
+                return new ReproduceAction(reproducible);
             }
         }
+
         return null;
-    }
-    
-    /**
-     * Allow the Actor to reproduce, either by producing offspring or laying eggs.
-     *
-     * @param actor The actor performing the action.
-     * @param map   The map the actor is on.
-     * @return a description of the reproduction action.
-     */
-    @Override
-    public String execute(Actor actor, GameMap map) {
-        if (actor.hasCapability(Ability.PRODUCE_OFFSPRING)) {
-            return produceOffspring(actor, map);
-        } else if (actor.hasCapability(Ability.PRODUCE_EGG)) {
-            return produceEgg(actor, map);
-        }
-        return actor + " cannot reproduce.";
-    }
-    
-    /**
-     * Check if offspring production is possible by finding valid locations near blessed entities.
-     *
-     * @param actor the Actor attempting to reproduce
-     * @param map the GameMap the actor is on
-     * @return true if reproduction is possible, false otherwise
-     */
-    private boolean canProduceOffspring(Actor actor, GameMap map) {
-        boolean nearBlessedEntity = false;
-        ArrayList<Location> validLocations = new ArrayList<>();
-        
-        // Check all exits from the current location
-        for (Exit exit : map.locationOf(actor).getExits()) {
-            Location destination = exit.getDestination();
-            
-            // Check if the destination location is near a blessed entity
-            if (destination.getGround().hasCapability(Status.BLESSED)) {
-                nearBlessedEntity = true;
-            }
-            
-            // Check if the destination is valid for reproduction
-            if (destination.canActorEnter(actor) && !destination.containsAnActor()) {
-                validLocations.add(destination);
-            }
-        }
-        
-        // If not near a blessed entity or no valid locations, reproduction is not possible
-        if (!nearBlessedEntity || validLocations.isEmpty()) {
-            return false;
-        }
-        
-        // Select a random valid location for reproduction
-        reproduceAt = validLocations.get(random.nextInt(validLocations.size()));
-        return true;
-    }
-    
-    /**
-     * Produce offspring at the previously determined valid location.
-     *
-     * @param actor the Actor reproducing
-     * @param map the GameMap the actor is on
-     * @return a description of the reproduction
-     */
-    public String produceOffspring(Actor actor, GameMap map) {
-        reproducible.reproduce(actor, reproduceAt);
-        return menuDescription(actor);
-    }
-    
-    /**
-     * Produce an egg at the actor's current location.
-     * Egg production only depends on turn count and doesn't need blessed entities.
-     *
-     * @param actor the Actor laying the egg
-     * @param map the GameMap the actor is on
-     * @return a description of the egg laying
-     */
-    public String produceEgg(Actor actor, GameMap map) {
-        // Simply reproduce at the current location
-        reproducible.reproduce(actor, map.locationOf(actor));
-        return menuDescription(actor);
-    }
-    
-    /**
-     * Returns a description of this reproduction suitable to display in the menu.
-     *
-     * @param actor The actor performing the action.
-     * @return a String describing the reproduction
-     */
-    @Override
-    public String menuDescription(Actor actor) {
-        if (actor.hasCapability(Ability.PRODUCE_OFFSPRING)) {
-            return actor + " successfully reproduces";
-        } else {
-            return actor + " lays an egg";
-        }
     }
 }
