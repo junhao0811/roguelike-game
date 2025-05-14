@@ -60,13 +60,38 @@ public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
         System.out.println("Inheritree has been planted around the Omen Sheep!");
         return true;
     }
-    
+
+    /**
+     * Reproduces an egg at the given location.
+     *
+     * @param actor    the actor performing the reproduction
+     * @param location the location where the egg will be placed
+     */
+    @Override
     public void reproduce(Actor actor, Location location) {
-        location.addItem(new Egg(this));
+        location.addItem(new Egg(this, "Egg"));
     }
-    
+
+    /**
+     * Hatches the egg into a new Omen Sheep instance.
+     *
+     * @return a new Omen Sheep instance
+     */
+    @Override
     public Npc hatch() {
         return new OmenSheep();
+    }
+
+    /**
+     * Checks if the egg is ready to hatch. The egg is ready to hatch if the counter is 3.
+     *
+     * @param counter   the current counter value
+     * @param location  the location of the egg
+     * @return true if the egg is ready to hatch, false otherwise
+     */
+    @Override
+    public boolean isReadyToHatch(int counter, Location location) {
+        return counter == 3; // OmenSheep eggs hatch after 3 turns
     }
 
     /**

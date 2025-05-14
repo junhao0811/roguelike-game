@@ -33,23 +33,12 @@ public class Egg extends Item implements Edible {
     /**
      * Constructor.
      */
-    public Egg(Hatchable creature) {
+    public Egg(Hatchable creature, String name) {
         super("Egg", '0', true);
         this.creature = creature;
         this.counter = 0;
         this.addCapability(Ability.EAT);
     }
-    
-    /**
-     * Hatching condition for the Egg. The Egg can hatch into other creatures with different
-     * hatching conditions
-     *
-     * @return true if the hatching condition of the Egg is met, false otherwise
-     */
-    public boolean isReadyToHatch() {
-        return counter == 3;
-    }
-    
     
     /**
      * Updates the state of the Egg during each game tick by checking its hatching condition
@@ -59,7 +48,7 @@ public class Egg extends Item implements Edible {
      */
     @Override
     public void tick(Location currentLocation) {
-        if (this.isReadyToHatch()) {
+        if (creature.isReadyToHatch(counter, currentLocation)) {
             Actor newCreature = creature.hatch();
             // Check if the current location is occupied by an actor
             if (currentLocation.containsAnActor()) {

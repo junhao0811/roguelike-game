@@ -32,7 +32,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends Npc implements Curable, Reproducible, Hatchable {
+public class SpiritGoat extends Npc implements Curable, Reproducible {
 
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     private final Random random = new Random();
@@ -104,10 +104,6 @@ public class SpiritGoat extends Npc implements Curable, Reproducible, Hatchable 
         birthLocation.addActor(offspring);
 
         new Display().println("An offspring of " + actor + " has spawned");
-    }
-    
-    public Npc hatch() {
-        return new SpiritGoat();
     }
 
     /**
