@@ -109,7 +109,7 @@ public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
      * @see edu.monash.fit2099.demo.huntsman.HuntsmanSpider#allowableActions(Actor, String, GameMap)
      */
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
+        ActionList actions = super.allowableActions(otherActor, direction, map);
         // Check if the actor if he has the item which has the ability to cure
         if (otherActor.hasCapability(Ability.CURE)) {
             actions.add(new CureAction(this, direction, map.locationOf(this)));
