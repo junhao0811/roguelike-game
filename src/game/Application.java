@@ -1,5 +1,6 @@
 package game;
 
+import game.actors.npc.GoldenBeetle;
 import game.actors.npc.Npc;
 import game.displays.FancyMessage;
 import game.items.Talisman;
@@ -62,8 +63,11 @@ public class Application {
 //        spiritGoat.addStatusEffect(new CrimsonRot(10));
         
         Npc omenSheep = new OmenSheep();
-        gameMap.at(27, 13).addActor(omenSheep);
+        gameMap.at(24, 13).addActor(omenSheep);
         omenSheep.addStatusEffect(new CrimsonRot(15));
+        
+        Npc goldenBeetle = new GoldenBeetle();
+        gameMap.at(23, 13).addActor(goldenBeetle);
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {
