@@ -33,8 +33,8 @@ public class EatAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        edible.eat(actor);
-        return edible + " has been eaten by " + actor;
+        edible.eat(actor, map);
+        return edible + " has been consumed by the " + actor;
     }
     
     /**
