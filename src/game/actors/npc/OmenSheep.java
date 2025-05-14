@@ -1,4 +1,4 @@
-package game.actors.creatures;
+package game.actors.npc;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -6,32 +6,69 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.AttackAction;
-import game.Status;
+import edu.monash.fit2099.engine.positions.Location;
+import game.Ability;
+import game.actions.CureAction;
+import game.behaviours.ReproduceBehaviour;
 import game.behaviours.WanderBehaviour;
-
+import game.capabilities.Curable;
+import game.capabilities.Hatchable;
+import game.capabilities.Reproducible;
+import game.grounds.crops.Inheritree;
+import game.items.Egg;
 import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Class representing a Creature. Created by: Chong Jun Hao
+ * Class representing an Omen Sheep. Created by: Chong Jun Hao
  *
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public abstract class Npc extends Actor {
+public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
     /**
      * Constructor.
      */
-    public Npc(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
-        this.behaviours.put(Integer.MAX_VALUE, new WanderBehaviour());
+    public OmenSheep() {
+        super("Omen Sheep", 'm', 75);
+        this.behaviours.put(0, new ReproduceBehaviour(this));
+        this.behaviours.put(999, new WanderBehaviour());
+        this.addCapability(Ability.PRODUCE_EGG);
+    }
+
+    /**
+     * Cures the environment by replacing nearby ground with Inheritree instances.
+     * This action applies to the locations surrounding the current actor's position
+     * in the provided game map.
+     *
+     * @param actor the actor initiating the cure action
+     * @param location the location of the actor1
+     *
+     */
+    public boolean cure(Actor actor, Location location) {
+        for (Exit exit : location.getExits()) {
+            Location nearby = exit.getDestination();
+            if (nearby.canActorEnter(this)) {
+                nearby.setGround(new Inheritree());
+            }
+        }
+        System.out.println("Inheritree has been planted around the Omen Sheep!");
+        return true;
     }
     
+    public void reproduce(Actor actor, Location location) {
+        location.addItem(new Egg(this));
+    }
+    
+    public Npc hatch() {
+        return new OmenSheep();
+    }
+
     /**
      * At each turn, select a valid action to perform.
      *
@@ -49,7 +86,7 @@ public abstract class Npc extends Actor {
         if (!this.isConscious()) {
             display.println(this.unconscious(map));
         }
-        
+
         // Check if this actor is still on the map
         if (map.locationOf(this) != null) {
             for (Behaviour behaviour : behaviours.values()) {
@@ -61,7 +98,7 @@ public abstract class Npc extends Actor {
         }
         return new DoNothingAction();
     }
-    
+
     /**
      * The creature can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
      *
@@ -71,12 +108,13 @@ public abstract class Npc extends Actor {
      * @return actions that can be performed by the other actor
      * @see edu.monash.fit2099.demo.huntsman.HuntsmanSpider#allowableActions(Actor, String, GameMap)
      */
-    @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            actions.add(new AttackAction(this, direction));
+        ActionList actions = super.allowableActions(otherActor, direction, map);
+        // Check if the actor if he has the item which has the ability to cure
+        if (otherActor.hasCapability(Ability.CURE)) {
+            actions.add(new CureAction(this, direction, map.locationOf(this)));
         }
         return actions;
     }
 }
+

@@ -11,4 +11,7 @@ package game;
 public enum Ability {
     PLANT,
     CURE,
+    PRODUCE_OFFSPRING,
+    PRODUCE_EGG,
+    EAT
 }

@@ -1,15 +1,15 @@
 package game;
 
-import game.actors.creatures.Npc;
+import game.actors.npc.Npc;
 import game.displays.FancyMessage;
 import game.items.Talisman;
 import game.grounds.Blight;
 import game.grounds.Floor;
-import game.actors.creatures.OmenSheep;
+import game.actors.npc.OmenSheep;
 import game.actors.CrimsonRot;
 import game.actors.Player;
 import game.grounds.Soil;
-import game.actors.creatures.SpiritGoat;
+import game.actors.npc.SpiritGoat;
 import game.grounds.Wall;
 import game.items.seeds.BloodroseSeed;
 import game.items.seeds.InheritreeSeed;
@@ -59,7 +59,7 @@ public class Application {
         // Add spirit goat and omen sheep to the game map, with CrimsonRot status effect
         Npc spiritGoat = new SpiritGoat();
         gameMap.at(22, 13).addActor(spiritGoat);
-        spiritGoat.addStatusEffect(new CrimsonRot(10));
+//        spiritGoat.addStatusEffect(new CrimsonRot(10));
         
         Npc omenSheep = new OmenSheep();
         gameMap.at(27, 13).addActor(omenSheep);
