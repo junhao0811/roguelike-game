@@ -91,7 +91,7 @@ public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
      */
     @Override
     public boolean isReadyToHatch(int counter, Location location) {
-        return counter == 3; // OmenSheep eggs hatch after 3 turns
+        return counter == 3;
     }
 
     /**
