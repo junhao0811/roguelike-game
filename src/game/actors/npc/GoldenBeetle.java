@@ -96,6 +96,24 @@ public class GoldenBeetle extends Npc implements Reproducible, Hatchable, Edible
         
         // Check if this actor is still on the map
         if (map.locationOf(this) != null) {
+            // The Golden Beetle will begin to follow the actor if they detect a surrounding actor is followable
+            boolean foundActorToFollow = false;
+            for (Exit exit : map.locationOf(this).getExits()) {
+                Location nearby = exit.getDestination();
+                // It will only follow the actor until either the followed actor or the beetle itself is gone from the map
+                if (nearby.containsAnActor() && !this.behaviours.containsKey(1)) {
+                    Actor target = nearby.getActor();
+                    this.behaviours.put(1, new FollowBehaviour(target));
+                    foundActorToFollow = true;
+                    break;
+                }
+            }
+            
+            // Only remove FollowBehavior if checked all exits and found no actors
+            if (!foundActorToFollow && this.behaviours.containsKey(1)) {
+                this.behaviours.remove(1);
+            }
+            
             for (Behaviour behaviour : behaviours.values()) {
                 Action action = behaviour.getAction(this, map);
                 if (action != null) {
