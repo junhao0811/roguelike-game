@@ -27,7 +27,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends NonPlayableCharacter implements Curable, Reproducible {
+public class SpiritGoat extends Npc implements Curable, Reproducible {
 
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
 

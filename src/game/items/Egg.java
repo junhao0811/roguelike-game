@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.actors.npc.Npc;
 
 /**
  * A class representing an Egg that an actor can pick up and drop. The egg has the ability to hatch
@@ -16,13 +17,15 @@ import game.Ability;
  */
 public class Egg extends Item {
     
+    private Npc creature;
     private int counter;
     
     /**
      * Constructor.
      */
-    public Egg() {
+    public Egg(Npc creature) {
         super("Egg", '0', true);
+        this.creature = creature;
         this.counter = 0;
     }
     
@@ -37,24 +40,6 @@ public class Egg extends Item {
     }
     
     /**
-     * Handles the hatching process of an Egg. When the Egg is ready to hatch, and the given actor
-     * has the required ability to hatch the Egg, the Egg is removed from its current location
-     * and the actor is placed in its place.
-     *
-     * @param actor    The actor that hatches from the Egg and replace the Egg in the location.
-     * @param location The location where the Egg is hatching and where the actor will be hatched
-     *                 from.
-     */
-    public void hatch(Actor actor, Location location) {
-        if (isReadyToHatch()) {
-            if (actor.hasCapability(Ability.HATCH)) {
-                location.removeItem(this);
-                location.addActor(actor);
-            }
-        }
-    }
-    
-    /**
      * Inform the Egg on the ground of the passage of time. This method is called once per turn, if
      * the egg rests upon the ground.
      *
@@ -63,7 +48,10 @@ public class Egg extends Item {
     @Override
     public void tick(Location currentLocation) {
         counter++;
-        // think how to call hatch here
+        if (creature.hasCapability(Ability.HATCH) && isReadyToHatch()) {
+            currentLocation.removeItem(this);
+            currentLocation.addActor(creature);
+        }
     }
     
     /**

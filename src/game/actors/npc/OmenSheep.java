@@ -26,7 +26,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class OmenSheep extends NonPlayableCharacter implements Curable, Reproducible {
+public class OmenSheep extends Npc implements Curable, Reproducible {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     
@@ -62,7 +62,7 @@ public class OmenSheep extends NonPlayableCharacter implements Curable, Reproduc
     }
     
     public void reproduce(Actor actor, Location location) {
-        location.addItem(new Egg());
+        location.addItem(new Egg(this));
         new Display().println(this + " has produced an Egg!");
     }
 

@@ -12,12 +12,12 @@ import game.Status;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public abstract class NonPlayableCharacter extends Actor {
+public abstract class Npc extends Actor {
 
     /**
      * Constructor.
      */
-    public NonPlayableCharacter(String name, char displayChar, int hitPoints) {
+    public Npc(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
     }
     
