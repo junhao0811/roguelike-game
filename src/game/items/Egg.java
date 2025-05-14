@@ -90,8 +90,9 @@ public class Egg extends Item implements Edible {
      * in their inventory. The Egg is removed from the actor's inventory upon consumption.
      *
      * @param actor the actor attempting to eat the Egg
+     * @param map
      */
-    public void eat(Actor actor) {
+    public void eat(Actor actor, GameMap map) {
         if (actor.hasCapability(Ability.EAT)) {
             actor.removeItemFromInventory(this);
             actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH,
