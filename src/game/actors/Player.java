@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
+import game.Ability;
 import game.displays.FancyMessage;
 import game.weapons.BareFist;
 import game.Status;
@@ -33,6 +34,7 @@ public class Player extends Actor {
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.setIntrinsicWeapon(new BareFist());
+        this.addCapability(Ability.EAT);
     }
     
     /**

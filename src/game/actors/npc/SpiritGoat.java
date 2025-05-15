@@ -17,7 +17,6 @@ import game.actors.CrimsonRot;
 import game.behaviours.ReproduceBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
-import game.capabilities.Hatchable;
 import game.capabilities.Reproducible;
 
 import java.util.ArrayList;

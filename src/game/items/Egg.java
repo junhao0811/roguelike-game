@@ -38,7 +38,6 @@ public class Egg extends Item implements Edible {
         super("Egg", '0', true);
         this.creature = creature;
         this.counter = 0;
-        this.addCapability(Ability.EAT);
         this.name = name;
     }
     
