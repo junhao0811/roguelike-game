@@ -35,7 +35,7 @@ public class Egg extends Item implements Edible {
      * Constructor.
      */
     public Egg(Hatchable creature, String name) {
-        super("Egg", '0', true);
+        super(name, '0', true);
         this.creature = creature;
         this.counter = 0;
         this.name = name;
