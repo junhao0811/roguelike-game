@@ -29,6 +29,7 @@ public class Egg extends Item implements Edible {
     private final Random random = new Random();
     private Hatchable creature;
     private int counter;
+    private String name;
     
     /**
      * Constructor.
@@ -38,6 +39,7 @@ public class Egg extends Item implements Edible {
         this.creature = creature;
         this.counter = 0;
         this.addCapability(Ability.EAT);
+        this.name = name;
     }
     
     /**
@@ -84,19 +86,30 @@ public class Egg extends Item implements Edible {
         }
         counter++;
     }
-    
+
     /**
-     * Allows the provided actor to eat the Egg, increasing their maximum health if they the egg is
-     * in their inventory. The Egg is removed from the actor's inventory upon consumption.
+     * Allows the provided actor to eat the Egg and apply its specific effect.
+     * The Egg is removed from the actor's inventory upon consumption.
      *
      * @param actor the actor attempting to eat the Egg
-     * @param map
+     * @param map the current game map
      */
     public void eat(Actor actor, GameMap map) {
         if (actor.hasCapability(Ability.EAT)) {
             actor.removeItemFromInventory(this);
-            actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH,
-                ActorAttributeOperations.INCREASE, 10);
+
+            // Apply different effects based on egg type
+            if (this.name.equals("Golden Egg")) {
+                // Golden Egg restores 20 stamina
+                actor.modifyAttribute(BaseActorAttributes.STAMINA,
+                        ActorAttributeOperations.INCREASE, 20);
+                new Display().println(actor + " eats the Golden Egg and stamina is restored! (+20 stamina)");
+            } else {
+                // Regular egg increases max health by 10
+                actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH,
+                        ActorAttributeOperations.INCREASE, 10);
+                new Display().println(actor + " eats the Egg and health is restored! (+10 max health)");
+            }
         }
     }
     
