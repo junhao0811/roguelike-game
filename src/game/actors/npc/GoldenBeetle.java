@@ -26,6 +26,7 @@ import java.util.TreeMap;
 public class GoldenBeetle extends Npc implements Reproducible, Hatchable, Edible {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    private int reproductionCounter = 0;
     
     /**
      * Constructor.
@@ -46,7 +47,21 @@ public class GoldenBeetle extends Npc implements Reproducible, Hatchable, Edible
     public void reproduce(Actor actor, Location location) {
         location.addItem(new Egg(this, "Golden Egg"));
     }
-    
+
+    /**
+     * Checks if the GoldenBeetle can lay an egg.
+     * GoldenBeetle lays eggs every 5 turns.
+     *
+     * @param actor the actor considering reproduction
+     * @param map the map the actor is on
+     * @return true if the actor can lay an egg, false otherwise
+     */
+    @Override
+    public boolean canReproduce(Actor actor, GameMap map) {
+        reproductionCounter++;
+        return reproductionCounter % 5 == 0;
+    }
+
     public Npc hatch() {
         return new GoldenBeetle();
     }

@@ -30,6 +30,7 @@ import java.util.TreeMap;
 public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    private int reproductionCounter = 0;
     
     /**
      * Constructor.
@@ -70,6 +71,20 @@ public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
     @Override
     public void reproduce(Actor actor, Location location) {
         location.addItem(new Egg(this, "Egg"));
+    }
+
+    /**
+     * Checks if the OmenSheep can lay an egg.
+     * OmenSheep lays eggs every 7 turns.
+     *
+     * @param actor the actor considering reproduction
+     * @param map the map the actor is on
+     * @return true if the actor can lay an egg, false otherwise
+     */
+    @Override
+    public boolean canReproduce(Actor actor, GameMap map) {
+        reproductionCounter++;
+        return reproductionCounter % 7 == 0;
     }
 
     /**

@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.Status;
 import game.actions.CureAction;
 import game.actors.CrimsonRot;
 import game.behaviours.ReproduceBehaviour;
@@ -104,6 +105,29 @@ public class SpiritGoat extends Npc implements Curable, Reproducible {
         birthLocation.addActor(offspring);
 
         new Display().println("An offspring of " + actor + " has spawned");
+    }
+
+    /**
+     * Checks if the SpiritGoat can reproduce.
+     * SpiritGoat requires being near a blessed entity to reproduce.
+     *
+     * @param actor the actor considering reproduction
+     * @param map the map the actor is on
+     * @return true if the actor can reproduce, false otherwise
+     */
+    @Override
+    public boolean canReproduce(Actor actor, GameMap map) {
+        // Check if actor is near any blessed entity
+        Location actorLocation = map.locationOf(actor);
+
+        for (Exit exit : actorLocation.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.getGround().hasCapability(Status.BLESSED)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
