@@ -9,7 +9,6 @@ import game.items.Talisman;
 import game.grounds.Blight;
 import game.grounds.Floor;
 import game.actors.npcs.OmenSheep;
-import game.actors.CrimsonRot;
 import game.actors.Player;
 import game.grounds.Soil;
 import game.actors.npcs.SpiritGoat;
@@ -24,7 +23,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 
 /**
- * The game.main class to setup and run the game.
+ * The main class to setup and run the game.
  *
  * @author Adrian Kristanto, modified by Chong Jun Hao
  */
@@ -79,9 +78,6 @@ public class Application {
         
         Player player = new Player("Farmer", '@', 100, 200);
         world.addPlayer(player, gameMap.at(23, 10));
-        
-        // Add CrimsonRot status effect to player
-        player.addStatusEffect(new CrimsonRot());
         
         // game setup
         gameMap.at(24, 11).addItem(new Talisman());

@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.actions.CureAction;
+import game.actors.statuseffects.CrimsonRot;
 import game.behaviours.ReproduceBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
@@ -32,6 +33,7 @@ public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
         super("Omen Sheep", 'm', 75);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
+        this.addStatusEffect(new CrimsonRot(15));
         this.addCapability(Ability.PRODUCE_EGG);
     }
 

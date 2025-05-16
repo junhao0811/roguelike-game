@@ -1,6 +1,7 @@
 package game.grounds.crops;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -22,6 +23,8 @@ public class Bloodrose extends Crop {
     }
 
     public void cropEffect(Location location) {
+        Display display = new Display();
+
         for (Exit exit : location.getExits()) {
             Location destination = exit.getDestination();
 
@@ -31,7 +34,7 @@ public class Bloodrose extends Crop {
 
                 if (!actor.isConscious()) {
                     actor.unconscious(location.map());
-                    System.out.println(actor + " met their demise at the hands of a " + this);
+                    display.println(actor + " met their demise at the hands of a " + this);
                 }
             }
         }

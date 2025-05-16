@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.Status;
 import game.actions.CureAction;
-import game.actors.CrimsonRot;
+import game.actors.statuseffects.CrimsonRot;
 import game.behaviours.ReproduceBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
@@ -38,6 +38,7 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
         super("Spirit Goat", 'y', 50);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
+        this.addStatusEffect(new CrimsonRot(10));
         this.addCapability(Ability.PRODUCE_OFFSPRING);
     }
 

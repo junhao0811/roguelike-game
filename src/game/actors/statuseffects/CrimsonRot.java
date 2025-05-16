@@ -1,7 +1,7 @@
-package game.actors;
+package game.actors.statuseffects;
 
-import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 
@@ -14,17 +14,9 @@ import edu.monash.fit2099.engine.positions.Location;
  * @version 22.0.1
  */
 public class CrimsonRot extends StatusEffect {
-    
+
     private int countdownTimer;
-    
-    /**
-     * Constructor.
-     */
-    public CrimsonRot() {
-        super("Crimson Rot");
-        this.countdownTimer = Integer.MAX_VALUE;
-    }
-    
+
     /**
      * Constructor.
      *
@@ -34,7 +26,7 @@ public class CrimsonRot extends StatusEffect {
         super("Crimson Rot");
         this.countdownTimer = duration;
     }
-    
+
     /**
      * Inform a status effect of the passage of time.
      *
@@ -44,9 +36,12 @@ public class CrimsonRot extends StatusEffect {
     @Override
     public void tick(Location location, Actor actor) {
         Display display = new Display();
-        if (countdownTimer <= 0) {
-            display.println(actor.unconscious(location.map()));
+
+        if (countdownTimer == 0) {
+            actor.unconscious(location.map());
+            display.println(actor + " succumbs to the " + this + " and perishes");
         }
+
         countdownTimer--;
     }
 }

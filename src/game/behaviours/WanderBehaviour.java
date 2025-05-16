@@ -34,14 +34,13 @@ public class WanderBehaviour implements Behaviour {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (destination.canActorEnter(actor)) {
-                actions.add(exit.getDestination().getMoveAction(actor, "around", exit.getHotKey()));
+                actions.add(destination.getMoveAction(actor, "around", exit.getHotKey()));
             }
         }
         
         if (!actions.isEmpty()) {
             return actions.get(random.nextInt(actions.size()));
-        }
-        else {
+        } else {
             return null;
         }
     }
