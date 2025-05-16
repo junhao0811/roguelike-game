@@ -67,18 +67,10 @@ public abstract class NPC extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        // Check if the actor is unconscious due to natural causes or accident
-        if (!this.isConscious()) {
-            display.println(this.unconscious(map));
-        }
-
-        // Check if this actor is still on the map
-        if (map.locationOf(this) != null) {
-            for (Behaviour behaviour : getBehaviours()) {
-                Action action = behaviour.getAction(this, map);
-                if (action != null) {
-                    return action;
-                }
+        for (Behaviour behaviour : getBehaviours()) {
+            Action action = behaviour.getAction(this, map);
+            if (action != null) {
+                return action;
             }
         }
 

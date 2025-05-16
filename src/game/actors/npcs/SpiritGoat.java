@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -17,7 +18,6 @@ import game.capabilities.Curable;
 import game.capabilities.Reproducible;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 
@@ -46,26 +46,20 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
      * Resets the countdown timer back to 10 when it is being cured
      *
      * @param actor    unused here
-     * @param location unused here
      */
-    public boolean cure(Actor actor, Location location) {
-        // Retrieves all status effects the spirit goat currently has right now
-        List<StatusEffect> statusEffects = this.getStatusEffects();
+    @Override
+    public String cure(Actor actor, GameMap map) {
         StatusEffect crimsonRot = null;
 
-        // linear searching to find if spirit goat has the crimson rot status effect
-        for (StatusEffect statusEffect : statusEffects) {
-            if (statusEffect.toString().contains("Crimson Rot")) {
+        for (StatusEffect statusEffect : this.getStatusEffects()) {
+            if (statusEffect.toString().contains("Crimson Rot"))
                 crimsonRot = statusEffect;
-            }
         }
 
-        // Resets countdown timer back to 10 turns
         this.removeStatusEffect(crimsonRot);
         this.addStatusEffect(new CrimsonRot(10));
 
-        System.out.println("The Spirit Goat's energy has been restored!");
-        return true;
+        return actor + " cures the " + this + ", resetting its decay of Crimson Rot";
     }
 
     /**
@@ -133,12 +127,14 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
      * @return actions that can be performed by the other actor
      * @see edu.monash.fit2099.demo.huntsman.HuntsmanSpider#allowableActions(Actor, String, GameMap)
      */
+    @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
-        // Check if the actor has the item which has the ability to cure
-        if (otherActor.hasCapability(Ability.CURE)) {
-            actions.add(new CureAction(this, direction, map.locationOf(this)));
+        for (Item item : otherActor.getItemInventory()) {
+            if (item.hasCapability(Ability.CURE)) {
+                actions.add(new CureAction(this, direction, item));
+            }
         }
 
         return actions;

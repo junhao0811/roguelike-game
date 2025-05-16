@@ -2,60 +2,62 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.capabilities.Curable;
 
 /**
- * This class inherits the Action class and represents an Action that allows actors to cure entities that implement the Curable interface.
- * This action is typically performed using a Talisman on a curable target in a specific direction.
- *
- * @author Ng Jun Xian
+ * Class representing an action to cure
  */
 public class CureAction extends Action {
 
-    private Curable curable;
-    private String direction;
-    private Location location;
     /**
-     * Constructor for CureAction.
-     *
-     * @param curable the target that can be cured
-     * @param direction the direction from the actor to the curable target
+     * The Curable that is to be cured
      */
-    public CureAction(Curable curable, String direction, Location location) {
-        this.curable = curable;
-        this.direction = direction;
-        this.location = location;
+    private final Curable target;
+
+    /**
+     * The direction of incoming cure
+     */
+    private final String direction;
+
+    /**
+     * Item used for the cure
+     */
+    private final String item;
+
+    /**
+     * Constructor
+     *
+     * @param target the Curable to cure
+     * @param direction the direction where the cure should be performed (only used for display purposes)
+     * @param item      the item used for the cure (only used for display purposes)
+     */
+    public CureAction(Curable target, String direction, Item item) {
+        this.target = target;
+        this.direction = " at " + direction;
+        this.item = " with " + item;
     }
 
     /**
-     * Executes the curing action on the target.
-     * Attempts to cure the curable target and returns a message indicating the result.
+     * Constructor with no direction as default
      *
-     * @param actor the actor performing the cure action
-     * @param map the game map where the action is performed
-     * @return a string describing the result of the curing attempt
+     * @param target the Curable to cure
+     * @param item    the item used for the cure (only used for display purposes)
      */
+    public CureAction(Curable target, Item item) {
+        this.target = target;
+        this.direction = "";
+        this.item = " with " + item;
+    }
+
     @Override
     public String execute(Actor actor, GameMap map) {
-        boolean cured = curable.cure(actor, location);
-        if (cured) {
-            return actor + " cures " + curable + " at " + direction;
-        }
-        else{
-            return actor + " had failed to cure " + curable + " at " + direction;
-        }
+        return target.cure(actor, map);
     }
 
-    /**
-     * Returns a description of this action for menu display
-     *
-     * @param actor the actor performing the action
-     * @return a string describing the action for menu display
-     */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " cures " + curable + " at " + direction + " with the Talisman";
+        return actor + " cures " + target + direction + item;
     }
 }

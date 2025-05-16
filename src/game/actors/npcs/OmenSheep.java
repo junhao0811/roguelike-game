@@ -2,6 +2,7 @@ package game.actors.npcs;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -37,24 +38,13 @@ public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
         this.addCapability(Ability.PRODUCE_EGG);
     }
 
-    /**
-     * Cures the environment by replacing nearby ground with Inheritree instances.
-     * This action applies to the locations surrounding the current actor's position
-     * in the provided game map.
-     *
-     * @param actor the actor initiating the cure action
-     * @param location the location of the actor
-     *
-     */
-    public boolean cure(Actor actor, Location location) {
-        for (Exit exit : location.getExits()) {
-            Location nearby = exit.getDestination();
-            if (nearby.canActorEnter(this)) {
-                nearby.setGround(new Inheritree());
-            }
+    @Override
+    public String cure(Actor actor, GameMap map) {
+        for (Exit exit : map.locationOf(this).getExits()) {
+            Location destination = exit.getDestination();
+            destination.setGround(new Inheritree());
         }
-        System.out.println("Inheritree has been planted around the Omen Sheep!");
-        return true;
+        return actor + " cures the " + this + ", Inheritrees grow at each tile surrounding it";
     }
 
     /**
@@ -113,15 +103,16 @@ public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
      * @return actions that can be performed by the other actor
      * @see edu.monash.fit2099.demo.huntsman.HuntsmanSpider#allowableActions(Actor, String, GameMap)
      */
+    @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
-        // Check if the actor has the item which has the ability to cure
-        if (otherActor.hasCapability(Ability.CURE)) {
-            actions.add(new CureAction(this, direction, map.locationOf(this)));
+        for (Item item : otherActor.getItemInventory()) {
+            if (item.hasCapability(Ability.CURE)) {
+                actions.add(new CureAction(this, direction, item));
+            }
         }
 
         return actions;
     }
 }
-
