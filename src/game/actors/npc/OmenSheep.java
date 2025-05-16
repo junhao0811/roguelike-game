@@ -48,7 +48,7 @@ public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
      * in the provided game map.
      *
      * @param actor the actor initiating the cure action
-     * @param location the location of the actor1
+     * @param location the location of the actor
      *
      */
     public boolean cure(Actor actor, Location location) {
