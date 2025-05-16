@@ -2,36 +2,37 @@ package game.grounds.crops;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
- * A class representing the "Bloodrose" crop in the valley
- *
- * @author Chong Jun Hao
- * @version 22.0.1
+ * A class representing a Bloodrose
  */
 public class Bloodrose extends Crop {
-    
+
     /**
      * Constructor
      */
     public Bloodrose() {
-        super('w', "Bloodrose");
+        super('w', "Bloodrose", 75);
     }
-    
-    /**
-     * This method is called when the crop blooms.
-     * It will hurt all actors in the nearby locations.
-     *
-     * @param location The location of the crop
-     */
-    @Override
-    public void bloom(Location location) {
+
+    public void plantingEffect(Actor actor, GameMap map) {
+        actor.hurt(5);
+    }
+
+    public void cropEffect(Location location) {
         for (Exit exit : location.getExits()) {
-            Location nearby = exit.getDestination();
-            if (nearby.containsAnActor()) {
-                Actor actor = nearby.getActor();
+            Location destination = exit.getDestination();
+
+            if (destination.containsAnActor()) {
+                Actor actor = destination.getActor();
                 actor.hurt(10);
+
+                if (!actor.isConscious()) {
+                    actor.unconscious(location.map());
+                    System.out.println(actor + " met their demise at the hands of a " + this);
+                }
             }
         }
     }

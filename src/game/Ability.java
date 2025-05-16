@@ -9,7 +9,7 @@ package game;
  * modified by: Ng Jun Xian
  */
 public enum Ability {
-    PLANT,
+    PLANT_CROPS,
     CURE,
     PRODUCE_OFFSPRING,
     PRODUCE_EGG,

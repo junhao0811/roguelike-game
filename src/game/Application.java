@@ -1,20 +1,20 @@
 package game;
 
-import game.actors.npc.GoldenBeetle;
-import game.actors.npc.Npc;
+import game.actors.npcs.GoldenBeetle;
+import game.actors.npcs.NPC;
 import game.displays.FancyMessage;
+import game.grounds.crops.Bloodrose;
+import game.grounds.crops.Inheritree;
 import game.items.Talisman;
 import game.grounds.Blight;
 import game.grounds.Floor;
-import game.actors.npc.OmenSheep;
+import game.actors.npcs.OmenSheep;
 import game.actors.CrimsonRot;
 import game.actors.Player;
 import game.grounds.Soil;
-import game.actors.npc.SpiritGoat;
+import game.actors.npcs.SpiritGoat;
 import game.grounds.Wall;
-import game.items.seeds.BloodroseSeed;
-import game.items.seeds.InheritreeSeed;
-import game.items.seeds.Seed;
+import game.items.Seed;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,13 +58,13 @@ public class Application {
         world.addGameMap(gameMap);
         
         // Add spirit goat and omen sheep to the game map, with CrimsonRot status effect
-        Npc spiritGoat = new SpiritGoat();
+        NPC spiritGoat = new SpiritGoat();
         //gameMap.at(22, 13).addActor(spiritGoat);
         
-        Npc omenSheep = new OmenSheep();
+        NPC omenSheep = new OmenSheep();
         //gameMap.at(24, 13).addActor(omenSheep);
         
-        Npc goldenBeetle = new GoldenBeetle();
+        NPC goldenBeetle = new GoldenBeetle();
         gameMap.at(23, 13).addActor(goldenBeetle);
         
         // BEHOLD, ELDEN THING!
@@ -87,10 +87,10 @@ public class Application {
         gameMap.at(24, 11).addItem(new Talisman());
         
         // game test where the "Farmer" starts with one seed of "Inheritree" and one seed of "Bloodrose" in their inventory
-        Seed inheritreeSeed = new InheritreeSeed();
+        Seed inheritreeSeed = new Seed(new Inheritree());
         player.addItemToInventory(inheritreeSeed);
         
-        Seed bloodroseSeed = new BloodroseSeed();
+        Seed bloodroseSeed = new Seed(new Bloodrose());
         player.addItemToInventory(bloodroseSeed);
         
         world.run();

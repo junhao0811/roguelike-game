@@ -1,30 +1,48 @@
 package game.grounds.crops;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.capabilities.Bloomable;
 
 /**
- * Abstract class representing a crop in the game.
+ * A class representing a Crop
  */
-public abstract class Crop extends Ground implements Bloomable {
+public abstract class Crop extends Ground {
+
+    private final String name;
+    private final int staminaCost;
+    private boolean bloomState = false;
+
     /**
-     * Constructor.
-     *
-     * @param displayChar character to display for this type of terrain
-     * @param name name of the crop
+     * Constructor
      */
-    public Crop(char displayChar, String name) {
+    public Crop(char displayChar, String name, int staminaCost) {
         super(displayChar, name);
+        this.name = name;
+        this.staminaCost = staminaCost;
     }
-    
-    /**
-     * This method is called every turn to allow the crop to bloom.
-     *
-     * @param location the location of the crop
-     */
+
+    public String getName() {
+        return name;
+    }
+
+    public int getStaminaCost() {
+        return staminaCost;
+    }
+
+    public final void bloom() {
+        bloomState = true;
+    }
+
+    public abstract void plantingEffect(Actor actor, GameMap map);
+
+    public abstract void cropEffect(Location location);
+
     @Override
     public void tick(Location location) {
-        this.bloom(location);
+        if (bloomState) {
+            this.cropEffect(location);
+        }
     }
 }

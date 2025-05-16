@@ -5,11 +5,11 @@ import game.Status;
 
 /**
  * A class representing the soil in the valley
- * @author Adrian Kristanto, modified by Chong Jun Hao
+ * @author Adrian Kristanto
  */
 public class Soil extends Ground {
     public Soil() {
         super('.', "Soil");
-        this.addCapability(Status.PLANTING_TERRAIN);
+        this.addCapability(Status.FERTILE);
     }
 }
