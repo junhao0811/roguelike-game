@@ -35,6 +35,7 @@ public class Player extends Actor {
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.setIntrinsicWeapon(new BareFist());
         this.addCapability(Ability.EAT);
+        this.addCapability(Ability.CAN_BE_FOLLOWED);
     }
     
     /**
