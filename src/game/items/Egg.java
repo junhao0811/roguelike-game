@@ -29,27 +29,17 @@ public class Egg extends Item implements Edible {
     private final Random random = new Random();
     private Hatchable creature;
     private int counter;
+    private String name;
     
     /**
      * Constructor.
      */
-    public Egg(Hatchable creature) {
-        super("Egg", '0', true);
+    public Egg(Hatchable creature, String name) {
+        super(name, '0', true);
         this.creature = creature;
         this.counter = 0;
-        this.addCapability(Ability.EAT);
+        this.name = name;
     }
-    
-    /**
-     * Hatching condition for the Egg. The Egg can hatch into other creatures with different
-     * hatching conditions
-     *
-     * @return true if the hatching condition of the Egg is met, false otherwise
-     */
-    public boolean isReadyToHatch() {
-        return counter == 3;
-    }
-    
     
     /**
      * Updates the state of the Egg during each game tick by checking its hatching condition
@@ -59,7 +49,7 @@ public class Egg extends Item implements Edible {
      */
     @Override
     public void tick(Location currentLocation) {
-        if (this.isReadyToHatch()) {
+        if (creature.isReadyToHatch(counter, currentLocation)) {
             Actor newCreature = creature.hatch();
             // Check if the current location is occupied by an actor
             if (currentLocation.containsAnActor()) {
@@ -95,18 +85,30 @@ public class Egg extends Item implements Edible {
         }
         counter++;
     }
-    
+
     /**
-     * Allows the provided actor to eat the Egg, increasing their maximum health if they the egg is
-     * in their inventory. The Egg is removed from the actor's inventory upon consumption.
+     * Allows the provided actor to eat the Egg and apply its specific effect.
+     * The Egg is removed from the actor's inventory upon consumption.
      *
      * @param actor the actor attempting to eat the Egg
+     * @param map the current game map
      */
-    public void eat(Actor actor) {
+    public void eat(Actor actor, GameMap map) {
         if (actor.hasCapability(Ability.EAT)) {
             actor.removeItemFromInventory(this);
-            actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH,
-                ActorAttributeOperations.INCREASE, 10);
+
+            // Apply different effects based on egg type
+            if (this.name.equals("Golden Egg")) {
+                // Golden Egg restores 20 stamina
+                actor.modifyAttribute(BaseActorAttributes.STAMINA,
+                        ActorAttributeOperations.INCREASE, 20);
+                new Display().println(actor + " eats the Golden Egg and stamina is restored! (+20 stamina)");
+            } else {
+                // Regular egg increases max health by 10
+                actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH,
+                        ActorAttributeOperations.INCREASE, 10);
+                new Display().println(actor + " eats the Egg and health is restored! (+10 max health)");
+            }
         }
     }
     

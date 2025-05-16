@@ -1,5 +1,6 @@
 package game;
 
+import game.actors.npc.GoldenBeetle;
 import game.actors.npc.Npc;
 import game.displays.FancyMessage;
 import game.items.Talisman;
@@ -58,12 +59,13 @@ public class Application {
         
         // Add spirit goat and omen sheep to the game map, with CrimsonRot status effect
         Npc spiritGoat = new SpiritGoat();
-        gameMap.at(22, 13).addActor(spiritGoat);
-//        spiritGoat.addStatusEffect(new CrimsonRot(10));
+        //gameMap.at(22, 13).addActor(spiritGoat);
         
         Npc omenSheep = new OmenSheep();
-        gameMap.at(27, 13).addActor(omenSheep);
-        omenSheep.addStatusEffect(new CrimsonRot(15));
+        //gameMap.at(24, 13).addActor(omenSheep);
+        
+        Npc goldenBeetle = new GoldenBeetle();
+        gameMap.at(23, 13).addActor(goldenBeetle);
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {

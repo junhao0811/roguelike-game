@@ -30,6 +30,7 @@ import java.util.TreeMap;
 public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
     
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    private int reproductionCounter = 0;
     
     /**
      * Constructor.
@@ -47,7 +48,7 @@ public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
      * in the provided game map.
      *
      * @param actor the actor initiating the cure action
-     * @param location the location of the actor1
+     * @param location the location of the actor
      *
      */
     public boolean cure(Actor actor, Location location) {
@@ -60,13 +61,52 @@ public class OmenSheep extends Npc implements Curable, Reproducible, Hatchable {
         System.out.println("Inheritree has been planted around the Omen Sheep!");
         return true;
     }
-    
+
+    /**
+     * Reproduces an egg at the given location.
+     *
+     * @param actor    the actor performing the reproduction
+     * @param location the location where the egg will be placed
+     */
+    @Override
     public void reproduce(Actor actor, Location location) {
-        location.addItem(new Egg(this));
+        location.addItem(new Egg(this, "Egg"));
     }
-    
+
+    /**
+     * Checks if the OmenSheep can lay an egg.
+     * OmenSheep lays eggs every 7 turns.
+     *
+     * @param actor the actor considering reproduction
+     * @param map the map the actor is on
+     * @return true if the actor can lay an egg, false otherwise
+     */
+    @Override
+    public boolean canReproduce(Actor actor, GameMap map) {
+        reproductionCounter++;
+        return reproductionCounter % 7 == 0;
+    }
+
+    /**
+     * Hatches the egg into a new Omen Sheep instance.
+     *
+     * @return a new Omen Sheep instance
+     */
+    @Override
     public Npc hatch() {
         return new OmenSheep();
+    }
+
+    /**
+     * Checks if the egg is ready to hatch. The egg is ready to hatch if the counter is 3.
+     *
+     * @param counter   the current counter value
+     * @param location  the location of the egg
+     * @return true if the egg is ready to hatch, false otherwise
+     */
+    @Override
+    public boolean isReadyToHatch(int counter, Location location) {
+        return counter == 3;
     }
 
     /**

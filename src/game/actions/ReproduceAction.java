@@ -46,8 +46,9 @@ public class ReproduceAction extends Action {
     public String menuDescription(Actor actor) {
         if (actor.hasCapability(Ability.PRODUCE_OFFSPRING)) {
             return actor + " successfully reproduces";
-        } else {
+        } else if (actor.hasCapability(Ability.PRODUCE_EGG)) {
             return actor + " lays an egg";
         }
+        return actor + " is unable to reproduce";
     }
 }

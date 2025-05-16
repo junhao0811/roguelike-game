@@ -11,12 +11,12 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.Status;
 import game.actions.CureAction;
 import game.actors.CrimsonRot;
 import game.behaviours.ReproduceBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Curable;
-import game.capabilities.Hatchable;
 import game.capabilities.Reproducible;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import java.util.TreeMap;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class SpiritGoat extends Npc implements Curable, Reproducible, Hatchable {
+public class SpiritGoat extends Npc implements Curable, Reproducible {
 
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     private final Random random = new Random();
@@ -105,9 +105,28 @@ public class SpiritGoat extends Npc implements Curable, Reproducible, Hatchable 
 
         new Display().println("An offspring of " + actor + " has spawned");
     }
-    
-    public Npc hatch() {
-        return new SpiritGoat();
+
+    /**
+     * Checks if the SpiritGoat can reproduce.
+     * SpiritGoat requires being near a blessed entity to reproduce.
+     *
+     * @param actor the actor considering reproduction
+     * @param map the map the actor is on
+     * @return true if the actor can reproduce, false otherwise
+     */
+    @Override
+    public boolean canReproduce(Actor actor, GameMap map) {
+        // Check if actor is near any blessed entity
+        Location actorLocation = map.locationOf(actor);
+
+        for (Exit exit : actorLocation.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.getGround().hasCapability(Status.BLESSED)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
