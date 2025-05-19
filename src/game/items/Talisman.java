@@ -15,6 +15,10 @@ import game.grounds.Blight;
  * @author Adrian Kristanto, modified by Chong Jun Hao
  */
 public class Talisman extends Item {
+
+    /**
+     * Constructor
+     */
     public Talisman() {
         super("Talisman", 'o', true);
         this.addCapability(Ability.CURE);

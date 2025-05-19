@@ -16,9 +16,9 @@ import java.util.Random;
  *
  */
 public class WanderBehaviour implements Behaviour {
-    
+
     private final Random random = new Random();
-    
+
     /**
      * Returns a MoveAction to wander to a random location, if possible.
      * If no movement is possible, returns null.
@@ -30,18 +30,18 @@ public class WanderBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
         ArrayList<Action> actions = new ArrayList<>();
-        
+
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (destination.canActorEnter(actor)) {
                 actions.add(destination.getMoveAction(actor, "around", exit.getHotKey()));
             }
         }
-        
+
         if (!actions.isEmpty()) {
             return actions.get(random.nextInt(actions.size()));
-        } else {
-            return null;
         }
+
+        return null;
     }
 }

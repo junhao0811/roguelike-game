@@ -75,6 +75,7 @@ public class Player extends Actor {
         // Handle death logic
         if (!this.isConscious()) {
             display.println(this.unconscious(map));
+
             for (String line : FancyMessage.YOU_DIED.split("\n")) {
                 display.println(line);
                 try {
@@ -83,6 +84,7 @@ public class Player extends Actor {
                     exception.printStackTrace();
                 }
             }
+
             return new DoNothingAction();
         }
         

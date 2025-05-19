@@ -27,9 +27,9 @@ import java.util.Random;
 public class Egg extends Item implements Edible {
     
     private final Random random = new Random();
-    private Hatchable creature;
+    private final Hatchable creature;
+    private final String name;
     private int counter;
-    private String name;
     
     /**
      * Constructor.
@@ -94,24 +94,25 @@ public class Egg extends Item implements Edible {
      * @param map the current game map
      */
     public void eat(Actor actor, GameMap map) {
-        if (actor.hasCapability(Ability.EAT)) {
-            actor.removeItemFromInventory(this);
+        Display display = new Display();
 
-            // Apply different effects based on egg type
-            if (this.name.equals("Golden Egg")) {
-                // Golden Egg restores 20 stamina
-                actor.modifyAttribute(BaseActorAttributes.STAMINA,
-                        ActorAttributeOperations.INCREASE, 20);
-                new Display().println(actor + " eats the Golden Egg and stamina is restored! (+20 stamina)");
-            } else {
-                // Regular egg increases max health by 10
-                actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH,
-                        ActorAttributeOperations.INCREASE, 10);
-                new Display().println(actor + " eats the Egg and health is restored! (+10 max health)");
-            }
+        actor.removeItemFromInventory(this);
+
+        // Apply different effects based on egg type
+        if (this.name.equals("Golden Egg")) {
+            // Golden Egg restores 20 stamina
+            actor.modifyAttribute(BaseActorAttributes.STAMINA,
+                    ActorAttributeOperations.INCREASE, 20);
+            display.println(actor + " eats the Golden Egg and stamina is restored! (+20 stamina)");
+
+        } else {
+            // Regular egg increases max health by 10
+            actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH,
+                    ActorAttributeOperations.INCREASE, 10);
+            display.println(actor + " eats the Egg and health is restored! (+10 max health)");
         }
     }
-    
+
     /**
      * List of allowable actions that the egg can perform to its owner.
      *
@@ -122,9 +123,11 @@ public class Egg extends Item implements Edible {
     @Override
     public ActionList allowableActions(Actor owner, GameMap map) {
         ActionList actions = new ActionList();
+
         if (owner.hasCapability(Ability.EAT)) {
             actions.add(new EatAction(this));
         }
+
         return actions;
     }
 }

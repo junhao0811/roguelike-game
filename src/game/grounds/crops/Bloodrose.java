@@ -18,10 +18,12 @@ public class Bloodrose extends Crop {
         super('w', "Bloodrose", 75);
     }
 
+    @Override
     public void plantingEffect(Actor actor, GameMap map) {
         actor.hurt(5);
     }
 
+    @Override
     public void cropEffect(Location location) {
         Display display = new Display();
 
@@ -33,8 +35,8 @@ public class Bloodrose extends Crop {
                 actor.hurt(10);
 
                 if (!actor.isConscious()) {
-                    actor.unconscious(location.map());
                     display.println(actor + " met their demise at the hands of a " + this);
+                    actor.unconscious(location.map());
                 }
             }
         }

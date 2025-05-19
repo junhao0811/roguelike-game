@@ -51,8 +51,10 @@ public class Seed extends Item {
      */
     public PlantAction getPlantAction(Actor actor, GameMap map) {
         if (actor.hasCapability(Ability.PLANT_CROPS) &&
-                map.locationOf(actor).getGround().hasCapability(Status.FERTILE))
+                map.locationOf(actor).getGround().hasCapability(Status.FERTILE)) {
             return new PlantAction(this);
+        }
+
         return null;
     }
 

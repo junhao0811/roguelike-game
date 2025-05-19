@@ -38,8 +38,8 @@ public class CrimsonRot extends StatusEffect {
         Display display = new Display();
 
         if (countdownTimer == 0) {
-            actor.unconscious(location.map());
             display.println(actor + " succumbs to the " + this + " and perishes");
+            actor.unconscious(location.map());
         }
 
         countdownTimer--;

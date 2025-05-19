@@ -21,6 +21,7 @@ public class Inheritree extends Crop {
         super('t', "Inheritree", 25);
     }
 
+    @Override
     public void plantingEffect(Actor actor, GameMap map) {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
@@ -31,6 +32,7 @@ public class Inheritree extends Crop {
         }
     }
 
+    @Override
     public void cropEffect(Location location) {
         for (Exit exit : location.getExits()) {
             Location destination = exit.getDestination();
