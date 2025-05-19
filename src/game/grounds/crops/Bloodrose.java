@@ -19,20 +19,26 @@ public class Bloodrose extends Crop {
     }
 
     @Override
-    public void plantingEffect(Actor actor, GameMap map) {
-        actor.hurt(5);
+    public String plantingEffect(Actor actor, GameMap map) {
+        int damage = 5;
+
+        actor.hurt(damage);
+
+        return "The health of " + actor + " is sapped by " + damage + " points";
     }
 
     @Override
     public void cropEffect(Location location) {
         Display display = new Display();
+        int damage = 10;
 
         for (Exit exit : location.getExits()) {
             Location destination = exit.getDestination();
 
             if (destination.containsAnActor()) {
                 Actor actor = destination.getActor();
-                actor.hurt(10);
+                actor.hurt(damage);
+                display.println(this + " hurts " + actor + " by " + damage + " points");
 
                 if (!actor.isConscious()) {
                     display.println(actor + " met their demise at the hands of a " + this);

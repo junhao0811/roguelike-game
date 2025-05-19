@@ -35,7 +35,7 @@ public abstract class Crop extends Ground {
         bloomState = true;
     }
 
-    public abstract void plantingEffect(Actor actor, GameMap map);
+    public abstract String plantingEffect(Actor actor, GameMap map);
 
     public abstract void cropEffect(Location location);
 

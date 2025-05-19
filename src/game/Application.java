@@ -56,15 +56,15 @@ public class Application {
         GameMap gameMap = new GameMap("Valley of the Inheritree", groundFactory, map);
         world.addGameMap(gameMap);
         
-        // Add spirit goat and omen sheep to the game map, with CrimsonRot status effect
+        // Add spirit goat and omen sheep to the game map
         NPC spiritGoat = new SpiritGoat();
         //gameMap.at(22, 13).addActor(spiritGoat);
         
         NPC omenSheep = new OmenSheep();
-        //gameMap.at(24, 13).addActor(omenSheep);
+        gameMap.at(24, 13).addActor(omenSheep);
         
         NPC goldenBeetle = new GoldenBeetle();
-        gameMap.at(23, 13).addActor(goldenBeetle);
+        //gameMap.at(23, 13).addActor(goldenBeetle);
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {
@@ -82,12 +82,10 @@ public class Application {
         // game setup
         gameMap.at(24, 11).addItem(new Talisman());
         
-        // game test where the "Farmer" starts with one seed of "Inheritree" and one seed of "Bloodrose" in their inventory
-        Seed inheritreeSeed = new Seed(new Inheritree());
-        player.addItemToInventory(inheritreeSeed);
-        
-        Seed bloodroseSeed = new Seed(new Bloodrose());
-        player.addItemToInventory(bloodroseSeed);
+        // game test where the "Farmer" starts with one seed of "Inheritree" and
+        // one seed of "Bloodrose" in their inventory
+        player.addItemToInventory(new Seed(new Inheritree()));
+        player.addItemToInventory(new Seed(new Bloodrose()));
         
         world.run();
     }

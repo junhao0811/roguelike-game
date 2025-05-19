@@ -38,11 +38,11 @@ public class Seed extends Item {
             actor.modifyAttribute(BaseActorAttributes.STAMINA,
                     ActorAttributeOperations.DECREASE, crop.getStaminaCost());
             crop.bloom();
-            crop.plantingEffect(actor, map);
-            return actor + " plants the " + this + ", consuming " +
-                    crop.getStaminaCost() + " stamina";
+
+            return actor + " plants the " + this + ", consuming " + crop.getStaminaCost() +
+                    " stamina" + "\n" + crop.plantingEffect(actor, map);
         } else {
-            return actor + " does not have enough stamina to plant the " + this;
+            return " does not have enough stamina to plant the " + this;
         }
     }
 
