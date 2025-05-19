@@ -59,6 +59,7 @@ public class AttackAction extends Action {
         }
 
         String result = weapon.attack(actor, target, map);
+
         if (!target.isConscious()) {
             result += "\n" + target.unconscious(actor, map);
         }

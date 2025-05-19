@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
 import game.Ability;
-import game.displays.FancyMessage;
 import game.weapons.BareFist;
 import game.Status;
 
@@ -36,21 +35,6 @@ public class Player extends Actor {
         this.addCapability(Ability.PLANT_CROPS);
         this.addCapability(Ability.EAT);
         this.addCapability(Ability.CAN_BE_FOLLOWED);
-    }
-
-    @Override
-    public String unconscious(GameMap map) {
-        // YOU DIED!
-        for (String line : FancyMessage.YOU_DIED.split("\n")) {
-            new Display().println(line);
-            try {
-                Thread.sleep(200);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-
-        return super.unconscious(map);
     }
 
     /**

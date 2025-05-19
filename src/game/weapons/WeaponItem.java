@@ -11,12 +11,12 @@ import java.util.Random;
  * Class representing items that can be used as a weapon.
  * @author Adrian Kristanto
  */
-public class WeaponItem extends Item implements Weapon {
+public abstract class WeaponItem extends Item implements Weapon {
     private static final float DEFAULT_DAMAGE_MULTIPLIER = 1.0f;
-    private int damage;
-    private int hitRate;
+    private final int damage;
+    private final int hitRate;
     private final String verb;
-    private float damageMultiplier;
+    private final float damageMultiplier;
 
     /**
      * Constructor.
@@ -38,12 +38,13 @@ public class WeaponItem extends Item implements Weapon {
     @Override
     public String attack(Actor attacker, Actor target, GameMap map) {
         Random rand = new Random();
+
         if (!(rand.nextInt(100) < this.hitRate)) {
             return attacker + " misses " + target + ".";
         }
 
         target.hurt(Math.round(damage * damageMultiplier));
 
-        return String.format("%s %s %s for %d damage", attacker, verb, target, damage);
+        return attacker + " " + verb + " " + target + " for " + damage;
     }
 }

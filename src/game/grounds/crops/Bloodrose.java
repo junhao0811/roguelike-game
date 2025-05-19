@@ -23,8 +23,14 @@ public class Bloodrose extends Crop {
         int damage = 5;
 
         actor.hurt(damage);
+        String result = "The health of " + actor + " is sapped by " + damage + " points";
 
-        return "The health of " + actor + " is sapped by " + damage + " points";
+        if (!actor.isConscious()) {
+            result += "\n" + actor + " met their demise at the hands of a " + this;
+            actor.unconscious(map);
+        }
+
+        return result;
     }
 
     @Override

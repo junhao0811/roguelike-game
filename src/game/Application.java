@@ -86,7 +86,17 @@ public class Application {
         // one seed of "Bloodrose" in their inventory
         player.addItemToInventory(new Seed(new Inheritree()));
         player.addItemToInventory(new Seed(new Bloodrose()));
-        
+
         world.run();
+
+        // YOU DIED!
+        for (String line : FancyMessage.YOU_DIED.split("\n")) {
+            new Display().println(line);
+            try {
+                Thread.sleep(200);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
     }
 }
