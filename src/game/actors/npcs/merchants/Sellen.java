@@ -2,11 +2,16 @@ package game.actors.npcs.merchants;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Creatures;
 import game.actions.SpeakAction;
 import game.actors.npcs.MonologueList;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Speakable;
+import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
+import game.effects.attributeeffects.RestoreAttributeEffect;
+import game.effects.spawneffects.SpawnEffect;
 import game.weapons.Broadsword;
 import game.weapons.DragonslayerGreatsword;
 import game.weapons.Katana;
@@ -21,9 +26,20 @@ public class Sellen extends Merchant implements Speakable {
 
     @Override
     public void setupSellables() {
-        this.addSellable(new Broadsword(100));
-        this.addSellable(new DragonslayerGreatsword(1500));
-        this.addSellable(new Katana(500));
+        Broadsword broadsword = new Broadsword(100);
+        broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.HEALTH, 20));
+
+        DragonslayerGreatsword dragonslayerGreatsword = new DragonslayerGreatsword(1500);
+        dragonslayerGreatsword.addEffect(new SpawnEffect(Creatures.GOLDEN_BEETLE));
+
+        Katana katana = new Katana(500);
+        katana.addEffect(new SpawnEffect(Creatures.OMEN_SHEEP, this));
+        katana.addEffect(new RestoreAttributeEffect(BaseActorAttributes.HEALTH, 10));
+        katana.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 20));
+
+        this.addSellable(broadsword);
+        this.addSellable(dragonslayerGreatsword);
+        this.addSellable(katana);
     }
 
     @Override

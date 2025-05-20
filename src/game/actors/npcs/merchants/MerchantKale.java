@@ -2,6 +2,7 @@ package game.actors.npcs.merchants;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.actions.SpeakAction;
@@ -12,6 +13,8 @@ import game.conditions.EmptyInventoryCondition;
 import game.conditions.NearbyCondition;
 import game.conditions.comparisons.ComparisonOperations;
 import game.conditions.comparisons.RunesComparisonCondition;
+import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
+import game.effects.attributeeffects.RestoreAttributeEffect;
 import game.weapons.Broadsword;
 import game.weapons.DragonslayerGreatsword;
 
@@ -25,8 +28,14 @@ public class MerchantKale extends Merchant implements Speakable {
 
     @Override
     public void setupSellables() {
-        this.addSellable(new Broadsword(150));
-        this.addSellable(new DragonslayerGreatsword(1700));
+        Broadsword broadsword = new Broadsword(150);
+        broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 30));
+
+        DragonslayerGreatsword dragonslayerGreatsword = new DragonslayerGreatsword(1700);
+        dragonslayerGreatsword.addEffect(new RestoreAttributeEffect(BaseActorAttributes.STAMINA, 20));
+
+        this.addSellable(broadsword);
+        this.addSellable(dragonslayerGreatsword);
     }
 
     @Override

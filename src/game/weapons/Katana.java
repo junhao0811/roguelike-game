@@ -22,6 +22,10 @@ public class Katana extends WeaponItem implements Sellable {
         effects.add(new ReduceAttributeEffect(BaseActorAttributes.HEALTH, 25));
     }
 
+    public void addEffect(Effect effect) {
+        effects.add(effect);
+    }
+
     @Override
     public String sell(Actor actor, GameMap map, Merchant merchant) {
 

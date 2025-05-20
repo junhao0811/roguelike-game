@@ -22,6 +22,10 @@ public class Broadsword extends WeaponItem implements Sellable {
         effects.add(new RestoreAttributeEffect(BaseActorAttributes.HEALTH, 10));
     }
 
+    public void addEffect(Effect effect) {
+        effects.add(effect);
+    }
+
     @Override
     public String sell(Actor actor, GameMap map, Merchant merchant) {
 

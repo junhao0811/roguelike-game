@@ -23,6 +23,10 @@ public class DragonslayerGreatsword extends WeaponItem implements Sellable {
         effects.add(new IncreaseMaxAttributeEffect(BaseActorAttributes.HEALTH, 15));
     }
 
+    public void addEffect(Effect effect) {
+        effects.add(effect);
+    }
+
     @Override
     public String sell(Actor actor, GameMap map, Merchant merchant) {
 
