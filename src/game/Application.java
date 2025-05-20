@@ -61,10 +61,10 @@ public class Application {
         //gameMap.at(22, 13).addActor(spiritGoat);
         
         NPC omenSheep = new OmenSheep();
-        gameMap.at(24, 13).addActor(omenSheep);
+        //gameMap.at(24, 13).addActor(omenSheep);
         
         NPC goldenBeetle = new GoldenBeetle();
-        //gameMap.at(23, 13).addActor(goldenBeetle);
+        gameMap.at(23, 13).addActor(goldenBeetle);
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {

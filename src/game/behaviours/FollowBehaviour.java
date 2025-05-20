@@ -22,34 +22,46 @@ public class FollowBehaviour implements Behaviour {
     
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        Action action = null;
+        Location here = map.locationOf(actor);
 
-        for (Exit exit : map.locationOf(actor).getExits()) {
-            Location destination = exit.getDestination();
-
-            if (destination.containsAnActor() &&
-                    destination.getActor().hasCapability(Ability.CAN_BE_FOLLOWED)) {
-                target = destination.getActor();
-                return new DoNothingAction();
-            }
-        }
-
-        if (target != null) {
-            Location here = map.locationOf(actor);
-            Location there = map.locationOf(target);
-
-            int currentDistance = distance(here, there);
-
+        if (target == null) {
             for (Exit exit : here.getExits()) {
                 Location destination = exit.getDestination();
 
-                if (destination.canActorEnter(actor)) {
-                    int newDistance = distance(destination, there);
+                if (destination.containsAnActor() &&
+                        destination.getActor().hasCapability(Ability.CAN_BE_FOLLOWED)) {
+                    target = destination.getActor();
+                    return new DoNothingAction();
+                }
+            }
 
-                    if (newDistance < currentDistance) {
-                        action = destination.getMoveAction(actor, "to follow " + target,
-                                exit.getHotKey());
-                    }
+            return null;
+        }
+
+        Location there = map.locationOf(target);
+        int currentEuclideanDistance = getEuclideanDistance(here, there);
+
+        if (currentEuclideanDistance <= 1) {
+            return new DoNothingAction();
+        }
+
+        Action action = null;
+        int currentManhattanDistance = getManhattanDistance(here, there);
+
+        for (Exit exit : here.getExits()) {
+            Location destination = exit.getDestination();
+
+            if (destination.canActorEnter(actor)) {
+                int euclideanDistance = getEuclideanDistance(destination, there);
+                int manhattanDistance = getManhattanDistance(destination, there);
+
+                if (euclideanDistance < currentEuclideanDistance ||
+                        (euclideanDistance == currentEuclideanDistance &&
+                                manhattanDistance < currentManhattanDistance)) {
+                    currentEuclideanDistance = euclideanDistance;
+                    currentManhattanDistance = manhattanDistance;
+                    action = destination.getMoveAction(actor, "to follow " + target,
+                            exit.getHotKey());
                 }
             }
         }
@@ -58,13 +70,28 @@ public class FollowBehaviour implements Behaviour {
     }
     
     /**
+     * Compute the Euclidean distance between two locations.
+     *
+     * @param a the first location
+     * @param b the second location
+     * @return the number of steps between a and b if you can move in both the four cardinal directions
+     *          and the four ordinal directions.
+     */
+    private int getEuclideanDistance(Location a, Location b) {
+        int x = a.x() - b.x();
+        int y = a.y() - b.y();
+
+        return (int) Math.sqrt((x * x) + (y * y));
+    }
+
+    /**
      * Compute the Manhattan distance between two locations.
      *
      * @param a the first location
-     * @param b the first location
-     * @return the number of steps between a and b if you only move in the four cardinal directions.
+     * @param b the second location
+     * @return the number of steps between a and b if you can only move in the four cardinal directions.
      */
-    private int distance(Location a, Location b) {
+    private int getManhattanDistance(Location a, Location b) {
         return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
     }
 }
