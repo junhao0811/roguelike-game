@@ -1,9 +1,12 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.*;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.actions.AttackAction;
 
 import java.util.Random;
 
@@ -40,11 +43,20 @@ public abstract class WeaponItem extends Item implements Weapon {
         Random rand = new Random();
 
         if (!(rand.nextInt(100) < this.hitRate)) {
-            return attacker + " misses " + target + ".";
+            return attacker + " misses " + target;
         }
 
         target.hurt(Math.round(damage * damageMultiplier));
 
         return attacker + " " + verb + " " + target + " for " + damage;
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location){
+        ActionList actions = new ActionList();
+
+        actions.add(new AttackAction(otherActor, this));
+
+        return actions;
     }
 }

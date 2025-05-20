@@ -30,14 +30,26 @@ public class AttackAction extends Action {
     private Weapon weapon;
 
     /**
-     * Constructor.
+     * Constructor
      *
      * @param target the Actor to attack
      * @param direction the direction where the attack should be performed (only used for display purposes)
+     * @param weapon the Weapon used to attack
      */
     public AttackAction(Actor target, String direction, Weapon weapon) {
         this.target = target;
         this.direction = " at " + direction;
+        this.weapon = weapon;
+    }
+
+    /**
+     * Constructor with no direction as default
+     *
+     * @param target the Actor to attack
+     * @param weapon the Weapon used to attack
+     */
+    public AttackAction(Actor target, Weapon weapon) {
+        this.target = target;
         this.weapon = weapon;
     }
 
