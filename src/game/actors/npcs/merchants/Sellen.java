@@ -1,17 +1,29 @@
-package game.actors.npcs;
+package game.actors.npcs.merchants;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.SpeakAction;
+import game.actors.npcs.MonologueList;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Speakable;
+import game.weapons.Broadsword;
+import game.weapons.DragonslayerGreatsword;
+import game.weapons.Katana;
 
-public class Sellen extends NPC implements Speakable {
+public class Sellen extends Merchant implements Speakable {
 
     public Sellen() {
         super("Sellen", 's', 150);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
+        this.setupSellables();
+    }
+
+    @Override
+    public void setupSellables() {
+        this.addSellable(new Broadsword(100));
+        this.addSellable(new DragonslayerGreatsword(1500));
+        this.addSellable(new Katana(500));
     }
 
     @Override

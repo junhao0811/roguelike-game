@@ -1,6 +1,8 @@
 package game;
 
 import game.actors.npcs.*;
+import game.actors.npcs.merchants.MerchantKale;
+import game.actors.npcs.merchants.Sellen;
 import game.displays.FancyMessage;
 import game.grounds.crops.Bloodrose;
 import game.grounds.crops.Inheritree;
@@ -92,6 +94,8 @@ public class Application {
         // one seed of "Bloodrose" in their inventory
         player.addItemToInventory(new Seed(new Inheritree()));
         player.addItemToInventory(new Seed(new Bloodrose()));
+
+        player.addBalance(5000);
 
         world.run();
 

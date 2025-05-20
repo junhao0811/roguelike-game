@@ -1,22 +1,32 @@
-package game.actors.npcs;
+package game.actors.npcs.merchants;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.actions.SpeakAction;
+import game.actors.npcs.MonologueList;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Speakable;
 import game.conditions.EmptyInventoryCondition;
 import game.conditions.NearbyCondition;
 import game.conditions.comparisons.ComparisonOperations;
 import game.conditions.comparisons.RunesComparisonCondition;
+import game.weapons.Broadsword;
+import game.weapons.DragonslayerGreatsword;
 
-public class MerchantKale extends NPC implements Speakable {
+public class MerchantKale extends Merchant implements Speakable {
 
     public MerchantKale() {
         super("Merchant Kale", 'k', 200);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
+        this.setupSellables();
+    }
+
+    @Override
+    public void setupSellables() {
+        this.addSellable(new Broadsword(150));
+        this.addSellable(new DragonslayerGreatsword(1700));
     }
 
     @Override

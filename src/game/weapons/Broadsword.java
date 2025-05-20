@@ -2,14 +2,41 @@ package game.weapons;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.npcs.merchants.Merchant;
 import game.capabilities.Sellable;
 
 public class Broadsword extends WeaponItem implements Sellable {
-    public Broadsword() {
+
+    private final int price;
+
+    public Broadsword(int price) {
         super("Broadsword", 'b', 30, "slashes", 50);
+        this.price = price;
     }
 
-    public String sell(Actor actor, GameMap map) {
-        return "";
+    @Override
+    public String sell(Actor actor, GameMap map, Merchant merchant) {
+
+        if (actor.getBalance() >= price) {
+            String result;
+
+            result = " successfully purchases the " + this + " from " + merchant;
+
+            actor.deductBalance(price);
+            merchant.addBalance(price);
+            result += "\n" + actor + " pays " + price + " Runes to " + merchant;
+
+            actor.addItemToInventory(this);
+            result += "\n" + this + " is added to the inventory of " + actor;
+
+            return result;
+        }
+
+        return " does not have enough Runes to purchase the " + this + " from " + merchant;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (" + price + " Runes)";
     }
 }
