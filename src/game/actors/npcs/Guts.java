@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.SpeakAction;
+import game.behaviours.BerserkBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Speakable;
 import game.conditions.comparisons.AttributeComparisonCondition;
@@ -17,6 +18,9 @@ public class Guts extends NPC implements Speakable {
         super("Guts", 'g', 500);
         this.setIntrinsicWeapon(new BareFist());
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
+        this.addBehaviour(Integer.MAX_VALUE - 1,
+                new BerserkBehaviour(new AttributeComparisonCondition(ComparisonOperations.GT,
+                        BaseActorAttributes.HEALTH, 50)));
     }
 
     @Override

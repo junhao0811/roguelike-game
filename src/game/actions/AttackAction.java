@@ -22,7 +22,7 @@ public class AttackAction extends Action {
     /**
      * The direction of incoming attack.
      */
-    private final String direction;
+    private String direction = "";
 
     /**
      * Weapon used for the attack
@@ -50,6 +50,15 @@ public class AttackAction extends Action {
     public AttackAction(Actor target, String direction) {
         this.target = target;
         this.direction = " at " + direction;
+    }
+
+    /**
+     * Constructor with intrinsic weapon and no direction as default
+     *
+     * @param target the actor to attack
+     */
+    public AttackAction(Actor target) {
+        this.target = target;
     }
 
     @Override
