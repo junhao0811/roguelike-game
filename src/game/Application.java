@@ -1,17 +1,14 @@
 package game;
 
-import game.actors.npcs.GoldenBeetle;
-import game.actors.npcs.NPC;
+import game.actors.npcs.*;
 import game.displays.FancyMessage;
 import game.grounds.crops.Bloodrose;
 import game.grounds.crops.Inheritree;
 import game.items.Talisman;
 import game.grounds.Blight;
 import game.grounds.Floor;
-import game.actors.npcs.OmenSheep;
 import game.actors.Player;
 import game.grounds.Soil;
-import game.actors.npcs.SpiritGoat;
 import game.grounds.Wall;
 import game.items.Seed;
 import java.util.Arrays;
@@ -64,7 +61,16 @@ public class Application {
         //gameMap.at(24, 13).addActor(omenSheep);
         
         NPC goldenBeetle = new GoldenBeetle();
-        gameMap.at(23, 13).addActor(goldenBeetle);
+        //gameMap.at(23, 13).addActor(goldenBeetle);
+
+        NPC guts = new Guts();
+        gameMap.at(22, 14).addActor(guts);
+
+        NPC sellen = new Sellen();
+        gameMap.at(23, 14).addActor(sellen);
+
+        NPC merchantKale = new MerchantKale();
+        gameMap.at(24, 14).addActor(merchantKale);
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {

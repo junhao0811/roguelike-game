@@ -16,7 +16,14 @@ public class Sellen extends NPC implements Speakable {
 
     @Override
     public String speak(Actor actor, GameMap map) {
-        return "";
+        MonologueList monologues = new MonologueList(actor, map);
+
+        monologues.add("The academy casts out those it fears. Yet knowledge, " +
+                "like the stars, cannot be bound forever.");
+
+        monologues.add("You sense it too, don’t you? The Glintstone hums, even now.");
+
+        return this + ": “" + monologues.getMonologue() + "”";
     }
 
     @Override

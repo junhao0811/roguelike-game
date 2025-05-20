@@ -18,7 +18,13 @@ public class Guts extends NPC implements Speakable {
 
     @Override
     public String speak(Actor actor, GameMap map) {
-        return "";
+        MonologueList monologues = new MonologueList(actor, map);
+
+        monologues.add("RAAAAGH!");
+        monologues.add("I’LL CRUSH YOU ALL!");
+        monologues.add("WEAK! TOO WEAK TO FIGHT ME!");
+
+        return this + ": “" + monologues.getMonologue() + "”";
     }
 
     @Override
