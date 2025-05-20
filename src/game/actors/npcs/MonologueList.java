@@ -2,6 +2,7 @@ package game.actors.npcs;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.conditions.Condition;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,5 +29,11 @@ public class MonologueList {
 
     public void add(String monologue) {
         monologues.add(monologue);
+    }
+
+    public void add(String monologue, Condition condition) {
+        if (condition.check(actor, map)) {
+            monologues.add(monologue);
+        }
     }
 }

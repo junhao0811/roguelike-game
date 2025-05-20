@@ -2,10 +2,13 @@ package game.actors.npcs;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.SpeakAction;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Speakable;
+import game.conditions.comparisons.AttributeComparisonCondition;
+import game.conditions.comparisons.ComparisonOperations;
 import game.weapons.BareFist;
 
 public class Guts extends NPC implements Speakable {
@@ -22,7 +25,9 @@ public class Guts extends NPC implements Speakable {
 
         monologues.add("RAAAAGH!");
         monologues.add("I’LL CRUSH YOU ALL!");
-        monologues.add("WEAK! TOO WEAK TO FIGHT ME!");
+        monologues.add("WEAK! TOO WEAK TO FIGHT ME!",
+                new AttributeComparisonCondition(ComparisonOperations.LT,
+                        BaseActorAttributes.HEALTH,50));
 
         return this + ": “" + monologues.getMonologue() + "”";
     }

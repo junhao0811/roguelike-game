@@ -3,9 +3,14 @@ package game.actors.npcs;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Status;
 import game.actions.SpeakAction;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.Speakable;
+import game.conditions.EmptyInventoryCondition;
+import game.conditions.NearbyCondition;
+import game.conditions.comparisons.ComparisonOperations;
+import game.conditions.comparisons.RunesComparisonCondition;
 
 public class MerchantKale extends NPC implements Speakable {
 
@@ -18,13 +23,14 @@ public class MerchantKale extends NPC implements Speakable {
     public String speak(Actor actor, GameMap map) {
         MonologueList monologues = new MonologueList(actor, map);
 
-        monologues.add("Ah, hard times, I see. Keep your head low and your blade sharp.");
+        monologues.add("Ah, hard times, I see. Keep your head low and your blade sharp.",
+                new RunesComparisonCondition(ComparisonOperations.LT, 50));
 
         monologues.add("Not a scrap to your name? Even a farmer should carry a " +
-                "trinket or two.");
+                "trinket or two.", new EmptyInventoryCondition());
 
         monologues.add("Rest by the flame when you can, friend. These lands " +
-                "will wear you thin.");
+                "will wear you thin.", new NearbyCondition(Status.CURSED));
 
         monologues.add("A merchant’s life is a lonely one. But the roads… they whisper " +
                 "secrets to those who listen.");
