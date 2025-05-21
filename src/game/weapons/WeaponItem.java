@@ -47,6 +47,7 @@ public abstract class WeaponItem extends Item implements Weapon {
 
         target.hurt(Math.round(damage * damageMultiplier));
 
-        return attacker + " " + verb + " " + target + " for " + damage;
+        return attacker + " " + verb + " " + target + " with the " + this +
+                " for " + damage + " damage";
     }
 }

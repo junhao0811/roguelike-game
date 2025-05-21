@@ -30,7 +30,7 @@ public class Sellen extends Merchant implements Speakable {
         broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.HEALTH, 20));
 
         Stock dragonslayerGreatsword = new Stock(new DragonslayerGreatsword(), 1500);
-        dragonslayerGreatsword.addEffect(new SpawnEffect(Creatures.OMEN_SHEEP));
+        dragonslayerGreatsword.addEffect(new SpawnEffect(Creatures.GOLDEN_BEETLE));
 
         Stock katana = new Stock(new Katana(), 500);
         katana.addEffect(new SpawnEffect(Creatures.OMEN_SHEEP, this));
