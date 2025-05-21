@@ -50,7 +50,8 @@ public class EffectList implements Iterable<Effect> {
     }
 
     /**
-     * Appends a single Effect to this collection, if it is non-null.  If it is null, then it is ignored.
+     * Appends a single Effect to this collection, if it is non-null.
+     * If it is null, then it is ignored.
      * @param effect the Effect to append
      * @return true unconditionally
      */
@@ -102,7 +103,8 @@ public class EffectList implements Iterable<Effect> {
     }
 
     /**
-     * Remove the first occurrence of an Effect from the collection, if it is present.  If it is not present, the list is unchanged.
+     * Remove the first occurrence of an Effect from the collection, if it is present.
+     * If it is not present, the list is unchanged.
      * @param effect the Effect to remove
      */
     public void remove(Effect effect) {
