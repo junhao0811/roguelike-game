@@ -1,8 +1,9 @@
 package game.capabilities;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.npcs.merchants.Merchant;
+import game.effects.Effect;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interface representing a Sellable
@@ -10,7 +11,9 @@ import game.actors.npcs.merchants.Merchant;
 public interface Sellable {
 
     /**
-     * Method to house the selling logic
+     * Method to return the list of effects the Sellable holds
      */
-    String sell(Actor actor, GameMap map, Merchant merchant);
+    default List<Effect> getEffects() {
+        return new ArrayList<Effect>();
+    }
 }

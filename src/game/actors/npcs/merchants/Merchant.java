@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.PurchaseAction;
 import game.actors.npcs.NPC;
-import game.capabilities.Sellable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,32 +12,32 @@ import java.util.List;
 
 public abstract class Merchant extends NPC {
 
-    private final List<Sellable> sellables = new ArrayList<>();
+    private final List<Stock> stocks = new ArrayList<>();
 
     public Merchant(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
     }
 
-    public abstract void setupSellables();
+    public abstract void setupStocks();
 
-    public void addSellable(Sellable sellable) {
-        sellables.add(sellable);
+    public void addStock(Stock stock) {
+        stocks.add(stock);
     }
 
-    public void removeSellable(Sellable sellable) {
-        sellables.remove(sellable);
+    public void removeStock(Stock stock) {
+        stocks.remove(stock);
     }
 
-    public List<Sellable> getSellables() {
-        return Collections.unmodifiableList(sellables);
+    public List<Stock> getStocks() {
+        return Collections.unmodifiableList(stocks);
     }
 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
-        for (Sellable sellable : sellables) {
-            actions.add(new PurchaseAction(this, direction, sellable));
+        for (Stock stock : stocks) {
+            actions.add(new PurchaseAction(this, direction, stock));
         }
 
         return actions;

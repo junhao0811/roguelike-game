@@ -23,19 +23,19 @@ public class MerchantKale extends Merchant implements Speakable {
     public MerchantKale() {
         super("Merchant Kale", 'k', 200);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
-        this.setupSellables();
+        this.setupStocks();
     }
 
     @Override
-    public void setupSellables() {
-        Broadsword broadsword = new Broadsword(150);
+    public void setupStocks() {
+        Stock broadsword = new Stock(new Broadsword(), 150);
         broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 30));
 
-        DragonslayerGreatsword dragonslayerGreatsword = new DragonslayerGreatsword(1700);
+        Stock dragonslayerGreatsword = new Stock(new DragonslayerGreatsword(), 1700);
         dragonslayerGreatsword.addEffect(new RestoreAttributeEffect(BaseActorAttributes.STAMINA, 20));
 
-        this.addSellable(broadsword);
-        this.addSellable(dragonslayerGreatsword);
+        this.addStock(broadsword);
+        this.addStock(dragonslayerGreatsword);
     }
 
     @Override
