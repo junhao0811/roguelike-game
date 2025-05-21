@@ -14,5 +14,6 @@ public enum Ability {
     PRODUCE_OFFSPRING,
     PRODUCE_EGG,
     EAT,
-    CAN_BE_FOLLOWED
+    CAN_BE_FOLLOWED,
+    ATTACK
 }
