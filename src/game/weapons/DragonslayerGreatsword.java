@@ -5,8 +5,15 @@ import game.capabilities.Sellable;
 import game.effects.EffectList;
 import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
 
+/**
+ * Class representing a weapon item called a dragonslayer greatsword.
+ * This weapon item deals 70 damage points with a 75% chance to hit the target.
+ */
 public class DragonslayerGreatsword extends WeaponItem implements Sellable {
 
+    /**
+     * Constructor
+     */
     public DragonslayerGreatsword() {
         super("Dragonslayer Greatsword", 'D',
                 70, "strikes", 75);
