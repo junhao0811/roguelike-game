@@ -8,5 +8,5 @@ public interface Merchant {
     /**
      * Method to house the logic to set up the Merchant's stock
      */
-    StockList setupStocks();
+    StockList getStocks();
 }

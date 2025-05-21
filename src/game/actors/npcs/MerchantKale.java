@@ -31,7 +31,7 @@ public class MerchantKale extends NPC implements Speakable, Merchant {
     }
 
     @Override
-    public StockList setupStocks() {
+    public StockList getStocks() {
         StockList stocks = new StockList();
 
         Stock broadsword = new Stock(new Broadsword(), 150);
@@ -74,7 +74,7 @@ public class MerchantKale extends NPC implements Speakable, Merchant {
         }
 
         if (otherActor.hasCapability(Ability.PURCHASE)) {
-            for (Stock stock : setupStocks()) {
+            for (Stock stock : getStocks()) {
                 actions.add(new PurchaseAction(this, direction, stock));
             }
         }
