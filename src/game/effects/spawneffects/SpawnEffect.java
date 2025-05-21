@@ -8,7 +8,7 @@ import game.actors.npcs.GoldenBeetle;
 import game.actors.npcs.OmenSheep;
 import game.actors.npcs.SpiritGoat;
 import game.effects.Effect;
-import game.Creatures;
+import game.enums.Creatures;
 
 import java.util.ArrayList;
 import java.util.List;

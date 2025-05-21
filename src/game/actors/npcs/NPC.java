@@ -8,9 +8,9 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Ability;
+import game.enums.Ability;
 import game.actions.AttackAction;
-import game.Status;
+import game.enums.Status;
 import game.weapons.WeaponItem;
 
 import java.util.Collection;

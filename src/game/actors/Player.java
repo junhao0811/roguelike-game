@@ -9,9 +9,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
-import game.Ability;
+import game.enums.Ability;
 import game.weapons.BareFist;
-import game.Status;
+import game.enums.Status;
 
 /**
  * Class representing the Player.

@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Status;
+import game.enums.Status;
 import game.actions.SpeakAction;
 import game.capabilities.speakable.MonologueList;
 import game.behaviours.WanderBehaviour;

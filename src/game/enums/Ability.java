@@ -1,4 +1,4 @@
-package game;
+package game.enums;
 
 /**
  * Use this enum to represent abilities. Example #1: if the player is capable jumping over walls,
@@ -15,5 +15,5 @@ public enum Ability {
     PRODUCE_EGG,
     EAT,
     CAN_BE_FOLLOWED,
-    ATTACK
+    ATTACK,
 }

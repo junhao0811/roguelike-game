@@ -1,7 +1,7 @@
 package game.grounds;
 
 import edu.monash.fit2099.engine.positions.Ground;
-import game.Status;
+import game.enums.Status;
 
 /**
  * A class representing the soil in the valley

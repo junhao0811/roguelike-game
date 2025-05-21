@@ -11,7 +11,7 @@ import game.capabilities.speakable.Speakable;
 import game.effects.attributeeffects.RestoreAttributeEffect;
 import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
 import game.effects.spawneffects.SpawnEffect;
-import game.Creatures;
+import game.enums.Creatures;
 import game.weapons.Broadsword;
 import game.weapons.DragonslayerGreatsword;
 import game.weapons.Katana;

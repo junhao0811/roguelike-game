@@ -1,4 +1,4 @@
-package game;
+package game.enums;
 
 /**
  * Use this enum class to represent a status. Example #1: if the player is sleeping, you can attack
@@ -10,5 +10,5 @@ public enum Status {
     HOSTILE_TO_ENEMY,
     FERTILE,
     CURSED,
-    BLESSED
+    BLESSED,
 }
