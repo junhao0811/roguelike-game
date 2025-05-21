@@ -11,6 +11,7 @@ import game.capabilities.speakable.MonologueList;
 import game.capabilities.speakable.Speakable;
 import game.conditions.comparisons.AttributeComparisonCondition;
 import game.conditions.comparisons.ComparisonOperations;
+import game.enums.Ability;
 import game.weapons.BareFist;
 
 public class Guts extends NPC implements Speakable {
@@ -41,7 +42,9 @@ public class Guts extends NPC implements Speakable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
-        actions.add(new SpeakAction(this, direction));
+        if (otherActor.hasCapability(Ability.LISTEN)) {
+            actions.add(new SpeakAction(this, direction));
+        }
 
         return actions;
     }

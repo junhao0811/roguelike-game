@@ -16,4 +16,6 @@ public enum Ability {
     EAT,
     CAN_BE_FOLLOWED,
     ATTACK,
+    LISTEN,
+    PURCHASE,
 }

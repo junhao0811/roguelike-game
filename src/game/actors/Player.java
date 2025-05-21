@@ -32,9 +32,15 @@ public class Player extends Actor {
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.setIntrinsicWeapon(new BareFist());
+        this.setupCapabilities();
+    }
+
+    private void setupCapabilities() {
         this.addCapability(Ability.PLANT_CROPS);
         this.addCapability(Ability.EAT);
         this.addCapability(Ability.CAN_BE_FOLLOWED);
+        this.addCapability(Ability.LISTEN);
+        this.addCapability(Ability.PURCHASE);
     }
 
     /**

@@ -1,9 +1,14 @@
-package game.actors.npcs.merchants;
+package game.actors.npcs;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.PurchaseAction;
+import game.capabilities.merchant.Merchant;
+import game.capabilities.merchant.Stock;
+import game.capabilities.merchant.StockList;
+import game.enums.Ability;
 import game.enums.Status;
 import game.actions.SpeakAction;
 import game.capabilities.speakable.MonologueList;
@@ -18,24 +23,27 @@ import game.effects.attributeeffects.RestoreAttributeEffect;
 import game.weapons.Broadsword;
 import game.weapons.DragonslayerGreatsword;
 
-public class MerchantKale extends Merchant implements Speakable {
+public class MerchantKale extends NPC implements Speakable, Merchant {
 
     public MerchantKale() {
         super("Merchant Kale", 'k', 200);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
-        this.setupStocks();
     }
 
     @Override
-    public void setupStocks() {
+    public StockList setupStocks() {
+        StockList stocks = new StockList();
+
         Stock broadsword = new Stock(new Broadsword(), 150);
         broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 30));
 
         Stock dragonslayerGreatsword = new Stock(new DragonslayerGreatsword(), 1700);
         dragonslayerGreatsword.addEffect(new RestoreAttributeEffect(BaseActorAttributes.STAMINA, 20));
 
-        this.addStock(broadsword);
-        this.addStock(dragonslayerGreatsword);
+        stocks.add(broadsword);
+        stocks.add(dragonslayerGreatsword);
+
+        return stocks;
     }
 
     @Override
@@ -61,7 +69,15 @@ public class MerchantKale extends Merchant implements Speakable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
-        actions.add(new SpeakAction(this, direction));
+        if (otherActor.hasCapability(Ability.LISTEN)) {
+            actions.add(new SpeakAction(this, direction));
+        }
+
+        if (otherActor.hasCapability(Ability.PURCHASE)) {
+            for (Stock stock : setupStocks()) {
+                actions.add(new PurchaseAction(this, direction, stock));
+            }
+        }
 
         return actions;
     }

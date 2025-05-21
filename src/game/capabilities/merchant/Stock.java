@@ -1,4 +1,4 @@
-package game.actors.npcs.merchants;
+package game.capabilities.merchant;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
@@ -22,15 +22,16 @@ public class Stock {
     }
 
     public String sell(Actor actor, GameMap map, Merchant merchant) {
+        Actor seller = (Actor) merchant;
 
         if (actor.getBalance() >= price) {
             StringBuilder result = new StringBuilder(actor + " successfully purchases the " +
-                    this + " from " + merchant);
+                    this + " from " + seller);
 
             actor.deductBalance(price);
-            merchant.addBalance(price);
+            seller.addBalance(price);
             result.append("\n").append(actor).append(" pays ").append(price).append(" Runes to ").
-                    append(merchant);
+                    append(seller);
 
             actor.addItemToInventory((Item) sellable);
             result.append("\n").append(sellable).append(" is added to the inventory of ").append(actor);
@@ -47,7 +48,7 @@ public class Stock {
             return result.toString();
         }
 
-        return " does not have enough Runes to purchase the " + this + " from " + merchant;
+        return " does not have enough Runes to purchase the " + this + " from " + seller;
     }
 
     public Sellable getSellable() {

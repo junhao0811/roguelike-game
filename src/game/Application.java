@@ -1,8 +1,8 @@
 package game;
 
 import game.actors.npcs.*;
-import game.actors.npcs.merchants.MerchantKale;
-import game.actors.npcs.merchants.Sellen;
+import game.actors.npcs.MerchantKale;
+import game.actors.npcs.Sellen;
 import game.displays.FancyMessage;
 import game.grounds.crops.Bloodrose;
 import game.grounds.crops.Inheritree;

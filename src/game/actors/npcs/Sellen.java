@@ -1,31 +1,37 @@
-package game.actors.npcs.merchants;
+package game.actors.npcs;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.PurchaseAction;
 import game.actions.SpeakAction;
+import game.capabilities.merchant.Merchant;
+import game.capabilities.merchant.Stock;
+import game.capabilities.merchant.StockList;
 import game.capabilities.speakable.MonologueList;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.speakable.Speakable;
 import game.effects.attributeeffects.RestoreAttributeEffect;
 import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
 import game.effects.spawneffects.SpawnEffect;
+import game.enums.Ability;
 import game.enums.Creatures;
 import game.weapons.Broadsword;
 import game.weapons.DragonslayerGreatsword;
 import game.weapons.Katana;
 
-public class Sellen extends Merchant implements Speakable {
+public class Sellen extends NPC implements Speakable, Merchant {
 
     public Sellen() {
         super("Sellen", 's', 150);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
-        this.setupStocks();
     }
 
     @Override
-    public void setupStocks() {
+    public StockList setupStocks() {
+        StockList stocks = new StockList();
+
         Stock broadsword = new Stock(new Broadsword(), 100);
         broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.HEALTH, 20));
 
@@ -37,9 +43,11 @@ public class Sellen extends Merchant implements Speakable {
         katana.addEffect(new RestoreAttributeEffect(BaseActorAttributes.HEALTH, 10));
         katana.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 20));
 
-        this.addStock(broadsword);
-        this.addStock(dragonslayerGreatsword);
-        this.addStock(katana);
+        stocks.add(broadsword);
+        stocks.add(dragonslayerGreatsword);
+        stocks.add(katana);
+
+        return stocks;
     }
 
     @Override
@@ -58,7 +66,15 @@ public class Sellen extends Merchant implements Speakable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
-        actions.add(new SpeakAction(this, direction));
+        if (otherActor.hasCapability(Ability.LISTEN)) {
+            actions.add(new SpeakAction(this, direction));
+        }
+
+        if (otherActor.hasCapability(Ability.PURCHASE)) {
+            for (Stock stock : setupStocks()) {
+                actions.add(new PurchaseAction(this, direction, stock));
+            }
+        }
 
         return actions;
     }

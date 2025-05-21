@@ -3,8 +3,8 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.npcs.merchants.Merchant;
-import game.actors.npcs.merchants.Stock;
+import game.capabilities.merchant.Merchant;
+import game.capabilities.merchant.Stock;
 
 public class PurchaseAction extends Action {
 
