@@ -33,7 +33,7 @@ public class Stock {
                     append(merchant);
 
             actor.addItemToInventory((Item) sellable);
-            result.append("\n").append(this).append(" is added to the inventory of ").append(actor);
+            result.append("\n").append(sellable).append(" is added to the inventory of ").append(actor);
 
             for (Effect effect : effects) {
                 result.append("\n").append(effect.applyEffect(actor, map));
