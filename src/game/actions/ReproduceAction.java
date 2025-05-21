@@ -8,12 +8,11 @@ import game.capabilities.Reproducible;
 
 /**
  * An action that handles reproduction of actors
+ *
+ * @author Ng Jun Xian
  */
 public class ReproduceAction extends Action {
 
-    /**
-     * The Reproducible that is to reproduce
-     */
     private final Reproducible reproducible;
 
     /**
