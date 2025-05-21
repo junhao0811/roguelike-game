@@ -3,7 +3,11 @@ package game.capabilities;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.npcs.NPC;
 
+/**
+ * Interface representing a Hatchable
+ */
 public interface Hatchable {
+
     /**
      * Hatches the Egg into a creature
      *
