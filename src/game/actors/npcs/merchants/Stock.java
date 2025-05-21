@@ -5,16 +5,15 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.capabilities.Sellable;
 import game.effects.Effect;
+import game.effects.EffectList;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Stock {
 
     private final Sellable sellable;
     private final int price;
-    private final List<Effect> effects = new ArrayList<>();
+    private final EffectList effects = new EffectList();
 
     public Stock(Sellable sellable, int price) {
         this.sellable = sellable;
@@ -58,20 +57,16 @@ public class Stock {
         return price;
     }
 
-    public void addEffect(Effect effect) {
-        effects.add(effect);
+    public void addEffect(EffectList effects) {
+        this.effects.add(effects);
     }
 
     public void addEffect(List<Effect> effects) {
-        this.effects.addAll(effects);
+        this.effects.add(effects);
     }
 
-    public void removeEffect(Effect effect) {
-        effects.remove(effect);
-    }
-
-    public List<Effect> getEffects() {
-        return Collections.unmodifiableList(effects);
+    public void addEffect(Effect effect) {
+        effects.add(effect);
     }
 
     @Override
