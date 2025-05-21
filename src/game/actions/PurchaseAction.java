@@ -20,7 +20,7 @@ public class PurchaseAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return actor + stock.sell(actor, map, merchant);
+        return stock.sell(actor, map, merchant);
     }
 
     @Override

@@ -24,7 +24,8 @@ public class Stock {
     public String sell(Actor actor, GameMap map, Merchant merchant) {
 
         if (actor.getBalance() >= price) {
-            StringBuilder result = new StringBuilder(" successfully purchases the " + this + " from " + merchant);
+            StringBuilder result = new StringBuilder(actor + " successfully purchases the " +
+                    this + " from " + merchant);
 
             actor.deductBalance(price);
             merchant.addBalance(price);
