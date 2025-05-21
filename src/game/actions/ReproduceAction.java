@@ -6,12 +6,14 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.enums.Ability;
 import game.capabilities.Reproducible;
 
-
 /**
  * An action that handles reproduction of actors
  */
 public class ReproduceAction extends Action {
 
+    /**
+     * The Reproducible that is to reproduce
+     */
     private final Reproducible reproducible;
 
     /**

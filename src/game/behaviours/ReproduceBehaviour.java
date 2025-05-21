@@ -12,6 +12,9 @@ import game.capabilities.Reproducible;
  */
 public class ReproduceBehaviour implements Behaviour {
 
+    /**
+     * The Reproducible that is to reproduce
+     */
     private final Reproducible reproducible;
 
     /**
