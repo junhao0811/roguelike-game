@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * Interface representing a Edible
+ *
+ * @author Chong Jun Hao
  */
 public interface Edible {
 

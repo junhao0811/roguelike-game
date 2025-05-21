@@ -21,7 +21,7 @@ import java.util.Random;
  * A class representing an Egg that an actor can pick up and drop. The egg has the ability to hatch
  * into a creature.
  *
- * @author Chong Jun Hao
+ * @author Chong Jun Hao and Ng Jun Xian
  * @version 22.0.1
  */
 public class Egg extends Item implements Edible {

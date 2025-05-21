@@ -24,7 +24,7 @@ import java.util.Random;
 /**
  * Class representing a Spirit Goat. Created by: Chong Jun Hao
  *
- * @author Chong Jun Hao
+ * @author Chong Jun Hao and Ng Jun Xian
  * @version 22.0.1
  */
 public class SpiritGoat extends NPC implements Curable, Reproducible {

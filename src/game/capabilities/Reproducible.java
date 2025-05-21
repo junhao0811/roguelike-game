@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.positions.Location;
 
 /**
  * Interface representing a Reproducible
+ *
+ * @author Ng Jun Xian
  */
 public interface Reproducible {
 

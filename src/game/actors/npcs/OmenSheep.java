@@ -21,7 +21,7 @@ import game.items.Egg;
 /**
  * Class representing an Omen Sheep. Created by: Chong Jun Hao
  *
- * @author Chong Jun Hao
+ * @author Chong Jun Hao and Ng Jun Xian
  * @version 22.0.1
  */
 public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {

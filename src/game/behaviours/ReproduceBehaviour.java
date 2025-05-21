@@ -9,12 +9,11 @@ import game.capabilities.Reproducible;
 
 /**
  * A behavior that determines when an actor should reproduce
+ *
+ * @author Ng Jun Xian
  */
 public class ReproduceBehaviour implements Behaviour {
 
-    /**
-     * The Reproducible that is to reproduce
-     */
     private final Reproducible reproducible;
 
     /**
