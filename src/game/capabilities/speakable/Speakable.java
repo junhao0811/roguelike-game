@@ -1,4 +1,4 @@
-package game.capabilities;
+package game.capabilities.speakable;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
