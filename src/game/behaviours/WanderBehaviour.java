@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -29,7 +30,7 @@ public class WanderBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        ArrayList<Action> actions = new ArrayList<>();
+        List<Action> actions = new ArrayList<>();
 
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();

@@ -12,7 +12,7 @@ import game.capabilities.Reproducible;
  */
 public class ReproduceAction extends Action {
 
-    private Reproducible reproducible;
+    private final Reproducible reproducible;
 
     /**
      * Constructor

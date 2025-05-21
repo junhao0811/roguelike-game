@@ -24,6 +24,10 @@ public abstract class Merchant extends NPC {
         stocks.add(stock);
     }
 
+    public void addStock(List<Stock> stocks) {
+        this.stocks.addAll(stocks);
+    }
+
     public void removeStock(Stock stock) {
         stocks.remove(stock);
     }

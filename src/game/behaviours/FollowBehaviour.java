@@ -18,8 +18,34 @@ import game.Ability;
  */
 public class FollowBehaviour implements Behaviour {
     
-    private Actor target = null;
+    private Actor target;
     
+    /**
+     * Compute the Euclidean distance between two locations.
+     *
+     * @param a the first location
+     * @param b the second location
+     * @return the number of steps between a and b if you can move in both the four cardinal directions
+     *          and the four ordinal directions.
+     */
+    private int getEuclideanDistance(Location a, Location b) {
+        int x = a.x() - b.x();
+        int y = a.y() - b.y();
+
+        return (int) Math.sqrt((x * x) + (y * y));
+    }
+
+    /**
+     * Compute the Manhattan distance between two locations.
+     *
+     * @param a the first location
+     * @param b the second location
+     * @return the number of steps between a and b if you can only move in the four cardinal directions.
+     */
+    private int getManhattanDistance(Location a, Location b) {
+        return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
+    }
+
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location here = map.locationOf(actor);
@@ -67,31 +93,5 @@ public class FollowBehaviour implements Behaviour {
         }
 
         return action;
-    }
-    
-    /**
-     * Compute the Euclidean distance between two locations.
-     *
-     * @param a the first location
-     * @param b the second location
-     * @return the number of steps between a and b if you can move in both the four cardinal directions
-     *          and the four ordinal directions.
-     */
-    private int getEuclideanDistance(Location a, Location b) {
-        int x = a.x() - b.x();
-        int y = a.y() - b.y();
-
-        return (int) Math.sqrt((x * x) + (y * y));
-    }
-
-    /**
-     * Compute the Manhattan distance between two locations.
-     *
-     * @param a the first location
-     * @param b the second location
-     * @return the number of steps between a and b if you can only move in the four cardinal directions.
-     */
-    private int getManhattanDistance(Location a, Location b) {
-        return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
     }
 }

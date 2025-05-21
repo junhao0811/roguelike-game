@@ -13,7 +13,7 @@ import game.capabilities.Edible;
  */
 public class EatAction extends Action {
     
-    private Edible edible;
+    private final Edible edible;
     
     /**
      * Constructor.

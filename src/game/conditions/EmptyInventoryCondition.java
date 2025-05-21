@@ -7,10 +7,6 @@ public class EmptyInventoryCondition extends Condition {
 
     @Override
     public boolean check(Actor actor, GameMap map) {
-        if (actor.getItemInventory().isEmpty()) {
-            return true;
-        }
-
-        return false;
+        return actor.getItemInventory().isEmpty();
     }
 }

@@ -15,8 +15,8 @@ import java.util.Random;
 
 public class BerserkBehaviour implements Behaviour {
 
-    private final Random random = new Random();
     private final Condition condition;
+    private final Random random = new Random();
 
     public BerserkBehaviour(Condition condition) {
         this.condition = condition;
