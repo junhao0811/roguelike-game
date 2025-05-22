@@ -14,6 +14,17 @@ import game.capabilities.Reproducible;
  */
 public class ReproduceBehaviour implements Behaviour {
 
+    private final Reproducible reproducible;
+
+    /**
+     * Constructor to create a ReproduceBehaviour.
+     *
+     * @param reproducible the Reproducible object that will reproduce
+     */
+    public ReproduceBehaviour(Reproducible reproducible) {
+        this.reproducible = reproducible;
+    }
+
     /**
      * Returns a ReproduceAction when an actor should reproduce.
      * Delegates to the actor's canReproduce method to check conditions.
@@ -24,8 +35,6 @@ public class ReproduceBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        Reproducible reproducible = (Reproducible) actor;
-
         // Check if the actor can reproduce (logic in actor classes)
         if (reproducible.canReproduce(actor, map)) {
             return new ReproduceAction(reproducible);

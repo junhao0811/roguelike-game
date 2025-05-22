@@ -34,7 +34,7 @@ public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
     public OmenSheep() {
         super("Omen Sheep", 'm', 75);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
-        this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour());
+        this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
         this.addStatusEffect(new CrimsonRot(15));
         this.addCapability(Ability.PRODUCE_EGG);
         this.addCapability(Status.CURSED);
