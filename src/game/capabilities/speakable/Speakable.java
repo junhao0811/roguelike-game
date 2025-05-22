@@ -9,7 +9,15 @@ import edu.monash.fit2099.engine.positions.GameMap;
 public interface Speakable {
 
     /**
+     * Method to house the logic to set up the MonologueList
+     */
+    MonologueList getMonologues(Actor actor, GameMap map);
+
+    /**
      * Method to house the speaking logic
      */
-    String speak(Actor actor, GameMap map);
+    default String speak(Actor actor, GameMap map) {
+        MonologueList monologues = getMonologues(actor, map);
+        return this + ": “" + monologues.getMonologue() + "”";
+    }
 }

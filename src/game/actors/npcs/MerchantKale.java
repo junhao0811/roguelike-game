@@ -47,7 +47,7 @@ public class MerchantKale extends NPC implements Speakable, Merchant {
     }
 
     @Override
-    public String speak(Actor actor, GameMap map) {
+    public MonologueList getMonologues(Actor actor, GameMap map) {
         MonologueList monologues = new MonologueList(actor, map);
 
         monologues.add("Ah, hard times, I see. Keep your head low and your blade sharp.",
@@ -62,7 +62,7 @@ public class MerchantKale extends NPC implements Speakable, Merchant {
         monologues.add("A merchant’s life is a lonely one. But the roads… they whisper " +
                 "secrets to those who listen.");
 
-        return this + ": “" + monologues.getMonologue() + "”";
+        return monologues;
     }
 
     @Override

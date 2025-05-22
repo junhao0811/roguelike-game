@@ -51,7 +51,7 @@ public class Sellen extends NPC implements Speakable, Merchant {
     }
 
     @Override
-    public String speak(Actor actor, GameMap map) {
+    public MonologueList getMonologues(Actor actor, GameMap map) {
         MonologueList monologues = new MonologueList(actor, map);
 
         monologues.add("The academy casts out those it fears. Yet knowledge, " +
@@ -59,7 +59,7 @@ public class Sellen extends NPC implements Speakable, Merchant {
 
         monologues.add("You sense it too, don’t you? The Glintstone hums, even now.");
 
-        return this + ": “" + monologues.getMonologue() + "”";
+        return monologues;
     }
 
     @Override

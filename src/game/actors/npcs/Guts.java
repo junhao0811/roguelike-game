@@ -26,7 +26,7 @@ public class Guts extends NPC implements Speakable {
     }
 
     @Override
-    public String speak(Actor actor, GameMap map) {
+    public MonologueList getMonologues(Actor actor, GameMap map) {
         MonologueList monologues = new MonologueList(actor, map);
 
         monologues.add("RAAAAGH!");
@@ -35,7 +35,7 @@ public class Guts extends NPC implements Speakable {
                 new AttributeComparisonCondition(ComparisonOperations.LT,
                         BaseActorAttributes.HEALTH,50));
 
-        return this + ": “" + monologues.getMonologue() + "”";
+        return monologues;
     }
 
     @Override
