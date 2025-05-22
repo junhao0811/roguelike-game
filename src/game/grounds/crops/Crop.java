@@ -17,7 +17,7 @@ public abstract class Crop extends Ground {
     /**
      * Constructor
      */
-    public Crop(char displayChar, String name, int staminaCost) {
+    protected Crop(char displayChar, String name, int staminaCost) {
         super(displayChar, name);
         this.name = name;
         this.staminaCost = staminaCost;

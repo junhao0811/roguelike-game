@@ -34,7 +34,7 @@ public abstract class NPC extends Actor {
      * @param displayChar the character that will represent the NPC in the display
      * @param hitPoints   the NPC's starting hit points
      */
-    public NPC(String name, char displayChar, int hitPoints) {
+    protected NPC(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
     }
 
