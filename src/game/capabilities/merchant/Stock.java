@@ -68,7 +68,7 @@ public class Stock {
             return result.toString();
         }
 
-        return " does not have enough Runes to purchase the " + this + " from " + seller;
+        return actor + " does not have enough Runes to purchase the " + this + " from " + seller;
     }
 
     /**

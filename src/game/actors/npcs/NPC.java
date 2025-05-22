@@ -30,9 +30,9 @@ public abstract class NPC extends Actor {
     /**
      * Constructor
      *
-     * @param name        Name to call the NPC in the UI
-     * @param displayChar Character to represent the NPC in the UI
-     * @param hitPoints   NPC's starting number of hitpoints
+     * @param name        the name of the NPC
+     * @param displayChar the character that will represent the NPC in the display
+     * @param hitPoints   the NPC's starting hit points
      */
     public NPC(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
