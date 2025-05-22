@@ -37,7 +37,7 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
-        this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
+        this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour());
         this.addStatusEffect(new CrimsonRot(10));
         this.addCapability(Ability.PRODUCE_OFFSPRING);
         this.addCapability(Status.CURSED);

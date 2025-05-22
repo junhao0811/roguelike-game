@@ -20,6 +20,7 @@ public class Inheritree extends Crop {
      */
     public Inheritree() {
         super('t', "Inheritree", 25);
+        this.addCapability(Status.BLESSED);
     }
 
     @Override

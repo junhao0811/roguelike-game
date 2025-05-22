@@ -27,7 +27,7 @@ public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible
         super("Golden Beetle", 'b', 25);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new FollowBehaviour());
-        this.addBehaviour(Integer.MAX_VALUE - 2, new ReproduceBehaviour(this));
+        this.addBehaviour(Integer.MAX_VALUE - 2, new ReproduceBehaviour());
         this.addCapability(Ability.PRODUCE_EGG);
     }
     

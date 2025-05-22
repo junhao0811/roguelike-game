@@ -22,6 +22,7 @@ public class Talisman extends Item {
     public Talisman() {
         super("Talisman", 'o', true);
         this.addCapability(Ability.CURE);
+        this.addCapability(Status.BLESSED);
     }
 
     /**
