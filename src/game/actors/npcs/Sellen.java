@@ -14,9 +14,9 @@ import game.behaviours.WanderBehaviour;
 import game.capabilities.speakable.Speakable;
 import game.effects.attributeeffects.RestoreAttributeEffect;
 import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
-import game.effects.spawneffects.SpawnEffect;
+import game.effects.spawneffects.SpawnGoldenBeetleEffect;
+import game.effects.spawneffects.SpawnOmenSheepEffect;
 import game.enums.Ability;
-import game.enums.Creatures;
 import game.weapons.Broadsword;
 import game.weapons.DragonslayerGreatsword;
 import game.weapons.Katana;
@@ -36,10 +36,10 @@ public class Sellen extends NPC implements Speakable, Merchant {
         broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.HEALTH, 20));
 
         Stock dragonslayerGreatsword = new Stock(new DragonslayerGreatsword(), 1500);
-        dragonslayerGreatsword.addEffect(new SpawnEffect(Creatures.GOLDEN_BEETLE));
+        dragonslayerGreatsword.addEffect(new SpawnGoldenBeetleEffect());
 
         Stock katana = new Stock(new Katana(), 500);
-        katana.addEffect(new SpawnEffect(Creatures.OMEN_SHEEP, this));
+        katana.addEffect(new SpawnOmenSheepEffect(this));
         katana.addEffect(new RestoreAttributeEffect(BaseActorAttributes.HEALTH, 10));
         katana.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 20));
 

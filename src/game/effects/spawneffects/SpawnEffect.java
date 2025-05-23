@@ -4,45 +4,32 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.npcs.GoldenBeetle;
-import game.actors.npcs.OmenSheep;
-import game.actors.npcs.SpiritGoat;
+import game.actors.npcs.NPC;
 import game.effects.Effect;
-import game.enums.Creatures;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SpawnEffect extends Effect {
+public abstract class SpawnEffect extends Effect {
 
-    private final Creatures creature;
+    private final NPC creature;
 
-    public SpawnEffect(Creatures creature) {
-        super();
+    public SpawnEffect(NPC creature, Actor target) {
+        super(target);
         this.creature = creature;
     }
 
-    public SpawnEffect(Creatures creature, Actor target) {
-        super(target);
+    public SpawnEffect(NPC creature) {
+        super();
         this.creature = creature;
     }
 
     @Override
     public String applyEffect(Actor actor, GameMap map) {
-        Actor target = this.getTarget(actor);
-        Actor spawnedCreature = null;
-
-        if (creature == Creatures.OMEN_SHEEP) {
-            spawnedCreature = new OmenSheep();
-        } else if (creature == Creatures.SPIRIT_GOAT) {
-            spawnedCreature = new SpiritGoat();
-        } else if (creature == Creatures.GOLDEN_BEETLE) {
-            spawnedCreature = new GoldenBeetle();
-        }
-
         List<Location> destinations = new ArrayList<>();
         Random random = new Random();
+        Actor target = this.getTarget(actor);
 
         for (Exit exit : map.locationOf(target).getExits()) {
             Location destination = exit.getDestination();
@@ -53,11 +40,11 @@ public class SpawnEffect extends Effect {
         }
 
         if (!destinations.isEmpty()) {
-            destinations.get(random.nextInt(destinations.size())).addActor(spawnedCreature);
-            return spawnedCreature + " is spawned within the surroundings of " + target;
+            destinations.get(random.nextInt(destinations.size())).addActor(creature);
+            return creature + " is spawned within the surroundings of " + target;
         }
 
         return "There are no valid locations surrounding " + target + " for " +
-                spawnedCreature + " to spawn";
+                creature + " to spawn";
     }
 }
