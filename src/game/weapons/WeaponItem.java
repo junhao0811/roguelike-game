@@ -1,9 +1,12 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.*;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.actions.AttackAction;
 import game.enums.Ability;
 
 import java.util.Random;
@@ -49,5 +52,14 @@ public abstract class WeaponItem extends Item implements Weapon {
 
         return attacker + " " + verb + " " + target + " with the " + this +
                 " for " + damage + " damage";
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location){
+        ActionList actions = new ActionList();
+
+        actions.add(new AttackAction(otherActor, this));
+
+        return actions;
     }
 }

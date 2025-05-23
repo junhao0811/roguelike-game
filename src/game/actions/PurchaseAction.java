@@ -3,7 +3,6 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.capabilities.merchant.Merchant;
 import game.capabilities.merchant.Stock;
 
 /**
@@ -11,9 +10,9 @@ import game.capabilities.merchant.Stock;
  */
 public class PurchaseAction extends Action {
 
-    private final Merchant merchant;
+    private final Actor merchant;
     private final String direction;
-    private final Stock stock;
+    private final Stock<?> stock;
 
     /**
      * Constructor
@@ -23,7 +22,7 @@ public class PurchaseAction extends Action {
      *                  (only used for display purposes)
      * @param stock the stock to be sold
      */
-    public PurchaseAction(Merchant merchant, String direction, Stock stock) {
+    public PurchaseAction(Actor merchant, String direction, Stock<?> stock) {
         this.merchant = merchant;
         this.direction = direction;
         this.stock = stock;

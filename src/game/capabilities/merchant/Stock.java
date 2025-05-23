@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * Class representing a Stock (a good that a Merchant sells)
  */
-public class Stock {
+public class Stock<S extends Item & Sellable> {
 
-    private final Sellable sellable;
+    private final S sellable;
     private final int price;
     private final EffectList effects = new EffectList();
 
@@ -24,7 +24,7 @@ public class Stock {
      * @param sellable the sellable to sell
      * @param price the price of the stock
      */
-    public Stock(Sellable sellable, int price) {
+    public Stock(S sellable, int price) {
         this.sellable = sellable;
         this.price = price;
         this.addEffect(sellable.getEffects());
@@ -41,19 +41,18 @@ public class Stock {
      * @param merchant the merchant who sold the stock
      * @return a description of what happened when the stock was purchased
      */
-    public String sell(Actor actor, GameMap map, Merchant merchant) {
-        Actor seller = (Actor) merchant;
+    public String sell(Actor actor, GameMap map, Actor merchant) {
 
         if (actor.getBalance() >= price) {
             StringBuilder result = new StringBuilder(actor + " successfully purchases the " +
-                    this + " from " + seller);
+                    this + " from " + merchant);
 
             actor.deductBalance(price);
-            seller.addBalance(price);
+            merchant.addBalance(price);
             result.append("\n").append(actor).append(" pays ").append(price).append(" Runes to ").
-                    append(seller);
+                    append(merchant);
 
-            actor.addItemToInventory((Item) sellable);
+            actor.addItemToInventory(sellable);
             result.append("\n").append(sellable).append(" is added to the inventory of ").append(actor);
 
             for (Effect effect : effects) {
@@ -68,11 +67,11 @@ public class Stock {
             return result.toString();
         }
 
-        return actor + " does not have enough Runes to purchase the " + this + " from " + seller;
+        return actor + " does not have enough Runes to purchase the " + this + " from " + merchant;
     }
 
     /**
-     * Appends the contents of another Effects list to the Effects list
+     * Appends the contents of another Effects list to the EffectList
      * tied to the stock
      *
      * @param effects the Effects to append
@@ -82,7 +81,7 @@ public class Stock {
     }
 
     /**
-     * Appends the contents of any List&lt;Effect&gt; to the Effects list
+     * Appends the contents of any List&lt;Effect&gt; to the EffectList
      * tied to the stock
      *
      * @param effects the List&lt;Effect&gt; to append
@@ -92,7 +91,7 @@ public class Stock {
     }
 
     /**
-     * Appends a single Effect to the Effects list tied to the stock
+     * Appends a single Effect to the EffectList tied to the stock
      *
      * @param effect the Effect to append
      */
