@@ -16,6 +16,8 @@ import java.util.TreeMap;
 
 /**
  * Class representing an NPC
+ *
+ * @author Lee Hao Zhe
  */
 public abstract class NPC extends Actor {
 

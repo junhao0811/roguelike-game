@@ -22,7 +22,7 @@ import java.util.Random;
 
 
 /**
- * Class representing a Spirit Goat. Created by: Chong Jun Hao
+ * Class representing a Spirit Goat
  *
  * @author Chong Jun Hao and Ng Jun Xian
  * @version 22.0.1
@@ -32,7 +32,7 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
     private final Random random = new Random();
 
     /**
-     * Constructor.
+     * Constructor
      */
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
@@ -43,11 +43,6 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
         this.addCapability(Status.CURSED);
     }
 
-    /**
-     * Resets the countdown timer back to 10 when it is being cured
-     *
-     * @param actor    unused here
-     */
     @Override
     public String cure(Actor actor, GameMap map) {
         StatusEffect crimsonRot = null;
@@ -70,6 +65,7 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
      * @param actor    the parent actor
      * @param location the actor's current location
      */
+    @Override
     public void reproduce(Actor actor, Location location) {
         // Find all valid locations around the actor
         ArrayList<Location> validLocations = new ArrayList<>();
@@ -119,15 +115,6 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
         return false;
     }
 
-    /**
-     * The creature can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-     *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return actions that can be performed by the other actor
-     * @see edu.monash.fit2099.demo.huntsman.HuntsmanSpider#allowableActions(Actor, String, GameMap)
-     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);

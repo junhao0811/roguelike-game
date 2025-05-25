@@ -21,8 +21,16 @@ import game.weapons.Broadsword;
 import game.weapons.DragonslayerGreatsword;
 import game.weapons.Katana;
 
+/**
+ * Class representing the NPC Sellen
+ *
+ * @author Abaan Anwar and Lee Hao Zhe
+ */
 public class Sellen extends NPC implements Speakable, Merchant {
 
+    /**
+     * Constructor
+     */
     public Sellen() {
         super("Sellen", 's', 150);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());

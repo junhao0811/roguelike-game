@@ -5,6 +5,8 @@ import game.effects.EffectList;
 
 /**
  * Interface representing a Sellable
+ *
+ * @author Tan Choong Sheng
  */
 public interface Sellable {
 

@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by: Riordan D. Alfredo
- * @author Riordan D. Alfredo
+ * Class representing the wander behaviour
  *
+ * @author Riordan D. Alfredo
  */
 public class WanderBehaviour implements Behaviour {
 

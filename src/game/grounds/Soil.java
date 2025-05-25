@@ -8,6 +8,10 @@ import game.enums.Status;
  * @author Adrian Kristanto
  */
 public class Soil extends Ground {
+
+    /**
+     * Constructor
+     */
     public Soil() {
         super('.', "Soil");
         this.addCapability(Status.FERTILE);

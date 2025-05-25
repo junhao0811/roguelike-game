@@ -12,6 +12,8 @@ import game.grounds.Soil;
 
 /**
  * A class representing an Inheritree
+ *
+ * @author Lee Hao Zhe
  */
 public class Inheritree extends Crop {
 

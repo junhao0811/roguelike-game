@@ -8,6 +8,8 @@ import game.capabilities.Curable;
 
 /**
  * Class representing an action to cure
+ *
+ * @author Lee Hao Zhe
  */
 public class CureAction extends Action {
 

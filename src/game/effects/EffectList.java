@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * A thin wrapper for <code>java.util.ArrayList&lt;Effect&gt;</code> that does not allow nulls to be added.
+ *
+ * @author Lee Hao Zhe
  */
 public class EffectList implements Iterable<Effect> {
     /**

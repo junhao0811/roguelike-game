@@ -16,12 +16,18 @@ import game.capabilities.Hatchable;
 import game.capabilities.Reproducible;
 import game.items.Egg;
 
+/**
+ * Class representing a Golden Beetle
+ *
+ * @author Chong Jun Hao
+ * @version 22.0.1
+ */
 public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible {
 
     private int reproductionCounter = 0;
     
     /**
-     * Constructor.
+     * Constructor
      */
     public GoldenBeetle() {
         super("Golden Beetle", 'b', 25);
@@ -30,35 +36,24 @@ public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible
         this.addBehaviour(Integer.MAX_VALUE - 2, new ReproduceBehaviour(this));
         this.addCapability(Ability.PRODUCE_EGG);
     }
-    
-    /**
-     * Reproduces an egg at the given location.
-     *
-     * @param actor    the actor that is reproducing
-     * @param location the location where the egg will be placed
-     */
+
+    @Override
     public void reproduce(Actor actor, Location location) {
         location.addItem(new Egg(this, "Golden Egg"));
     }
 
-    /**
-     * Checks if the GoldenBeetle can lay an egg.
-     * GoldenBeetle lays eggs every 5 turns.
-     *
-     * @param actor the actor considering reproduction
-     * @param map the map the actor is on
-     * @return true if the actor can lay an egg, false otherwise
-     */
     @Override
     public boolean canReproduce(Actor actor, GameMap map) {
         reproductionCounter++;
         return reproductionCounter % 5 == 0;
     }
 
+    @Override
     public NPC hatch() {
         return new GoldenBeetle();
     }
-    
+
+    @Override
     public boolean isReadyToHatch(int counter, Location location) {
         for (Exit exit : location.getExits()) {
             Location nearby = exit.getDestination();
@@ -68,14 +63,8 @@ public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible
         }
         return false;
     }
-    
-    /**
-     * Allows the provided actor to eat the Egg, increasing their maximum health if they eat the Egg
-     * in their inventory. The Egg is removed from the actor's inventory upon consumption.
-     *
-     * @param actor the actor attempting to eat the Egg
-     * @param map the map
-     */
+
+    @Override
     public void eat(Actor actor, GameMap map) {
         if (actor.hasCapability(Ability.EAT)) {
             actor.heal(15);
@@ -83,15 +72,7 @@ public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible
             this.unconscious(actor, map);
         }
     }
-    
-    /**
-     * The Golden Beetle can be consumed by any actor that has the EAT capability
-     *
-     * @param otherActor the Actor that might consume the Golden Beetle
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return ActionList of actions that can be performed
-     */
+
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);

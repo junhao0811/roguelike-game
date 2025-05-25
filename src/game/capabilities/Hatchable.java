@@ -5,6 +5,8 @@ import game.actors.npcs.NPC;
 
 /**
  * Interface representing a Hatchable
+ *
+ * @author Ng Jun Xian
  */
 public interface Hatchable {
 

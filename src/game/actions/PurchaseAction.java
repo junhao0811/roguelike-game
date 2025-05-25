@@ -7,6 +7,8 @@ import game.capabilities.merchant.Stock;
 
 /**
  * Class representing an action to purchase
+ *
+ * @author Tan Choong Sheng
  */
 public class PurchaseAction extends Action {
 

@@ -13,6 +13,8 @@ import game.grounds.crops.Crop;
 
 /**
  * A class representing a Seed that an actor can pick up, drop, and plant
+ *
+ * @author Lee Hao Zhe
  */
 public class Seed extends Item {
 

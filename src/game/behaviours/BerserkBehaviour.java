@@ -13,15 +13,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class representing the berserk behaviour
+ *
+ * @author Abaan Anwar
+ */
 public class BerserkBehaviour implements Behaviour {
 
     private final Condition condition;
     private final Random random = new Random();
 
+    /**
+     * Constructor
+     *
+     * @param condition the condition to be checked onto the potential targets
+     *                  to register them as possible targets
+     */
     public BerserkBehaviour(Condition condition) {
         this.condition = condition;
     }
 
+    /**
+     * Returns an AttackAction to attack a random actor nearby, if it passes
+     * the condition.
+     * If no possible targets are available, returns null.
+     *
+     * @param actor the Actor enacting the behaviour
+     * @param map the map that actor is currently on
+     * @return an Action, or null if no AttackAction is possible
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         List<Action> actions = new ArrayList<>();

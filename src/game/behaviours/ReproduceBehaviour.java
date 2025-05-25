@@ -8,7 +8,7 @@ import game.actions.ReproduceAction;
 import game.capabilities.Reproducible;
 
 /**
- * A behavior that determines when an actor should reproduce
+ * Class representing the reproduce behaviour
  *
  * @author Ng Jun Xian
  */
@@ -17,7 +17,7 @@ public class ReproduceBehaviour implements Behaviour {
     private final Reproducible reproducible;
 
     /**
-     * Constructor to create a ReproduceBehaviour.
+     * Constructor
      *
      * @param reproducible the Reproducible object that will reproduce
      */

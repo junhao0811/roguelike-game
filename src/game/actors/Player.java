@@ -14,14 +14,14 @@ import game.weapons.BareFist;
 import game.enums.Status;
 
 /**
- * Class representing the Player.
+ * Class representing the Player
  *
  * @author Adrian Kristanto
  */
 public class Player extends Actor {
     
     /**
-     * Constructor.
+     * Constructor
      *
      * @param name        Name to call the player in the UI
      * @param displayChar Character to represent the player in the UI
@@ -35,6 +35,9 @@ public class Player extends Actor {
         this.setupCapabilities();
     }
 
+    /**
+     * Method to setup all the capabilities of the Player
+     */
     private void setupCapabilities() {
         this.addCapability(Ability.PLANT_CROPS);
         this.addCapability(Ability.EAT);

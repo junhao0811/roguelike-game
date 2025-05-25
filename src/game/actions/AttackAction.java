@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
  * Note that the attacker must have a weapon, e.g.,
  * an intrinsic weapon or a weapon item.
  * Otherwise, the execute method will throw an error.
+ *
  * @author Adrian Kristanto
  */
 public class AttackAction extends Action {

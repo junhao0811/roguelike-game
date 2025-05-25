@@ -4,7 +4,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
- * Class representing an Effect
+ * Class representing an effect
+ *
+ * @author Tan Choong Sheng and Lee Hao Zhe
  */
 public abstract class Effect {
 
@@ -27,9 +29,9 @@ public abstract class Effect {
     }
 
     /**
-     * Applies the effect
+     * Method to apply the effect
      *
-     * @param actor The actor performing the action.
+     * @param actor The actor the effect is tied to.
      * @param map The map the actor is on.
      * @return a description of what happened
      */

@@ -19,7 +19,7 @@ import game.grounds.crops.Inheritree;
 import game.items.Egg;
 
 /**
- * Class representing an Omen Sheep. Created by: Chong Jun Hao
+ * Class representing an Omen Sheep
  *
  * @author Chong Jun Hao and Ng Jun Xian
  * @version 22.0.1
@@ -29,7 +29,7 @@ public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
     private int reproductionCounter = 0;
     
     /**
-     * Constructor.
+     * Constructor
      */
     public OmenSheep() {
         super("Omen Sheep", 'm', 75);
@@ -49,62 +49,27 @@ public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
         return actor + " cures the " + this + ", Inheritrees grow at each tile surrounding it";
     }
 
-    /**
-     * Reproduces an egg at the given location.
-     *
-     * @param actor    the actor performing the reproduction
-     * @param location the location where the egg will be placed
-     */
     @Override
     public void reproduce(Actor actor, Location location) {
         location.addItem(new Egg(this, "Egg"));
     }
 
-    /**
-     * Checks if the OmenSheep can lay an egg.
-     * OmenSheep lays eggs every 7 turns.
-     *
-     * @param actor the actor considering reproduction
-     * @param map the map the actor is on
-     * @return true if the actor can lay an egg, false otherwise
-     */
     @Override
     public boolean canReproduce(Actor actor, GameMap map) {
         reproductionCounter++;
         return reproductionCounter % 7 == 0;
     }
 
-    /**
-     * Hatches the egg into a new Omen Sheep instance.
-     *
-     * @return a new Omen Sheep instance
-     */
     @Override
     public NPC hatch() {
         return new OmenSheep();
     }
 
-    /**
-     * Checks if the egg is ready to hatch. The egg is ready to hatch if the counter is 3.
-     *
-     * @param counter   the current counter value
-     * @param location  the location of the egg
-     * @return true if the egg is ready to hatch, false otherwise
-     */
     @Override
     public boolean isReadyToHatch(int counter, Location location) {
         return counter == 3;
     }
 
-    /**
-     * The creature can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-     *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return actions that can be performed by the other actor
-     * @see edu.monash.fit2099.demo.huntsman.HuntsmanSpider#allowableActions(Actor, String, GameMap)
-     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);

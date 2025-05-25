@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * Interface representing a Speakable
+ *
+ * @author Abaan Anwar
  */
 public interface Speakable {
 

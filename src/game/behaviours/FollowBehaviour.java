@@ -46,6 +46,15 @@ public class FollowBehaviour implements Behaviour {
         return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
     }
 
+    /**
+     * Returns a MoveAction to wander to the nearest possible location to the target,
+     * if a target is registered and not nearby.
+     * If no target is found or target is already nearby, returns null.
+     *
+     * @param actor the Actor enacting the behaviour
+     * @param map the map that actor is currently on
+     * @return an Action, or null if no MoveAction is needed
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location here = map.locationOf(actor);

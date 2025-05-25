@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * Class representing a Stock (a good that a Merchant sells)
+ *
+ * @author Tan Choong Sheng and Lee Hao Zhe
  */
 public class Stock<S extends Item & Sellable> {
 

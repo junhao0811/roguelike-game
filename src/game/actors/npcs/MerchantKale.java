@@ -23,8 +23,16 @@ import game.effects.attributeeffects.RestoreAttributeEffect;
 import game.weapons.Broadsword;
 import game.weapons.DragonslayerGreatsword;
 
+/**
+ * Class representing the NPC Merchant Kale
+ *
+ * @author Abaan Anwar and Lee Hao Zhe
+ */
 public class MerchantKale extends NPC implements Speakable, Merchant {
 
+    /**
+     * Constructor
+     */
     public MerchantKale() {
         super("Merchant Kale", 'k', 200);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());

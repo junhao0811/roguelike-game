@@ -8,6 +8,8 @@ import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
 /**
  * Class representing a weapon item called a dragonslayer greatsword.
  * This weapon item deals 70 damage points with a 75% chance to hit the target.
+ *
+ * @author Tan Choong Sheng
  */
 public class DragonslayerGreatsword extends WeaponItem implements Sellable {
 

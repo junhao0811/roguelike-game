@@ -13,6 +13,7 @@ import java.util.Random;
 
 /**
  * Class representing items that can be used as a weapon.
+ *
  * @author Adrian Kristanto
  */
 public abstract class WeaponItem extends Item implements Weapon {
@@ -23,7 +24,7 @@ public abstract class WeaponItem extends Item implements Weapon {
     private final float damageMultiplier;
 
     /**
-     * Constructor.
+     * Constructor
      *
      * @param name        name of the item
      * @param displayChar character to use for display when item is on the ground

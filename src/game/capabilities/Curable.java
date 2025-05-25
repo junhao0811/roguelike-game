@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * Interface representing a Curable
+ *
+ * @author Lee Hao Zhe
  */
 public interface Curable {
 

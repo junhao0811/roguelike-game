@@ -57,7 +57,7 @@ public class Application {
         
         // Add spirit goat and omen sheep to the game map
         NPC spiritGoat = new SpiritGoat();
-        //gameMap.at(22, 13).addActor(spiritGoat);
+        gameMap.at(22, 13).addActor(spiritGoat);
         
         NPC omenSheep = new OmenSheep();
         //gameMap.at(24, 13).addActor(omenSheep);
@@ -66,10 +66,10 @@ public class Application {
         //gameMap.at(23, 13).addActor(goldenBeetle);
 
         NPC guts = new Guts();
-        gameMap.at(22, 14).addActor(guts);
+        //gameMap.at(22, 14).addActor(guts);
 
         NPC sellen = new Sellen();
-        gameMap.at(23, 14).addActor(sellen);
+        //gameMap.at(23, 14).addActor(sellen);
 
         NPC merchantKale = new MerchantKale();
         gameMap.at(24, 14).addActor(merchantKale);

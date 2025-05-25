@@ -6,10 +6,20 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
+/**
+ * Class representing the nearby condition
+ *
+ * @author Abaan Anwar and Lee Hao Zhe
+ */
 public class NearbyCondition extends Condition {
 
     private final Enum<?> capability;
 
+    /**
+     * Constructor
+     *
+     * @param capability the capability to check for in the surroundings
+     */
     public NearbyCondition(Enum<?> capability) {
         this.capability = capability;
     }

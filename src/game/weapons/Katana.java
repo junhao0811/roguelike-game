@@ -8,6 +8,8 @@ import game.effects.attributeeffects.ReduceAttributeEffect;
 /**
  * Class representing a weapon item called a katana.
  * This weapon item deals 50 damage points with a 60% chance to hit the target.
+ *
+ * @author Tan Choong Sheng
  */
 public class Katana extends WeaponItem implements Sellable {
 

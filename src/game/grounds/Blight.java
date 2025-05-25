@@ -11,12 +11,12 @@ import game.capabilities.Curable;
 /**
  * A class representing a blight covering the ground of the valley.
  *
- * @author Adrian Kristanto, modified by Chong Jun Hao
+ * @author Adrian Kristanto, modified by Chong Jun Hao and Lee Hao Zhe
  */
 public class Blight extends Ground implements Curable {
     
     /**
-     * Constructor.
+     * Constructor
      */
     public Blight() {
         super('x', "Blight");
@@ -24,8 +24,8 @@ public class Blight extends Ground implements Curable {
     }
 
     /**
-     * Cures the blight using a Talisman, revealing the soil underneath it, thus allowing the Farmer
-     * to plant crops on it
+     * Cures the blight using a Talisman, revealing the soil underneath it,
+     * thus allowing the Farmer to plant crops on it
      *
      * @param actor the actor performing the action.
      */

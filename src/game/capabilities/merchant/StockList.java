@@ -8,12 +8,14 @@ import java.util.List;
 
 /**
  * A thin wrapper for <code>java.util.ArrayList&lt;Stock&gt;</code> that does not allow nulls to be added.
+ *
+ * @author Lee Hao Zhe
  */
-public class StockList implements Iterable<Stock> {
+public class StockList implements Iterable<Stock<?>> {
     /**
      * List of stocks
      */
-    private final ArrayList<Stock> stocks = new ArrayList<>();
+    private final ArrayList<Stock<?>> stocks = new ArrayList<>();
 
     /**
      * Constructs an empty list of stocks.
@@ -24,7 +26,7 @@ public class StockList implements Iterable<Stock> {
      * Constructs a collection containing a single (non-null) Stock.
      * @param stock the Stock to add
      */
-    public StockList(Stock stock) {
+    public StockList(Stock<?> stock) {
         add(stock);
     }
 
@@ -33,7 +35,7 @@ public class StockList implements Iterable<Stock> {
      * @param stocks the Stocks to append
      */
     public void add(StockList stocks) {
-        for(Stock stock : stocks) {
+        for(Stock<?> stock : stocks) {
             add(stock);
         }
     }
@@ -43,8 +45,8 @@ public class StockList implements Iterable<Stock> {
      * This overload allows the use of an unmodifiableList to prevent privacy leaks.
      * @param stocks the List&lt;Stock&gt; to append
      */
-    public void add(List<Stock> stocks) {
-        for (Stock stock : stocks) {
+    public void add(List<Stock<?>> stocks) {
+        for (Stock<?> stock : stocks) {
             add(stock);
         }
     }
@@ -53,9 +55,9 @@ public class StockList implements Iterable<Stock> {
      * Appends a single Stock to this collection, if it is non-null.
      * If it is null, then it is ignored.
      * @param stock the Stock to append
-     * @return true unstockally
+     * @return true unconditionally
      */
-    public boolean add(Stock stock) {
+    public boolean add(Stock<?> stock) {
         if (stock != null) {
             stocks.add(stock);
         }
@@ -72,7 +74,7 @@ public class StockList implements Iterable<Stock> {
      * @see java.lang.Iterable#iterator()
      */
     @Override
-    public Iterator<Stock> iterator() {
+    public Iterator<Stock<?>> iterator() {
         return Collections.unmodifiableList(stocks).iterator();
     }
 
@@ -81,8 +83,8 @@ public class StockList implements Iterable<Stock> {
      * @param comparator an object that can compare two Stocks and determine their ordering
      * @return a sorted shallow copy of the list of Stocks
      */
-    public List<Stock> sorted(Comparator<Stock> comparator) {
-        ArrayList<Stock> sortedStocks = new ArrayList<>(stocks);
+    public List<Stock<?>> sorted(Comparator<Stock<?>> comparator) {
+        ArrayList<Stock<?>> sortedStocks = new ArrayList<>(stocks);
         sortedStocks.sort(comparator);
         return sortedStocks;
     }
@@ -107,7 +109,7 @@ public class StockList implements Iterable<Stock> {
      * If it is not present, the list is unchanged.
      * @param stock the Stock to remove
      */
-    public void remove(Stock stock) {
+    public void remove(Stock<?> stock) {
         stocks.remove(stock);
     }
 
@@ -117,7 +119,7 @@ public class StockList implements Iterable<Stock> {
      * @return the <code>i</code>'th Stock in the collection
      * @throws IndexOutOfBoundsException when <code>i</code> &gt;= <code>this.size()</code>
      */
-    public Stock get(int i) {
+    public Stock<?> get(int i) {
         return stocks.get(i);
     }
 
@@ -125,7 +127,7 @@ public class StockList implements Iterable<Stock> {
      * Create and return an unmodifiable copy of the contents of the collection.
      * @return an unmodifiable list of Stock
      */
-    public List<Stock> getUnmodifiableStockList() {
+    public List<Stock<?>> getUnmodifiableStockList() {
         return Collections.unmodifiableList(stocks);
     }
 }

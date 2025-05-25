@@ -7,6 +7,8 @@ import game.items.Seed;
 
 /**
  * Class representing an action to plant
+ *
+ * @author Lee Hao Zhe
  */
 public class PlantAction extends Action {
 

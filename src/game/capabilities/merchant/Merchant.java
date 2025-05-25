@@ -2,6 +2,8 @@ package game.capabilities.merchant;
 
 /**
  * Interface representing a Merchant
+ *
+ * @author Tan Choong Sheng
  */
 public interface Merchant {
 

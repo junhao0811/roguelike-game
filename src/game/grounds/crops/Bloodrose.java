@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.positions.Location;
 
 /**
  * A class representing a Bloodrose
+ *
+ * @author Lee Hao Zhe
  */
 public class Bloodrose extends Crop {
 

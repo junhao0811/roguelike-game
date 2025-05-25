@@ -11,15 +11,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class representing a spawn effect
+ *
+ * @author Tan Choong Sheng and Lee Hao Zhe
+ */
 public abstract class SpawnEffect extends Effect {
 
     private final NPC creature;
 
+    /**
+     * Constructor
+     *
+     * @param creature the creature to spawn
+     * @param target the target of the effect
+     */
     public SpawnEffect(NPC creature, Actor target) {
         super(target);
         this.creature = creature;
     }
 
+    /**
+     * Constructor with no target as default
+     *
+     * @param creature the creature to spawn
+     */
     public SpawnEffect(NPC creature) {
         super();
         this.creature = creature;

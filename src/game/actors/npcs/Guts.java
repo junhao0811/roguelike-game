@@ -14,8 +14,16 @@ import game.conditions.comparisons.ComparisonOperations;
 import game.enums.Ability;
 import game.weapons.BareFist;
 
+/**
+ * Class representing the NPC Guts
+ *
+ * @author Abaan Anwar and Lee Hao Zhe
+ */
 public class Guts extends NPC implements Speakable {
 
+    /**
+     * Constructor
+     */
     public Guts() {
         super("Guts", 'g', 500);
         this.setIntrinsicWeapon(new BareFist());
