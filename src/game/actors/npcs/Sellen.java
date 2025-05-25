@@ -32,13 +32,13 @@ public class Sellen extends NPC implements Speakable, Merchant {
     public StockList getStocks() {
         StockList stocks = new StockList();
 
-        Stock broadsword = new Stock(new Broadsword(), 100);
+        Stock<?> broadsword = new Stock<>(new Broadsword(), 100);
         broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.HEALTH, 20));
 
-        Stock dragonslayerGreatsword = new Stock(new DragonslayerGreatsword(), 1500);
+        Stock<?> dragonslayerGreatsword = new Stock<>(new DragonslayerGreatsword(), 1500);
         dragonslayerGreatsword.addEffect(new SpawnGoldenBeetleEffect());
 
-        Stock katana = new Stock(new Katana(), 500);
+        Stock<?> katana = new Stock<>(new Katana(), 500);
         katana.addEffect(new SpawnOmenSheepEffect(this));
         katana.addEffect(new RestoreAttributeEffect(BaseActorAttributes.HEALTH, 10));
         katana.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 20));
@@ -71,7 +71,7 @@ public class Sellen extends NPC implements Speakable, Merchant {
         }
 
         if (otherActor.hasCapability(Ability.PURCHASE)) {
-            for (Stock stock : getStocks()) {
+            for (Stock<?> stock : getStocks()) {
                 actions.add(new PurchaseAction(this, direction, stock));
             }
         }

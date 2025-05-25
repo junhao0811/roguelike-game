@@ -34,10 +34,10 @@ public class MerchantKale extends NPC implements Speakable, Merchant {
     public StockList getStocks() {
         StockList stocks = new StockList();
 
-        Stock broadsword = new Stock(new Broadsword(), 150);
+        Stock<?> broadsword = new Stock<>(new Broadsword(), 150);
         broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 30));
 
-        Stock dragonslayerGreatsword = new Stock(new DragonslayerGreatsword(), 1700);
+        Stock<?> dragonslayerGreatsword = new Stock<>(new DragonslayerGreatsword(), 1700);
         dragonslayerGreatsword.addEffect(new RestoreAttributeEffect(BaseActorAttributes.STAMINA, 20));
 
         stocks.add(broadsword);
@@ -74,7 +74,7 @@ public class MerchantKale extends NPC implements Speakable, Merchant {
         }
 
         if (otherActor.hasCapability(Ability.PURCHASE)) {
-            for (Stock stock : getStocks()) {
+            for (Stock<?> stock : getStocks()) {
                 actions.add(new PurchaseAction(this, direction, stock));
             }
         }
