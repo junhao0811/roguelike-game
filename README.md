@@ -106,4 +106,6 @@ The player, "Farmer", approaches an Inheritree. "Farmer" has a "Demon Jug" in hi
 menu and selects the "Water Inheritree with Demon Jug" option. 
 A message is displayed "Demon Jug is unable to water Inheritree as it is blessed by grace", indicating that the water 
 action has failed.
+
+Approved by TA
 ```
