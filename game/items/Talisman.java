@@ -1,25 +1,45 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.ability.Ability;
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.enums.Ability;
+import game.enums.Status;
+import game.actions.CureAction;
+import game.capabilities.Curable;
+import game.grounds.Blight;
 
 /**
- * A class representing a Talisman that an actor can pick up and drop.
- * The Talisman provides the CURING ability to its holder,
- * allowing them to cure curable entities in the game.
+ * A class representing a Talisman that an actor can pick up and drop
  *
- * @author Adrian Kristanto
- * modified by Ng Jun Xian
+ * @author Adrian Kristanto, modified by Chong Jun Hao
  */
 public class Talisman extends Item {
 
     /**
-     * Constructor for Talisman.
-     * Creates a Talisman with display character 'o' that can be picked up and carried.
-     * The Talisman has the CURING ability, which is granted to any actor carrying it.
+     * Constructor
      */
     public Talisman() {
         super("Talisman", 'o', true);
-        this.addCapability(Ability.CURING);
+        this.addCapability(Ability.CURE);
+        this.addCapability(Status.BLESSED);
+    }
+
+    /**
+     * Method to get a new CureAction instance associated with the Talisman
+     */
+    public CureAction getCureAction(Curable curable) {
+        return new CureAction(curable, this);
+    }
+
+    @Override
+    public ActionList allowableActions(Actor actor, GameMap map) {
+        ActionList actions = new ActionList();
+
+        if (map.locationOf(actor).getGround().hasCapability(Status.CURSED))
+            actions.add(this.getCureAction(new Blight()));
+
+        return actions;
     }
 }

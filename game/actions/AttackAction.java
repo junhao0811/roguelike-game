@@ -1,4 +1,4 @@
-package game.actions; //req 1
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -10,19 +10,20 @@ import edu.monash.fit2099.engine.weapons.Weapon;
  * Note that the attacker must have a weapon, e.g.,
  * an intrinsic weapon or a weapon item.
  * Otherwise, the execute method will throw an error.
+ *
  * @author Adrian Kristanto
  */
-public class AttackAction extends Action { //Inherits engine.actions.action
+public class AttackAction extends Action {
 
     /**
      * The Actor that is to be attacked
      */
-    private Actor target;
+    private final Actor target;
 
     /**
      * The direction of incoming attack.
      */
-    private String direction;
+    private String direction = "";
 
     /**
      * Weapon used for the attack
@@ -30,14 +31,26 @@ public class AttackAction extends Action { //Inherits engine.actions.action
     private Weapon weapon;
 
     /**
-     * Constructor.
+     * Constructor
      *
      * @param target the Actor to attack
      * @param direction the direction where the attack should be performed (only used for display purposes)
+     * @param weapon the Weapon used to attack
      */
     public AttackAction(Actor target, String direction, Weapon weapon) {
         this.target = target;
-        this.direction = direction;
+        this.direction = " at " + direction;
+        this.weapon = weapon;
+    }
+
+    /**
+     * Constructor with no direction as default
+     *
+     * @param target the Actor to attack
+     * @param weapon the Weapon used to attack
+     */
+    public AttackAction(Actor target, Weapon weapon) {
+        this.target = target;
         this.weapon = weapon;
     }
 
@@ -49,18 +62,28 @@ public class AttackAction extends Action { //Inherits engine.actions.action
      */
     public AttackAction(Actor target, String direction) {
         this.target = target;
-        this.direction = direction;
+        this.direction = " at " + direction;
+    }
+
+    /**
+     * Constructor with intrinsic weapon and no direction as default
+     *
+     * @param target the actor to attack
+     */
+    public AttackAction(Actor target) {
+        this.target = target;
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
         if (weapon == null) {
-            weapon = actor.getIntrinsicWeapon(); //dependency on engine.actor.actors
+            weapon = actor.getIntrinsicWeapon();
         }
 
-        String result = weapon.attack(actor, target, map); //dependency on engine.weapons.weapon
-        if (!target.isConscious()) { //dependency on engine.actor.actors
-            result += "\n" + target.unconscious(actor, map); //dependency on engine.actor.actors
+        String result = weapon.attack(actor, target, map);
+
+        if (!target.isConscious()) {
+            result += "\n" + target.unconscious(actor, map);
         }
 
         return result;
@@ -68,7 +91,7 @@ public class AttackAction extends Action { //Inherits engine.actions.action
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
+        return actor + " attacks " + target + direction +
+                " with " + (weapon != null ? weapon : "Intrinsic Weapon");
     }
 }
-
