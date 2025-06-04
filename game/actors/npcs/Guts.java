@@ -38,7 +38,7 @@ public class Guts extends NPC implements Speakable {
         MonologueList monologues = new MonologueList(actor, map);
 
         monologues.add("RAAAAGH!");
-        monologues.add("I’LL CRUSH YOU ALL!");
+        monologues.add("I'LL CRUSH YOU ALL!");
         monologues.add("WEAK! TOO WEAK TO FIGHT ME!",
                 new AttributeComparisonCondition(ComparisonOperations.LT,
                         BaseActorAttributes.HEALTH,50));

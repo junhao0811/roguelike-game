@@ -67,7 +67,7 @@ public class MerchantKale extends NPC implements Speakable, Merchant {
         monologues.add("Rest by the flame when you can, friend. These lands " +
                 "will wear you thin.", new NearbyCondition(Status.CURSED));
 
-        monologues.add("A merchant's life is a lonely one. But the roads… they whisper " +
+        monologues.add("A merchant's life is a lonely one. But the roads... they whisper " +
                 "secrets to those who listen.");
 
         return monologues;
