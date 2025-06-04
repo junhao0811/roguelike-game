@@ -65,7 +65,7 @@ public class Sellen extends NPC implements Speakable, Merchant {
         monologues.add("The academy casts out those it fears. Yet knowledge, " +
                 "like the stars, cannot be bound forever.");
 
-        monologues.add("You sense it too, don’t you? The Glintstone hums, even now.");
+        monologues.add("You sense it too, don't you? The Glintstone hums, even now.");
 
         return monologues;
     }

@@ -2,18 +2,24 @@ package game;
 
 import game.actors.npcs.*;
 import game.displays.FancyMessage;
+import game.enums.BehaviourSelection;
 import game.grounds.crops.Bloodrose;
 import game.grounds.crops.Inheritree;
 import game.items.Talisman;
 import game.grounds.Blight;
 import game.grounds.Floor;
 import game.actors.Player;
+import game.actors.creatures.GoldenBeetle;
+import game.actors.creatures.OmenSheep;
+import game.actors.creatures.SpiritGoat;
 import game.grounds.Soil;
 import game.grounds.TeleportationCircle;
 import game.grounds.Wall;
 import game.items.Seed;
 import java.util.Arrays;
 import java.util.List;
+import game.actors.creatures.*;
+
 
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
@@ -86,14 +92,23 @@ public class Application {
         limveldTeleporter.addDestination(gameMap.at(23, 11), "Valley of the Inheritree");
         
         // Add spirit goat and omen sheep to the game map
-        NPC spiritGoat = new SpiritGoat();
+        Creature spiritGoat = new SpiritGoat(BehaviourSelection.PRIORITY_BASED);
         gameMap.at(22, 13).addActor(spiritGoat);
         
-        NPC omenSheep = new OmenSheep();
+        Creature omenSheep = new OmenSheep(BehaviourSelection.PRIORITY_BASED);
         //gameMap.at(24, 13).addActor(omenSheep);
         
-        NPC goldenBeetle = new GoldenBeetle();
+        Creature goldenBeetle = new GoldenBeetle(BehaviourSelection.PRIORITY_BASED);
+
         //gameMap.at(23, 13).addActor(goldenBeetle);
+        Creature spiritGoat2 = new SpiritGoat(BehaviourSelection.RANDOM);
+        limveldGameMap.at(6, 6).addActor(spiritGoat2);
+        
+        Creature omenSheep2 = new OmenSheep(BehaviourSelection.RANDOM);
+        limveldGameMap.at(9, 9).addActor(omenSheep2);
+        
+        Creature goldenBeetle2 = new GoldenBeetle(BehaviourSelection.RANDOM);
+        limveldGameMap.at(10, 10).addActor(goldenBeetle2);
 
         NPC guts = new Guts();
         //gameMap.at(22, 14).addActor(guts);

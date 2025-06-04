@@ -1,4 +1,4 @@
-package game.actors.npcs;
+package game.actors.creatures;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.enums.Ability;
+import game.enums.BehaviourSelection;
 import game.enums.Status;
 import game.actions.CureAction;
 import game.actors.statuseffects.CrimsonRot;
@@ -27,15 +28,15 @@ import java.util.Random;
  * @author Chong Jun Hao and Ng Jun Xian
  * @version 22.0.1
  */
-public class SpiritGoat extends NPC implements Curable, Reproducible {
+public class SpiritGoat extends Creature implements Curable, Reproducible {
 
     private final Random random = new Random();
 
     /**
      * Constructor
      */
-    public SpiritGoat() {
-        super("Spirit Goat", 'y', 50);
+    public SpiritGoat(BehaviourSelection selectionStrategy) {
+        super("Spirit Goat", 'y', 50,selectionStrategy);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
         this.addStatusEffect(new CrimsonRot(10));
@@ -84,9 +85,16 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
 
         // Select a random valid location
         Location birthLocation = validLocations.get(random.nextInt(validLocations.size()));
+        
+        BehaviourSelection offspringBehavior;
+        if (random.nextBoolean()) {
+            offspringBehavior = BehaviourSelection.RANDOM;
+        } else {
+            offspringBehavior = BehaviourSelection.PRIORITY_BASED;
+        }
 
         // Create and place the offspring
-        SpiritGoat offspring = new SpiritGoat();
+        SpiritGoat offspring = new SpiritGoat(offspringBehavior);
         birthLocation.addActor(offspring);
 
         new Display().println("An offspring of " + actor + " has spawned");

@@ -25,7 +25,7 @@ public abstract class NPC extends Actor {
      * The behaviours TreeMap to store all the behaviours of the NPC
      */
     private final Map<Integer, Behaviour> behaviours = new TreeMap<>();
-
+    
     /**
      * Constructor
      *
@@ -35,6 +35,7 @@ public abstract class NPC extends Actor {
      */
     protected NPC(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+
     }
 
     /**

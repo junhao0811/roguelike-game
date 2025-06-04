@@ -1,7 +1,7 @@
 package game.effects.spawneffects;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.actors.npcs.GoldenBeetle;
+import game.actors.creatures.GoldenBeetle;
 
 /**
  * Class representing the spawn Golden Beetle effect

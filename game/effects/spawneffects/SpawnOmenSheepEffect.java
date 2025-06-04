@@ -1,7 +1,7 @@
 package game.effects.spawneffects;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.actors.npcs.OmenSheep;
+import game.actors.creatures.OmenSheep;
 
 /**
  * Class representing the spawn Omen Sheep effect

@@ -1,4 +1,6 @@
-package game.actors.npcs;
+package game.actors.creatures;
+
+import java.util.Random;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -6,6 +8,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.enums.Ability;
+import game.enums.BehaviourSelection;
 import game.enums.Status;
 import game.actions.EatAction;
 import game.behaviours.FollowBehaviour;
@@ -22,15 +25,17 @@ import game.items.Egg;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible {
+public class GoldenBeetle extends Creature implements Reproducible, Hatchable, Edible {
 
     private int reproductionCounter = 0;
     
+    private Random random = new Random();
+
     /**
      * Constructor
      */
-    public GoldenBeetle() {
-        super("Golden Beetle", 'b', 25);
+    public GoldenBeetle(BehaviourSelection selectionStrategy) {
+        super("Golden Beetle", 'b', 25, selectionStrategy);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new FollowBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 2, new ReproduceBehaviour(this));
@@ -49,8 +54,14 @@ public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible
     }
 
     @Override
-    public NPC hatch() {
-        return new GoldenBeetle();
+    public Creature hatch() {
+        BehaviourSelection offspringBehavior;
+        if (random.nextBoolean()) {
+            offspringBehavior = BehaviourSelection.RANDOM;
+        } else {
+            offspringBehavior = BehaviourSelection.PRIORITY_BASED;
+        }
+        return new GoldenBeetle(offspringBehavior);
     }
 
     @Override
