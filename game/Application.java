@@ -1,8 +1,6 @@
 package game;
 
 import game.actors.npcs.*;
-import game.actors.npcs.MerchantKale;
-import game.actors.npcs.Sellen;
 import game.displays.FancyMessage;
 import game.grounds.crops.Bloodrose;
 import game.grounds.crops.Inheritree;
@@ -11,6 +9,7 @@ import game.grounds.Blight;
 import game.grounds.Floor;
 import game.actors.Player;
 import game.grounds.Soil;
+import game.grounds.TeleportationCircle;
 import game.grounds.Wall;
 import game.items.Seed;
 import java.util.Arrays;
@@ -54,6 +53,37 @@ public class Application {
         
         GameMap gameMap = new GameMap("Valley of the Inheritree", groundFactory, map);
         world.addGameMap(gameMap);
+        // A3 Req 1
+        List<String> limveldMap = Arrays.asList(
+           ".............xxxx",
+                "..............xxx",
+                "................x",
+                ".................",
+                "................x",
+                "...............xx",
+                "..............xxx",
+                "..............xxx",
+                "..............xxx",
+                ".............xxxx",
+                ".............xxxx",
+                "....xxx.....xxxxx",
+                "....xxxx...xxxxxx");
+        
+        GameMap limveldGameMap = new GameMap("Limveld", groundFactory, limveldMap);
+        world.addGameMap(limveldGameMap);
+        
+
+        // Create teleportation circles and place them directly A3 Req 1
+        TeleportationCircle valleyTeleporter = new TeleportationCircle();
+        TeleportationCircle limveldTeleporter = new TeleportationCircle();
+        
+        // Place teleporters on the maps A3 Req 1
+        gameMap.at(23, 11).setGround(valleyTeleporter);
+        limveldGameMap.at(8, 6).setGround(limveldTeleporter);
+        
+        // Add destinations to teleporters A3 Req 1
+        valleyTeleporter.addDestination(limveldGameMap.at(8, 6), "Limveld");
+        limveldTeleporter.addDestination(gameMap.at(23, 11), "Valley of the Inheritree");
         
         // Add spirit goat and omen sheep to the game map
         NPC spiritGoat = new SpiritGoat();
