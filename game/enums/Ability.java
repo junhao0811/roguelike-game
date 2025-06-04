@@ -18,5 +18,6 @@ public enum Ability {
     ATTACK,
     LISTEN,
     PURCHASE,
-    CAN_TELEPORT
+    CAN_TELEPORT,
+    CAN_GROW
 }

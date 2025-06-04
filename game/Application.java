@@ -109,6 +109,9 @@ public class Application {
         
         Creature goldenBeetle2 = new GoldenBeetle(BehaviourSelection.RANDOM);
         limveldGameMap.at(10, 10).addActor(goldenBeetle2);
+        
+        Creature bedofchaos = new BedOfChaos(BehaviourSelection.PRIORITY_BASED);
+        limveldGameMap.at(8, 8).addActor(bedofchaos);
 
         NPC guts = new Guts();
         //gameMap.at(22, 14).addActor(guts);

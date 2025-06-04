@@ -51,11 +51,13 @@ public class TeleportationCircle extends Ground {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        
-        // Only players can use teleportation circles
+    
+      
         if (actor.hasCapability(Ability.CAN_TELEPORT)) {
-            for (int i = 0; i < destinations.size(); i++) {
-                actions.add(new TeleportAction(destinations.get(i), destinationNames.get(i)));
+            if (location.containsAnActor() && location.getActor() == actor) {
+                for (int i = 0; i < destinations.size(); i++) {
+                    actions.add(new TeleportAction(destinations.get(i), destinationNames.get(i)));
+                }
             }
         }
         

@@ -11,5 +11,5 @@ public enum Status {
     FERTILE,
     CURSED,
     BLESSED,
-    CREATURE
+    CREATURE,
 }
