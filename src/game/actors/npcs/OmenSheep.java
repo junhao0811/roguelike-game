@@ -27,12 +27,25 @@ import game.items.Egg;
 public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
 
     private int reproductionCounter = 0;
-    
+
     /**
      * Constructor
+     *
+     * @param randomBehaviour boolean to determine if the Omen Sheep selects behaviour randomly
+     */
+    public OmenSheep(boolean randomBehaviour) {
+        super("Omen Sheep", 'm', 75, randomBehaviour);
+    }
+
+    /**
+     * Constructor with random behaviour set to false as default
      */
     public OmenSheep() {
         super("Omen Sheep", 'm', 75);
+    }
+
+    @Override
+    protected void setup() {
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
         this.addStatusEffect(new CrimsonRot(15));

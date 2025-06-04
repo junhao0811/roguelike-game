@@ -58,6 +58,10 @@ public class Application {
         // Add spirit goat and omen sheep to the game map
         NPC spiritGoat = new SpiritGoat();
         gameMap.at(22, 13).addActor(spiritGoat);
+
+        // Add spirit goat and omen sheep to the game map
+        NPC spiritGoat2 = new SpiritGoat(true);
+        gameMap.at(23, 13).addActor(spiritGoat2);
         
         NPC omenSheep = new OmenSheep();
         //gameMap.at(24, 13).addActor(omenSheep);
@@ -72,7 +76,7 @@ public class Application {
         //gameMap.at(23, 14).addActor(sellen);
 
         NPC merchantKale = new MerchantKale();
-        gameMap.at(24, 14).addActor(merchantKale);
+        //gameMap.at(24, 14).addActor(merchantKale);
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {

@@ -33,6 +33,10 @@ public class Sellen extends NPC implements Speakable, Merchant {
      */
     public Sellen() {
         super("Sellen", 's', 150);
+    }
+
+    @Override
+    protected void setup() {
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
     }
 

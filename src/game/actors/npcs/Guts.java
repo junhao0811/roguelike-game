@@ -26,6 +26,10 @@ public class Guts extends NPC implements Speakable {
      */
     public Guts() {
         super("Guts", 'g', 500);
+    }
+
+    @Override
+    protected void setup() {
         this.setIntrinsicWeapon(new BareFist());
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1,

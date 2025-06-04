@@ -10,9 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.enums.Status;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Class representing an NPC
@@ -25,6 +23,7 @@ public abstract class NPC extends Actor {
      * The behaviours TreeMap to store all the behaviours of the NPC
      */
     private final Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    private final boolean randomBehaviour;
 
     /**
      * Constructor
@@ -32,10 +31,32 @@ public abstract class NPC extends Actor {
      * @param name        the name of the NPC
      * @param displayChar the character that will represent the NPC in the display
      * @param hitPoints   the NPC's starting hit points
+     * @param randomBehaviour boolean to determine if the NPC selects behaviour randomly
+     */
+    protected NPC(String name, char displayChar, int hitPoints, boolean randomBehaviour) {
+        super(name, displayChar, hitPoints);
+        this.randomBehaviour = randomBehaviour;
+        setup();
+    }
+
+    /**
+     * Constructor with random behaviour set to false as default
+     *
+     * @param name        the name of the NPC
+     * @param displayChar the character that will represent the NPC in the display
+     * @param hitPoints   the NPC's starting hit points
      */
     protected NPC(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        this.randomBehaviour = false;
+        setup();
     }
+
+    /**
+     * Method to setup all the unique properties of the NPC such as behaviours,
+     * capabilities, status effects, and intrinsic weapon
+     */
+    protected abstract void setup();
 
     /**
      * Add behaviour to the behaviours TreeMap
@@ -58,10 +79,22 @@ public abstract class NPC extends Actor {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : getBehaviours()) {
+        if (randomBehaviour) {
+            Random random = new Random();
+            List<Behaviour> behaviourList = new ArrayList<>(getBehaviours());
+            Behaviour behaviour = behaviourList.get(random.nextInt(behaviourList.size()));
             Action action = behaviour.getAction(this, map);
+
             if (action != null) {
                 return action;
+            }
+
+        } else {
+            for (Behaviour behaviour : getBehaviours()) {
+                Action action = behaviour.getAction(this, map);
+                if (action != null) {
+                    return action;
+                }
             }
         }
 

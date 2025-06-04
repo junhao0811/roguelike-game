@@ -35,6 +35,10 @@ public class MerchantKale extends NPC implements Speakable, Merchant {
      */
     public MerchantKale() {
         super("Merchant Kale", 'k', 200);
+    }
+
+    @Override
+    protected void setup() {
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
     }
 

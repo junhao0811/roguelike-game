@@ -33,9 +33,22 @@ public class SpiritGoat extends NPC implements Curable, Reproducible {
 
     /**
      * Constructor
+     *
+     * @param randomBehaviour boolean to determine if the Spirit Goat selects behaviour randomly
+     */
+    public SpiritGoat(boolean randomBehaviour) {
+        super("Spirit Goat", 'y', 50, randomBehaviour);
+    }
+
+    /**
+     * Constructor with random behaviour set to false as default
      */
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
+    }
+
+    @Override
+    protected void setup() {
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
         this.addStatusEffect(new CrimsonRot(10));

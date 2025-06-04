@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.conditions.Condition;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,7 +18,7 @@ public class MonologueList {
 
     private final Actor actor;
     private final GameMap map;
-    private final ArrayList<String> monologues = new ArrayList<>();
+    private final List<String> monologues = new ArrayList<>();
     private final Random random = new Random();
 
     /**

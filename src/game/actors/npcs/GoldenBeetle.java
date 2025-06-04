@@ -25,12 +25,25 @@ import game.items.Egg;
 public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible {
 
     private int reproductionCounter = 0;
-    
+
     /**
      * Constructor
+     *
+     * @param randomBehaviour boolean to determine if the Golden Beetle selects behaviour randomly
+     */
+    public GoldenBeetle(boolean randomBehaviour) {
+        super("Golden Beetle", 'b', 25, randomBehaviour);
+    }
+
+    /**
+     * Constructor with random behaviour set to false as default
      */
     public GoldenBeetle() {
         super("Golden Beetle", 'b', 25);
+    }
+
+    @Override
+    protected void setup() {
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new FollowBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 2, new ReproduceBehaviour(this));
