@@ -54,20 +54,24 @@ public class Application {
         
         GameMap gameMap = new GameMap("Valley of the Inheritree", groundFactory, map);
         world.addGameMap(gameMap);
-        
-        // Add spirit goat and omen sheep to the game map
+
         NPC spiritGoat = new SpiritGoat();
         gameMap.at(22, 13).addActor(spiritGoat);
 
-        // Add spirit goat and omen sheep to the game map
         NPC spiritGoat2 = new SpiritGoat(true);
         gameMap.at(23, 13).addActor(spiritGoat2);
         
         NPC omenSheep = new OmenSheep();
-        //gameMap.at(24, 13).addActor(omenSheep);
+        gameMap.at(24, 13).addActor(omenSheep);
+
+        NPC omenSheep2 = new OmenSheep(true);
+        gameMap.at(25, 13).addActor(omenSheep2);
         
         NPC goldenBeetle = new GoldenBeetle();
-        //gameMap.at(23, 13).addActor(goldenBeetle);
+        gameMap.at(21, 13).addActor(goldenBeetle);
+
+        NPC goldenBeetle2 = new GoldenBeetle(true);
+        gameMap.at(20, 13).addActor(goldenBeetle2);
 
         NPC guts = new Guts();
         //gameMap.at(22, 14).addActor(guts);

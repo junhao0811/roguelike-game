@@ -85,6 +85,9 @@ public abstract class NPC extends Actor {
             Behaviour behaviour = behaviourList.get(random.nextInt(behaviourList.size()));
             Action action = behaviour.getAction(this, map);
 
+            // Display the random behaviour chosen
+            System.out.println("\n"+behaviour);
+
             if (action != null) {
                 return action;
             }
