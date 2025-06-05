@@ -1,0 +1,29 @@
+package game.items.mysteryitems;
+
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+import edu.monash.fit2099.engine.positions.GameMap;
+
+/**
+ * Special Stamina potion given by Guts at high affection
+ * Extends ConsumableItem for common consumption behavior
+ */
+public class StaminaPotion extends ConsumableItem {
+    
+    private static final int STAMINA_RESTORE = 50;
+    
+    public StaminaPotion() {
+        super("Guts' Stamina Potion", 'S', STAMINA_RESTORE, "restores");
+    }
+    
+    @Override
+    protected void applyConsumptionEffect(Actor actor, GameMap map) {
+        if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
+            actor.modifyAttribute(BaseActorAttributes.STAMINA, 
+                                ActorAttributeOperations.INCREASE, 
+                                effectValue);
+        }
+    }
+    
+}

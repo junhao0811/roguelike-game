@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.affectionitems.AffectionItem;
+import game.items.affectionitems.ThornedBloom;
 
 /**
  * A class representing a Bloodrose
@@ -48,6 +50,8 @@ public class Bloodrose extends Crop {
                 actor.hurt(damage);
                 display.println(this + " hurts " + actor + " by " + damage + " points");
 
+                ThornedBloom thornedBloom = new ThornedBloom();
+                actor.addItemToInventory(thornedBloom);
                 if (!actor.isConscious()) {
                     display.println(actor + " met their demise at the hands of a " + this);
                     actor.unconscious(location.map());

@@ -19,5 +19,9 @@ public enum Ability {
     LISTEN,
     PURCHASE,
     CAN_TELEPORT,
-    CAN_GROW
+    CAN_GROW,
+    CAUSES_BLEEDING,
+    CAN_BE_AFFECTED,
+    CAN_AFFECT,
+    CONSUME
 }

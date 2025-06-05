@@ -8,24 +8,28 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
+import game.enums.Ability;
+import game.actions.GiftAction;
+import game.capabilities.Giftable;
 import game.enums.Status;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
+import edu.monash.fit2099.engine.items.Item;
 
 /**
  * Class representing an NPC
  *
- * @author Lee Hao Zhe
+ * @author Lee Hao Zhe, modified by Chong Jun Hao
  */
-public abstract class NPC extends Actor {
+public abstract class NPC extends Actor implements Giftable {
 
     /**
      * The behaviours TreeMap to store all the behaviours of the NPC
      */
     private final Map<Integer, Behaviour> behaviours = new TreeMap<>();
-    
+    private int affectionLevel;
+
     /**
      * Constructor
      *
@@ -33,9 +37,26 @@ public abstract class NPC extends Actor {
      * @param displayChar the character that will represent the NPC in the display
      * @param hitPoints   the NPC's starting hit points
      */
-    protected NPC(String name, char displayChar, int hitPoints) {
+    protected NPC(String name, char displayChar, int hitPoints, int affectionLevel) {
         super(name, displayChar, hitPoints);
+        this.affectionLevel = affectionLevel;
+        this.addCapability(Ability.CAN_BE_AFFECTED);
+    }
 
+    public int getAffectionLevel() {
+        return affectionLevel;
+    }
+    
+    public boolean affectionIsPositive(){
+        return affectionLevel > 0;
+    }
+
+    public void setAffectionLevel(int affectionLevel) {
+        this.affectionLevel = affectionLevel;
+    }
+
+    public void removeBehaviour(int key) {
+        this.behaviours.remove(key);
     }
 
     /**
@@ -58,6 +79,16 @@ public abstract class NPC extends Actor {
     }
 
     @Override
+    public String gift(NPC receiver, Actor giver, GameMap map) {
+        if (receiver.hasCapability(Ability.CAN_BE_AFFECTED)) {
+            giver.removeItemFromInventory(this);
+            receiver.addItemToInventory(this);
+            return applyAffection(giver, receiver, map);
+        } 
+        return giver + " cannot affect " + receiver + " with this item.";
+    }
+
+    @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         for (Behaviour behaviour : getBehaviours()) {
             Action action = behaviour.getAction(this, map);
@@ -76,7 +107,14 @@ public abstract class NPC extends Actor {
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
         }
-
+        
+        if (otherActor.hasCapability(Ability.CAN_BE_AFFECTED)) {
+            for(Item item : otherActor.getItemInventory()) {
+                if (item.hasCapability(Ability.CAN_AFFECT)){
+                    actions.add(new GiftAction(this, item, direction));
+                }
+            }
+        }
         return actions;
     }
 }

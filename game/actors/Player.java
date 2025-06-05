@@ -45,7 +45,7 @@ public class Player extends Actor {
         this.addCapability(Ability.LISTEN);
         this.addCapability(Ability.PURCHASE);
         this.addCapability(Ability.CAN_TELEPORT);
-
+        this.addCapability(Ability.CONSUME);
     }
 
     /**

@@ -39,7 +39,7 @@ public class HealingEffect extends Effect {
     public String applyEffect(Actor actor, GameMap map) {
         Actor target = getTarget(actor);
         target.heal(healAmount);
-        return target + " is healed for " + healAmount + " points by grown part";
+        return target + " is healed by " + healAmount + " HP.";
     }
     
     /**

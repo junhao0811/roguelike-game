@@ -133,7 +133,7 @@ public class Application {
         }
         
         Player player = new Player("Farmer", '@', 100, 200);
-        world.addPlayer(player, limveldGameMap.at(5, 5));
+        world.addPlayer(player, limveldGameMap.at(5,5));
         
         // game setup
         gameMap.at(24, 11).addItem(new Talisman());

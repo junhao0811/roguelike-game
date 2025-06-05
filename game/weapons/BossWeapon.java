@@ -23,7 +23,4 @@ public class BossWeapon extends IntrinsicWeapon {
         super(BASE_DAMAGE + bonusDamage, VERB, HIT_RATE);
     }
 
-    public BossWeapon withBonus(int bonusDamage) {
-        return new BossWeapon(bonusDamage);
-    }
 }

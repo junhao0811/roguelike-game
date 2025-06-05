@@ -12,10 +12,14 @@ import game.bossparts.Branch;
 import game.bossparts.Leaf;
 import game.enums.Ability;
 import game.enums.BehaviourSelection;
+import game.items.affectionitems.BossTrophy;
 import game.weapons.BossWeapon;
 import java.util.Random;
 import game.capabilities.Growable;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.actors.Actor;
 
 /**
  * Class representing the Bed of Chaos, a creature in the game.
@@ -114,6 +118,30 @@ public class BedOfChaos extends Creature implements Growable {
         return random.nextBoolean() ? new Branch() : new Leaf();
     }
 
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        // Drop BossTrophy before becoming unconscious
+        super.unconscious(map);
+        return dropBossTrophy(map);
+    }
+    
+    /**
+     * Handles dropping BossTrophy when Bed of Chaos dies
+     * Always drops (100% drop rate)
+     */
+    private String dropBossTrophy(GameMap map) {
+        String result = null;
+        Location currentLocation = map.locationOf(this);
+        if (currentLocation != null) {
+            BossTrophy bossTrophy = new BossTrophy();
+            currentLocation.addItem(bossTrophy);
+            
+            
+            result = "The " + this + " drops a Boss Trophy as proof of your victory!";
+        }
+
+        return result;
+    }
 
     /**
      * Returns the intrinsic weapon for the Bed of Chaos
