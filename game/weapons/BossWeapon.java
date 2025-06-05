@@ -11,7 +11,19 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
  */
 public class BossWeapon extends IntrinsicWeapon {
 
+    private static final int BASE_DAMAGE = 25;
+    private static final String VERB = "smacks";
+    private static final int HIT_RATE = 75;
+
     public BossWeapon() {
-        super(25, "smacks", 75);
+        super(BASE_DAMAGE, VERB, HIT_RATE);
+    }
+
+    public BossWeapon(int bonusDamage){
+        super(BASE_DAMAGE + bonusDamage, VERB, HIT_RATE);
+    }
+
+    public BossWeapon withBonus(int bonusDamage) {
+        return new BossWeapon(bonusDamage);
     }
 }

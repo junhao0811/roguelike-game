@@ -15,6 +15,7 @@ import game.enums.BehaviourSelection;
 import game.weapons.BossWeapon;
 import java.util.Random;
 import game.capabilities.Growable;
+import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * Class representing the Bed of Chaos, a creature in the game.
@@ -35,17 +36,84 @@ public class BedOfChaos extends Creature implements Growable {
         this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
         this.addCapability(Ability.CAN_GROW);
         this.growthParts = new ArrayList<>();
-        this.addBehaviour(Integer.MAX_VALUE, new GrowthBehaviour());
+        this.addBehaviour(Integer.MAX_VALUE - 1, new GrowthBehaviour(this));
     }
 
-    public 
-    private BossPart getRandomGrowthPart() {
-        if (growthParts.isEmpty()) {
-            return null;
+    @Override
+    public String grow(GameMap map) {
+        StringBuilder growthDescription = new StringBuilder();
+        BossPart currentPart = getRandomGrowthPart();
+        
+        // Continue growing until we get a part that cannot grow further
+        while (currentPart != null && currentPart.canGrow()) {
+            growthParts.add(currentPart);
+            growthDescription.append(this).append(" is growing...\n");
+            growthDescription.append("it grows a ").append(currentPart).append("\n");
+            
+            // Apply effects for the current part
+            String effectResult = applyPartEffects(currentPart, map);
+            if (!effectResult.isEmpty()) {
+                growthDescription.append(effectResult).append("\n");
+            }
+
+            // Get the next part in the growth chain
+            BossPart nextPart = currentPart.grow();
+            currentPart = nextPart; // Move to next part or null to end chain
         }
+        
+        // Add the final part that cannot grow further (like a Leaf)
+        if (currentPart != null) {
+            growthParts.add(currentPart);
+            growthDescription.append(this).append(" is growing...\n");
+            growthDescription.append("it grows a ").append(currentPart).append("\n");
+            
+            String finalEffectResult = applyPartEffects(currentPart, map);
+            if (!finalEffectResult.isEmpty()) {
+                growthDescription.append(finalEffectResult).append("\n");
+            }
+        }
+        
+        String result = growthDescription.toString().trim();
+        return result.isEmpty() ? this + " cannot grow further" : result;
+    }
+
+    /**
+     * Applies the effects of a grown part
+     * Handles attack bonuses and healing without downcasting
+     */
+    private String applyPartEffects(BossPart part, GameMap map) {
+        StringBuilder effects = new StringBuilder();
+        
+        // Apply effects through the part's effect system
+        String effectResult = part.applyGrowEffect(this, map);
+        if (!effectResult.isEmpty()) {
+            effects.append(effectResult);
+        }
+        
+        return effects.toString();
+    }
+
+    /**
+     * Calculates total attack bonus from all grown parts
+     * Uses the getAttackBonus() method instead of effects system
+     * Refactored for better readability and performance
+     */
+    private int getTotalAttackBonus() {
+        int totalBonus = 0;
+        
+        // Simple iteration for clarity
+        for (BossPart part : growthParts) {
+            totalBonus += part.getAttackBonus();
+        }
+        
+        return totalBonus;
+    }
+
+    private BossPart getRandomGrowthPart() {
 
         return random.nextBoolean() ? new Branch() : new Leaf();
     }
+
 
     /**
      * Returns the intrinsic weapon for the Bed of Chaos
@@ -55,8 +123,8 @@ public class BedOfChaos extends Creature implements Growable {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new BossWeapon();
+        int bonusDamage = getTotalAttackBonus();
+        return new BossWeapon(bonusDamage);
     }
-
     
 }

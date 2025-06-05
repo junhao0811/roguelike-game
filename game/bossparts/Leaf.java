@@ -1,6 +1,5 @@
 package game.bossparts;
 
-import game.effects.bossparteffects.AttackBonusEffect;
 import game.effects.bossparteffects.HealingEffect;
 
 public class Leaf extends BossPart {
@@ -12,8 +11,7 @@ public class Leaf extends BossPart {
      * Constructor for Leaf
      */
     public Leaf() {
-        super("Leaf", false);
-        this.effects.add(new AttackBonusEffect(ATTACK_BONUS));
+        super("Leaf", false, ATTACK_BONUS);
         this.effects.add(new HealingEffect(HEAL_AMOUNT));
     }
 

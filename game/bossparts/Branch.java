@@ -3,8 +3,6 @@ package game.bossparts;
 
 import java.util.Random;
 
-import game.effects.bossparteffects.AttackBonusEffect;
-
 public class Branch extends BossPart {
 
     private Random random = new Random();
@@ -17,13 +15,9 @@ public class Branch extends BossPart {
      * @param canGrow whether this branch can continue growing
      */
     public Branch() {
-        super("Branch", true);
-        this.effects.add(new AttackBonusEffect(ATTACK_BONUS));
+        super("Branch", true, ATTACK_BONUS);   
     }
 
-    public void applyGrowEffect() {
-        
-    }
     /**
      * Creates the next growth part (if this part can grow)
      * Returns null if this part cannot grow
@@ -31,7 +25,7 @@ public class Branch extends BossPart {
     @Override
     public BossPart grow() {
         if (random.nextBoolean()) {
-            return this;
+            return new Branch();
         } else {
             return new Leaf();
         }

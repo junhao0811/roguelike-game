@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.GrowthAction;
 import game.enums.Status;
+import game.capabilities.Growable;
 
 /**
  * A behaviour that makes the boss grow when no players are nearby
@@ -16,7 +17,13 @@ import game.enums.Status;
  * @author GitHub Copilot
  */
 public class GrowthBehaviour implements Behaviour {
-    
+
+    private Growable growable;
+
+    public GrowthBehaviour(Growable growable) {
+        this.growable = growable;   
+        // Constructor can be empty as no initialization is needed
+    }
     /**
      * Returns a GrowthAction if no hostile targets are nearby, null otherwise
      *
@@ -43,6 +50,6 @@ public class GrowthBehaviour implements Behaviour {
         }
         
         // No players nearby, can grow
-        return new GrowthAction();
+        return new GrowthAction(growable);
     }
 }

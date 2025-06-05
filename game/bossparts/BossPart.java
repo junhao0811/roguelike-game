@@ -15,6 +15,7 @@ public abstract class BossPart {
     protected final String name;
     protected final boolean canGrow;
     protected final EffectList effects;
+    private final int attackBonus;
     
     /**
      * Constructor for BossGrowthPart
@@ -24,10 +25,12 @@ public abstract class BossPart {
      * @param healAmount the heal amount this part provides when grown
      * @param canGrow whether this part can continue growing
      */
-    protected BossPart(String name, boolean canGrow) {
+    protected BossPart(String name, boolean canGrow, int attackBonus) {
         this.name = name;
         this.canGrow = canGrow;
+        this.attackBonus = attackBonus; // Default attack bonus, can be overridden in subclasses
         this.effects = new EffectList();
+
     }
     /**
      * Creates the next growth part (if this part can grow)
@@ -43,13 +46,20 @@ public abstract class BossPart {
     }
 
     /**
+     * Gets the attack bonus this part provides
+     */
+    public int getAttackBonus() {
+        return attackBonus;
+    }
+
+    /**
      * Applies all growth effects to the boss
      *
      * @param boss the boss actor
      * @param map the game map
      * @return description of applied effects
      */
-    public String applyBranchEffect(Actor boss, GameMap map) {
+    public String applyGrowEffect(Actor boss, GameMap map) {
         StringBuilder result = new StringBuilder();
         
         for (Effect effect : effects) {
@@ -60,6 +70,15 @@ public abstract class BossPart {
         }
         
         return result.toString().trim();
+    }
+
+    /**
+     * Checks if this part can grow further
+     *
+     * @return true if this part can grow, false otherwise
+     */
+    public boolean canGrow() {
+        return canGrow;
     }
 
     @Override
