@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
-import game.enums.Ability;
 
 import java.util.Random;
 
@@ -38,7 +37,6 @@ public abstract class WeaponItem extends Item implements Weapon {
         this.verb = verb;
         this.hitRate = hitRate;
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
-        this.addCapability(Ability.ATTACK);
     }
 
     @Override

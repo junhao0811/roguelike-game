@@ -39,7 +39,6 @@ public class Seed extends Item {
             map.locationOf(actor).setGround(crop);
             actor.modifyAttribute(BaseActorAttributes.STAMINA,
                     ActorAttributeOperations.DECREASE, crop.getStaminaCost());
-            crop.bloom();
 
             return actor + " plants the " + this + ", consuming " + crop.getStaminaCost() +
                     " stamina" + "\n" + crop.plantingEffect(actor, map);

@@ -15,7 +15,7 @@ public enum Ability {
     PRODUCE_EGG,
     EAT,
     CAN_BE_FOLLOWED,
-    ATTACK,
     LISTEN,
     PURCHASE,
+    CAN_BE_WATERED,
 }

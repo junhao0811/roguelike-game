@@ -27,7 +27,7 @@ public abstract class ModAttributeMaxEffect extends Effect {
      * @param verb the verb uses to describe the attribute modification
      * @param target the target of the effect
      */
-    public ModAttributeMaxEffect(BaseActorAttributes attribute,
+    protected ModAttributeMaxEffect(BaseActorAttributes attribute,
                                  ActorAttributeOperations operation,
                                  int value, String verb, Actor target) {
         super(target);
@@ -45,7 +45,7 @@ public abstract class ModAttributeMaxEffect extends Effect {
      * @param value the value to modify the attribute by
      * @param verb the verb uses to describe the attribute modification
      */
-    public ModAttributeMaxEffect(BaseActorAttributes attribute,
+    protected ModAttributeMaxEffect(BaseActorAttributes attribute,
                                  ActorAttributeOperations operation,
                                  int value, String verb) {
         super();

@@ -1,6 +1,7 @@
 package game.effects.spawneffects;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.npcs.GoldenBeetle;
 
 /**
@@ -16,13 +17,18 @@ public class SpawnGoldenBeetleEffect extends SpawnEffect {
      * @param target the target of the effect
      */
     public SpawnGoldenBeetleEffect(Actor target) {
-        super(new GoldenBeetle(), target);
+        super(target);
     }
 
     /**
      * Constructor with no target as default
      */
     public SpawnGoldenBeetleEffect() {
-        super(new GoldenBeetle());
+        super();
+    }
+
+    @Override
+    public String applyEffect(Actor actor, GameMap map) {
+        return super.spawnNPC(actor, map, new GoldenBeetle());
     }
 }

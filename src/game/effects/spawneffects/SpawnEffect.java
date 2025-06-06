@@ -18,31 +18,31 @@ import java.util.Random;
  */
 public abstract class SpawnEffect extends Effect {
 
-    private final NPC creature;
-
     /**
      * Constructor
      *
-     * @param creature the creature to spawn
      * @param target the target of the effect
      */
-    public SpawnEffect(NPC creature, Actor target) {
+    protected SpawnEffect(Actor target) {
         super(target);
-        this.creature = creature;
     }
 
     /**
      * Constructor with no target as default
-     *
-     * @param creature the creature to spawn
      */
-    public SpawnEffect(NPC creature) {
+    protected SpawnEffect() {
         super();
-        this.creature = creature;
     }
 
-    @Override
-    public String applyEffect(Actor actor, GameMap map) {
+    /**
+     * Method to spawn an NPC
+     *
+     * @param actor The actor the effect is tied to.
+     * @param map The map the actor is on.
+     * @param npc The NPC to spawn.
+     * @return a description of what happened
+     */
+    protected String spawnNPC(Actor actor, GameMap map, NPC npc) {
         List<Location> destinations = new ArrayList<>();
         Random random = new Random();
         Actor target = this.getTarget(actor);
@@ -56,11 +56,11 @@ public abstract class SpawnEffect extends Effect {
         }
 
         if (!destinations.isEmpty()) {
-            destinations.get(random.nextInt(destinations.size())).addActor(creature);
-            return creature + " is spawned within the surroundings of " + target;
+            destinations.get(random.nextInt(destinations.size())).addActor(npc);
+            return npc + " is spawned within the surroundings of " + target;
         }
 
         return "There are no valid locations surrounding " + target + " for " +
-                creature + " to spawn";
+                npc + " to spawn";
     }
 }

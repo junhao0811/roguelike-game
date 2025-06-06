@@ -20,6 +20,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.watercontainers.CursedPot;
+import game.watercontainers.DemonJug;
+import game.watercontainers.HolyGrail;
 
 /**
  * The main class to setup and run the game.
@@ -56,28 +59,28 @@ public class Application {
         world.addGameMap(gameMap);
 
         NPC spiritGoat = new SpiritGoat();
-        gameMap.at(22, 13).addActor(spiritGoat);
+        //gameMap.at(22, 13).addActor(spiritGoat);
 
         NPC spiritGoat2 = new SpiritGoat(true);
-        gameMap.at(23, 13).addActor(spiritGoat2);
+        //gameMap.at(23, 13).addActor(spiritGoat2);
         
         NPC omenSheep = new OmenSheep();
-        gameMap.at(24, 13).addActor(omenSheep);
+        //gameMap.at(24, 13).addActor(omenSheep);
 
         NPC omenSheep2 = new OmenSheep(true);
-        gameMap.at(25, 13).addActor(omenSheep2);
+        //gameMap.at(25, 13).addActor(omenSheep2);
         
         NPC goldenBeetle = new GoldenBeetle();
-        gameMap.at(21, 13).addActor(goldenBeetle);
+        //gameMap.at(21, 13).addActor(goldenBeetle);
 
         NPC goldenBeetle2 = new GoldenBeetle(true);
-        gameMap.at(20, 13).addActor(goldenBeetle2);
+        //gameMap.at(20, 13).addActor(goldenBeetle2);
 
         NPC guts = new Guts();
         //gameMap.at(22, 14).addActor(guts);
 
         NPC sellen = new Sellen();
-        //gameMap.at(23, 14).addActor(sellen);
+        gameMap.at(23, 14).addActor(sellen);
 
         NPC merchantKale = new MerchantKale();
         //gameMap.at(24, 14).addActor(merchantKale);
@@ -102,6 +105,10 @@ public class Application {
         // one seed of "Bloodrose" in their inventory
         player.addItemToInventory(new Seed(new Inheritree()));
         player.addItemToInventory(new Seed(new Bloodrose()));
+
+        player.addItemToInventory(new CursedPot());
+        player.addItemToInventory(new DemonJug());
+        player.addItemToInventory(new HolyGrail());
 
         player.addBalance(5000);
 
