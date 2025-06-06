@@ -20,7 +20,7 @@ public class Leaf extends BossPart {
      * Returns null if this part cannot grow
      */
     @Override
-    public BossPart grow() {
+    public BossPart growPart() {
         return null; // A leaf cannot grow further
     }
     

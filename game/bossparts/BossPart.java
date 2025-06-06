@@ -36,7 +36,7 @@ public abstract class BossPart {
      * Creates the next growth part (if this part can grow)
      * Returns null if this part cannot grow
      */
-    public abstract BossPart grow();
+    public abstract BossPart growPart();
 
     /**
      * Gets the effects of this part

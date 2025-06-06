@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 import edu.monash.fit2099.engine.items.Item;
-
+import game.items.affectionitems.AffectionItem;
 /**
  * Class representing an NPC
  *
@@ -46,7 +46,7 @@ public abstract class NPC extends Actor implements Giftable {
     public int getAffectionLevel() {
         return affectionLevel;
     }
-    
+
     public boolean affectionIsPositive(){
         return affectionLevel > 0;
     }
@@ -78,14 +78,15 @@ public abstract class NPC extends Actor implements Giftable {
         return behaviours.values();
     }
 
+    //     String gift(Actor actor, GameMap map);
     @Override
-    public String gift(NPC receiver, Actor giver, GameMap map) {
-        if (receiver.hasCapability(Ability.CAN_BE_AFFECTED)) {
-            giver.removeItemFromInventory(this);
-            receiver.addItemToInventory(this);
-            return applyAffection(giver, receiver, map);
-        } 
-        return giver + " cannot affect " + receiver + " with this item.";
+    public String gift(Actor actor, Item gift, GameMap map) {
+        if (this.hasCapability(Ability.CAN_BE_AFFECTED) && gift.hasCapability(Ability.CAN_AFFECT)) {
+            actor.removeItemFromInventory(gift);
+            this.addItemToInventory(gift);
+            return gift.applyAffection(actor, this, map);
+        }
+        return actor + " cannot affect " + this + " with this item.";
     }
 
     @Override
@@ -107,7 +108,7 @@ public abstract class NPC extends Actor implements Giftable {
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
         }
-        
+
         if (otherActor.hasCapability(Ability.CAN_BE_AFFECTED)) {
             for(Item item : otherActor.getItemInventory()) {
                 if (item.hasCapability(Ability.CAN_AFFECT)){

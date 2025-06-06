@@ -23,7 +23,7 @@ public class Branch extends BossPart {
      * Returns null if this part cannot grow
      */
     @Override
-    public BossPart grow() {
+    public BossPart growPart() {
         if (random.nextBoolean()) {
             return new Branch();
         } else {

@@ -2,11 +2,9 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.capabilities.Giftable;
-import game.enums.Ability;
-import game.actors.npcs.NPC;
+import edu.monash.fit2099.engine.items.Item;
 
 /**
  * Action for giving items to NPCs
@@ -15,24 +13,29 @@ import game.actors.npcs.NPC;
  * @author Ng Jun Xian, modified by Chong Jun Hao
  */
 public class GiftAction extends Action {
-    
-    private final NPC target;
-    private Giftable giftable;
-    private final String direction;
-    
-    public GiftAction(NPC target, Giftable giftable, String direction) {
-        this.target = target;
-        this.giftable = giftable;
+
+    private Giftable targetNPC;
+    private Item gift;
+    private String direction;
+
+    public GiftAction(Giftable targetNPC, Item gift, String direction) {
+        this.targetNPC = targetNPC;
+        this.gift = gift;
         this.direction = direction;
     }
-    
+
+    public GiftAction(Giftable targetNPC, Item gift) {
+        this.targetNPC = targetNPC;
+        this.gift = gift;
+    }
+
     @Override
     public String execute(Actor actor, GameMap map) {
-        return giftable.gift(target, actor, map);
+        return targetNPC.gift(actor, gift, map);
     }
-    
+
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " gives " + giftable + " to " + target + " (" + direction + ")";
+        return actor + " gives " + gift + " to " + targetNPC;
     }
 }
