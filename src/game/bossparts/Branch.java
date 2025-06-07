@@ -11,14 +11,16 @@ import java.util.Random;
 public class Branch extends BossPart {
 
     private Random random = new Random();
+    private static final int ATTACK_BONUS = 3;
 
     /**
      * Constructor for Branch
      *
      */
     public Branch() {
-        super("Branch", true);
+        super("Branch", true, ATTACK_BONUS);
     }
+
 
     /**
      * Creates the next growth part (if this part can grow)

@@ -1,5 +1,7 @@
 package game.bossparts;
 
+import game.effects.bossparteffects.HealingEffect;
+
 /**
  * Class representing a Leaf part of the Bed of Chaos boss
  * This part does not grow further
@@ -8,11 +10,15 @@ package game.bossparts;
  */
 public class Leaf extends BossPart {
 
+    private static final int ATTACK_BONUS = 1;
+    private static final int HEAL_AMOUNT = 5;
+
     /**
      * Constructor for Leaf
      */
     public Leaf() {
-        super("Leaf", false);
+        super("Leaf", false, ATTACK_BONUS);
+        this.effects.add(new HealingEffect(HEAL_AMOUNT));
     }
 
     /**
