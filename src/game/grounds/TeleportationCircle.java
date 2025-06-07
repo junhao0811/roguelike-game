@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.TeleportAction;
 import game.enums.Ability;
 
 import java.util.ArrayList;
@@ -38,4 +39,29 @@ public class TeleportationCircle extends Ground {
         destinations.add(destination);
         destinationNames.add(destinationName);
     }
+
+    /**
+     * Returns a list of allowable actions for the actor at this location
+     *
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return a list of Actions
+     */
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        ActionList actions = new ActionList();
+
+
+        if (actor.hasCapability(Ability.TELEPORT)) {
+            if (location.containsAnActor() && location.getActor() == actor) {
+                for (int i = 0; i < destinations.size(); i++) {
+                    actions.add(new TeleportAction(destinations.get(i), destinationNames.get(i)));
+                }
+            }
+        }
+
+        return actions;
+    }
 }
+
