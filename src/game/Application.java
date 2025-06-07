@@ -8,6 +8,7 @@ import game.actors.npcs.*;
 import game.actors.npcs.MerchantKale;
 import game.actors.npcs.Sellen;
 import game.displays.FancyMessage;
+import game.enums.BehaviourSelection;
 import game.grounds.crops.Bloodrose;
 import game.grounds.crops.Inheritree;
 import game.items.Talisman;
@@ -94,14 +95,23 @@ public class Application {
 
 
         // Add spirit goat and omen sheep to the game map
-        Creature spiritGoat = new SpiritGoat();
+        Creature spiritGoat = new SpiritGoat(BehaviourSelection.DEFAULT);
         gameMap.at(22, 13).addActor(spiritGoat);
-        
-        Creature omenSheep = new OmenSheep();
+
+        Creature omenSheep = new OmenSheep(BehaviourSelection.DEFAULT);
         //gameMap.at(24, 13).addActor(omenSheep);
-        
-        Creature goldenBeetle = new GoldenBeetle();
+
+        Creature goldenBeetle = new GoldenBeetle(BehaviourSelection.DEFAULT);
+
         //gameMap.at(23, 13).addActor(goldenBeetle);
+        Creature spiritGoat2 = new SpiritGoat(BehaviourSelection.RANDOM);
+        limveldGameMap.at(6, 6).addActor(spiritGoat2);
+
+        Creature omenSheep2 = new OmenSheep(BehaviourSelection.RANDOM);
+        limveldGameMap.at(9, 9).addActor(omenSheep2);
+
+        Creature goldenBeetle2 = new GoldenBeetle(BehaviourSelection.RANDOM);
+        limveldGameMap.at(10, 10).addActor(goldenBeetle2);
 
         NPC guts = new Guts();
         //gameMap.at(22, 14).addActor(guts);

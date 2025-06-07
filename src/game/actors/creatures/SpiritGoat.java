@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.npcs.NPC;
 import game.enums.Ability;
+import game.enums.BehaviourSelection;
 import game.enums.Status;
 import game.actions.CureAction;
 import game.actors.statuseffects.CrimsonRot;
@@ -35,8 +36,8 @@ public class SpiritGoat extends Creature implements Curable, Reproducible {
     /**
      * Constructor
      */
-    public SpiritGoat() {
-        super("Spirit Goat", 'y', 50);
+    public SpiritGoat(BehaviourSelection selection) {
+        super("Spirit Goat", 'y', 50, selection);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
         this.addStatusEffect(new CrimsonRot(10));
@@ -86,8 +87,15 @@ public class SpiritGoat extends Creature implements Curable, Reproducible {
         // Select a random valid location
         Location birthLocation = validLocations.get(random.nextInt(validLocations.size()));
 
+        BehaviourSelection offspringBehavior;
+        if (random.nextBoolean()) {
+            offspringBehavior = BehaviourSelection.RANDOM;
+        } else {
+            offspringBehavior = BehaviourSelection.DEFAULT;
+        }
+
         // Create and place the offspring
-        SpiritGoat offspring = new SpiritGoat();
+        SpiritGoat offspring = new SpiritGoat(offspringBehavior);
         birthLocation.addActor(offspring);
 
         new Display().println("An offspring of " + actor + " has spawned");

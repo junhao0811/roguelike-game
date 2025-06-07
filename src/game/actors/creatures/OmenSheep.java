@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.npcs.NPC;
 import game.enums.Ability;
+import game.enums.BehaviourSelection;
 import game.enums.Status;
 import game.actions.CureAction;
 import game.actors.statuseffects.CrimsonRot;
@@ -19,6 +20,8 @@ import game.capabilities.Reproducible;
 import game.grounds.crops.Inheritree;
 import game.items.Egg;
 
+import java.util.Random;
+
 /**
  * Class representing an Omen Sheep
  *
@@ -28,12 +31,13 @@ import game.items.Egg;
 public class OmenSheep extends Creature implements Curable, Reproducible, Hatchable {
 
     private int reproductionCounter = 0;
-    
+
+    private Random random = new Random();
     /**
      * Constructor
      */
-    public OmenSheep() {
-        super("Omen Sheep", 'm', 75);
+    public OmenSheep(BehaviourSelection selection) {
+        super("Omen Sheep", 'm', 75, selection);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
         this.addStatusEffect(new CrimsonRot(15));
@@ -63,7 +67,13 @@ public class OmenSheep extends Creature implements Curable, Reproducible, Hatcha
 
     @Override
     public Creature hatch() {
-        return new OmenSheep();
+        BehaviourSelection offspringBehavior;
+        if (random.nextBoolean()) {
+            offspringBehavior = BehaviourSelection.RANDOM;
+        } else {
+            offspringBehavior = BehaviourSelection.DEFAULT;
+        }
+        return new OmenSheep(offspringBehavior);
     }
 
     @Override

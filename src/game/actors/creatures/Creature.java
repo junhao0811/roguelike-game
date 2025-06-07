@@ -29,7 +29,7 @@ public abstract class Creature extends Actor {
     /**
      * The strategy for selecting behaviors
      */
-    private final BehaviourSelection selectionStrategy;
+    private final BehaviourSelection selection;
 
     /**
      * Random instance for random behavior selection
@@ -43,9 +43,9 @@ public abstract class Creature extends Actor {
      * @param displayChar the character that will represent the NPC in the display
      * @param hitPoints   the NPC's starting hit points
      */
-    protected Creature(String name, char displayChar, int hitPoints, BehaviourSelection selectionStrategy ) {
+    protected Creature(String name, char displayChar, int hitPoints, BehaviourSelection selection ) {
         super(name, displayChar, hitPoints);
-        this.selectionStrategy = selectionStrategy;
+        this.selection = selection;
     }
 
     /**
@@ -71,7 +71,7 @@ public abstract class Creature extends Actor {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         Action selectedAction = null;
 
-        if (selectionStrategy == BehaviourSelection.DEFAULT) {
+        if (selection == BehaviourSelection.DEFAULT) {
             for (Behaviour behaviour : behaviours.values()) {
                 selectedAction = behaviour.getAction(this, map);
                 if (selectedAction != null) {
@@ -79,7 +79,7 @@ public abstract class Creature extends Actor {
                 }
             }
 
-        } else if (selectionStrategy == BehaviourSelection.RANDOM) {
+        } else if (selection == BehaviourSelection.RANDOM) {
             if (!behaviours.isEmpty()) {
                 List<Behaviour> behaviorList = new ArrayList<>(behaviours.values());
                 Behaviour randomBehaviour = behaviorList.get(random.nextInt(behaviorList.size()));
