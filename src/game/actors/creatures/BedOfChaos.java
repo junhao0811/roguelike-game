@@ -1,6 +1,7 @@
 package game.actors.creatures;
 
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.GrowthBehaviour;
 import game.behaviours.SmackBehaviour;
 import game.bossparts.BossPart;
@@ -9,6 +10,7 @@ import game.bossparts.Leaf;
 import game.capabilities.Growable;
 import game.enums.Ability;
 import game.enums.BehaviourSelection;
+import game.weapons.BossWeapon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,4 +95,31 @@ public class BedOfChaos extends Creature implements Growable {
 
         return random.nextBoolean() ? new Branch() : new Leaf();
     }
+
+    /**
+     * Calculates total attack bonus from all grown parts
+     */
+    private int getTotalAttackBonus() {
+        int totalBonus = 0;
+
+        // Simple iteration for clarity
+        for (BossPart part : growthParts) {
+            totalBonus += part.getAttackBonus();
+        }
+
+        return totalBonus;
+    }
+
+    /**
+     * Returns the intrinsic weapon for the Bed of Chaos
+     * Uses the BossWeapon with 25 damage and 75% hit rate
+     *
+     * @return BossWeapon intrinsic weapon
+     */
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        int bonusDamage = getTotalAttackBonus();
+        return new BossWeapon(bonusDamage);
+    }
+
 }
