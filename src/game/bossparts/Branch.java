@@ -2,6 +2,12 @@ package game.bossparts;
 
 import java.util.Random;
 
+/**
+ * Class representing a Branch part of the Bed of Chaos boss
+ * This part can grow into either another Branch or a Leaf
+ *
+ * @author Ng Jun Xian
+ */
 public class Branch extends BossPart {
 
     private Random random = new Random();

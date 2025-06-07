@@ -8,7 +8,14 @@ package game.bossparts;
  */
 public abstract class BossPart {
 
+    /**
+     * The name of the part
+     */
     protected final String name;
+
+    /**
+     * Whether this part can continue growing
+     */
     protected final boolean canGrow;
 
     /**

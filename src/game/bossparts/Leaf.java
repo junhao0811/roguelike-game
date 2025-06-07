@@ -1,5 +1,11 @@
 package game.bossparts;
 
+/**
+ * Class representing a Leaf part of the Bed of Chaos boss
+ * This part does not grow further
+ *
+ * @author Ng Jun Xian
+ */
 public class Leaf extends BossPart {
 
     /**
