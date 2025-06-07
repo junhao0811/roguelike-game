@@ -1,5 +1,9 @@
 package game;
 
+import game.actors.creatures.Creature;
+import game.actors.creatures.GoldenBeetle;
+import game.actors.creatures.OmenSheep;
+import game.actors.creatures.SpiritGoat;
 import game.actors.npcs.*;
 import game.actors.npcs.MerchantKale;
 import game.actors.npcs.Sellen;
@@ -90,13 +94,13 @@ public class Application {
 
 
         // Add spirit goat and omen sheep to the game map
-        NPC spiritGoat = new SpiritGoat();
+        Creature spiritGoat = new SpiritGoat();
         gameMap.at(22, 13).addActor(spiritGoat);
         
-        NPC omenSheep = new OmenSheep();
+        Creature omenSheep = new OmenSheep();
         //gameMap.at(24, 13).addActor(omenSheep);
         
-        NPC goldenBeetle = new GoldenBeetle();
+        Creature goldenBeetle = new GoldenBeetle();
         //gameMap.at(23, 13).addActor(goldenBeetle);
 
         NPC guts = new Guts();

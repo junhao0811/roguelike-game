@@ -1,10 +1,11 @@
-package game.actors.npcs;
+package game.actors.creatures;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.npcs.NPC;
 import game.enums.Ability;
 import game.enums.Status;
 import game.actions.EatAction;
@@ -22,7 +23,7 @@ import game.items.Egg;
  * @author Chong Jun Hao
  * @version 22.0.1
  */
-public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible {
+public class GoldenBeetle extends Creature implements Reproducible, Hatchable, Edible {
 
     private int reproductionCounter = 0;
     
@@ -49,7 +50,7 @@ public class GoldenBeetle extends NPC implements Reproducible, Hatchable, Edible
     }
 
     @Override
-    public NPC hatch() {
+    public Creature hatch() {
         return new GoldenBeetle();
     }
 

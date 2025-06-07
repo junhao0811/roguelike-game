@@ -1,4 +1,4 @@
-package game.actors.npcs;
+package game.actors.creatures;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.npcs.NPC;
 import game.enums.Ability;
 import game.enums.Status;
 import game.actions.CureAction;
@@ -24,7 +25,7 @@ import game.items.Egg;
  * @author Chong Jun Hao and Ng Jun Xian
  * @version 22.0.1
  */
-public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
+public class OmenSheep extends Creature implements Curable, Reproducible, Hatchable {
 
     private int reproductionCounter = 0;
     
@@ -61,7 +62,7 @@ public class OmenSheep extends NPC implements Curable, Reproducible, Hatchable {
     }
 
     @Override
-    public NPC hatch() {
+    public Creature hatch() {
         return new OmenSheep();
     }
 

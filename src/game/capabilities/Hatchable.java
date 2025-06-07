@@ -1,6 +1,7 @@
 package game.capabilities;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.creatures.Creature;
 import game.actors.npcs.NPC;
 
 /**
@@ -15,7 +16,7 @@ public interface Hatchable {
      *
      * @return the Npc that hatches from the Egg
      */
-    NPC hatch();
+    Creature hatch();
 
     /**
      * Hatching condition for the Egg. The Egg can hatch into other creatures with different
