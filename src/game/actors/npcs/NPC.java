@@ -80,6 +80,17 @@ public abstract class NPC extends Actor implements Giveable {
         return behaviours.values();
     }
     
+    /**
+     * Allows the farmer to gift an affection item to this NPC. The gifting operation checks
+     * whether the NPC has the capability to receive the gift and if the item can be given.
+     * If successful, the item is removed from the actor's inventory, added to the NPC's inventory,
+     * and any associated affection effect of the gift is applied between the actor and this NPC.
+     *
+     * @param actor the Player attempting to gift the item
+     * @param gift the item to be gifted
+     * @param map the map where the operation occurs
+     * @return a message indicating the result of the gifting operation
+     */
     @Override
     public String gift(Actor actor, Item gift, GameMap map) {
         if (this.hasCapability(Ability.RECEIVE) && gift.hasCapability(Ability.GIVE)) {
