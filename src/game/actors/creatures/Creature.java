@@ -41,7 +41,7 @@ public abstract class Creature extends Actor {
      *
      * @param name        the name of the Creature
      * @param displayChar the character that will represent the NPC in the display
-     * @param hitPoints   the NPC's starting hit points
+     * @param hitPoints   the Creature's starting hit points
      */
     protected Creature(String name, char displayChar, int hitPoints, BehaviourSelection selection ) {
         super(name, displayChar, hitPoints);
