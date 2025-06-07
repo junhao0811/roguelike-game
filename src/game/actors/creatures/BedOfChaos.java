@@ -1,6 +1,8 @@
 package game.actors.creatures;
 
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.behaviours.GrowthBehaviour;
+import game.behaviours.SmackBehaviour;
 import game.bossparts.BossPart;
 import game.bossparts.Branch;
 import game.bossparts.Leaf;
@@ -29,6 +31,8 @@ public class BedOfChaos extends Creature implements Growable {
         super("Bed of Chaos", 'T', 1000, selectionStrategy);
         this.addCapability(Ability.GROW);
         this.growthParts = new ArrayList<>();
+        this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
+        this.addBehaviour(Integer.MAX_VALUE - 1, new GrowthBehaviour(this));
     }
 
     @Override
