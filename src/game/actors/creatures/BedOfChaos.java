@@ -1,6 +1,8 @@
 package game.actors.creatures;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.GrowthBehaviour;
 import game.behaviours.SmackBehaviour;
@@ -10,8 +12,8 @@ import game.bossparts.Leaf;
 import game.capabilities.Growable;
 import game.enums.Ability;
 import game.enums.BehaviourSelection;
+import game.items.affectionitems.BossTrophy;
 import game.weapons.BossWeapon;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,21 +21,24 @@ import java.util.Random;
 /**
  * Class representing the Bed of Chaos, a creature in the game.
  *
- * @author Ng Jun Xian
+ * The Bed of Chaos is a unique creature that can only be attacked by the player.
+ * It has a special behavior that allows it to attack the player when they are within range.
+ *
+ * @author Chong Jun Hao
  */
 public class BedOfChaos extends Creature implements Growable {
 
     private final List<BossPart> growthParts;
     private Random random = new Random();
-
+    
     /**
      * Constructor for BedOfChaos.
      */
     public BedOfChaos(BehaviourSelection selectionStrategy) {
         super("Bed of Chaos", 'T', 1000, selectionStrategy);
+        this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
         this.addCapability(Ability.GROW);
         this.growthParts = new ArrayList<>();
-        this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new GrowthBehaviour(this));
     }
 
@@ -90,24 +95,51 @@ public class BedOfChaos extends Creature implements Growable {
 
         return effects.toString();
     }
+    
+    /**
+     * Calculates total attack bonus from all grown parts
+     * Uses the getAttackBonus() method instead of effects system
+     * Refactored for better readability and performance
+     */
+    private int getTotalAttackBonus() {
+        int totalBonus = 0;
+        
+        // Simple iteration for clarity
+        for (BossPart part : growthParts) {
+            totalBonus += part.getAttackBonus();
+        }
+        
+        return totalBonus;
+    }
 
     private BossPart getRandomGrowthPart() {
 
         return random.nextBoolean() ? new Branch() : new Leaf();
     }
-
+    
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        // Drop BossTrophy before becoming unconscious
+        super.unconscious(map);
+        return dropBossTrophy(map);
+    }
+    
     /**
-     * Calculates total attack bonus from all grown parts
+     * Handles dropping BossTrophy when Bed of Chaos dies
+     * Always drops (100% drop rate)
      */
-    private int getTotalAttackBonus() {
-        int totalBonus = 0;
-
-        // Simple iteration for clarity
-        for (BossPart part : growthParts) {
-            totalBonus += part.getAttackBonus();
+    private String dropBossTrophy(GameMap map) {
+        String result = null;
+        Location currentLocation = map.locationOf(this);
+        if (currentLocation != null) {
+            BossTrophy bossTrophy = new BossTrophy();
+            currentLocation.addItem(bossTrophy);
+            
+            
+            result = "The " + this + " drops a Boss Trophy as proof of your victory!";
         }
-
-        return totalBonus;
+        
+        return result;
     }
 
     /**
