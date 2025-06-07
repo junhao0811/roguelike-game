@@ -1,9 +1,6 @@
 package game;
 
-import game.actors.creatures.Creature;
-import game.actors.creatures.GoldenBeetle;
-import game.actors.creatures.OmenSheep;
-import game.actors.creatures.SpiritGoat;
+import game.actors.creatures.*;
 import game.actors.npcs.*;
 import game.actors.npcs.MerchantKale;
 import game.actors.npcs.Sellen;
@@ -112,6 +109,9 @@ public class Application {
 
         Creature goldenBeetle2 = new GoldenBeetle(BehaviourSelection.RANDOM);
         limveldGameMap.at(10, 10).addActor(goldenBeetle2);
+
+        Creature bedofchaos = new BedOfChaos(BehaviourSelection.DEFAULT);
+        limveldGameMap.at(8, 8).addActor(bedofchaos);
 
         NPC guts = new Guts();
         //gameMap.at(22, 14).addActor(guts);
