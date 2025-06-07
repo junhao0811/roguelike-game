@@ -12,6 +12,7 @@ import game.grounds.Floor;
 import game.actors.Player;
 import game.grounds.Soil;
 import game.grounds.Wall;
+import game.grounds.TeleportationCircle;
 import game.items.Seed;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +21,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+
 
 /**
  * The main class to setup and run the game.
@@ -54,7 +56,39 @@ public class Application {
         
         GameMap gameMap = new GameMap("Valley of the Inheritree", groundFactory, map);
         world.addGameMap(gameMap);
-        
+
+        // A3 Req 1
+        List<String> limveldMap = Arrays.asList(
+                ".............xxxx",
+                "..............xxx",
+                "................x",
+                ".................",
+                "................x",
+                "...............xx",
+                "..............xxx",
+                "..............xxx",
+                "..............xxx",
+                ".............xxxx",
+                ".............xxxx",
+                "....xxx.....xxxxx",
+                "....xxxx...xxxxxx");
+
+        GameMap limveldGameMap = new GameMap("Limveld", groundFactory, limveldMap);
+        world.addGameMap(limveldGameMap);
+
+        // Create teleportation circles and place them directly A3 Req 1
+        TeleportationCircle valleyTeleporter = new TeleportationCircle();
+        TeleportationCircle limveldTeleporter = new TeleportationCircle();
+
+        // Place teleporters on the maps A3 Req 1
+        gameMap.at(23, 11).setGround(valleyTeleporter);
+        limveldGameMap.at(8, 6).setGround(limveldTeleporter);
+
+        // Add destinations to teleporters A3 Req 1
+        valleyTeleporter.addDestination(limveldGameMap.at(8, 6), "Limveld");
+        limveldTeleporter.addDestination(gameMap.at(23, 11), "Valley of the Inheritree");
+
+
         // Add spirit goat and omen sheep to the game map
         NPC spiritGoat = new SpiritGoat();
         gameMap.at(22, 13).addActor(spiritGoat);
