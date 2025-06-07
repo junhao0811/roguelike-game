@@ -1,12 +1,13 @@
 package game.actors.creatures;
 
+import java.util.Random;
+
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.npcs.NPC;
 import game.enums.Ability;
 import game.enums.BehaviourSelection;
 import game.enums.Status;
@@ -19,8 +20,7 @@ import game.capabilities.Hatchable;
 import game.capabilities.Reproducible;
 import game.grounds.crops.Inheritree;
 import game.items.Egg;
-
-import java.util.Random;
+import game.items.affectionitems.SacredTear;
 
 /**
  * Class representing an Omen Sheep
@@ -63,6 +63,30 @@ public class OmenSheep extends Creature implements Curable, Reproducible, Hatcha
     public boolean canReproduce(Actor actor, GameMap map) {
         reproductionCounter++;
         return reproductionCounter % 7 == 0;
+    }
+    
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        super.unconscious(map);
+        return dropSacredTear(map);
+    }
+    
+    /**
+     * Handles the rare drop of SacredTear when OmenSheep dies
+     * Low drop rate of approximately 15%
+     */
+    private String dropSacredTear(GameMap map) {
+        String result = null;
+        if (random.nextDouble() < 0.15) {
+            Location currentLocation = map.locationOf(this);
+            if (currentLocation != null) {
+                SacredTear sacredTear = new SacredTear();
+                currentLocation.addItem(sacredTear);
+                
+                result = "A Sacred Tear drops from the fallen " + this + "!";
+            }
+        }
+        return result;
     }
 
     @Override
