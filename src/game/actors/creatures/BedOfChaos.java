@@ -3,7 +3,6 @@ package game.actors.creatures;
 import game.enums.Ability;
 import game.enums.BehaviourSelection;
 
-
 /**
  * Class representing the Bed of Chaos, a creature in the game.
  */
