@@ -8,12 +8,11 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
+import game.enums.BehaviourSelection;
 import game.enums.Status;
 
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Class representing a Creature
@@ -28,14 +27,25 @@ public abstract class Creature extends Actor {
     private final Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
     /**
+     * The strategy for selecting behaviors
+     */
+    private final BehaviourSelection selectionStrategy;
+
+    /**
+     * Random instance for random behavior selection
+     */
+    private static final Random random = new Random();
+
+    /**
      * Constructor
      *
      * @param name        the name of the Creature
      * @param displayChar the character that will represent the NPC in the display
      * @param hitPoints   the NPC's starting hit points
      */
-    protected Creature(String name, char displayChar, int hitPoints) {
+    protected Creature(String name, char displayChar, int hitPoints, BehaviourSelection selectionStrategy ) {
         super(name, displayChar, hitPoints);
+        this.selectionStrategy = selectionStrategy;
     }
 
     /**
@@ -59,14 +69,30 @@ public abstract class Creature extends Actor {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : getBehaviours()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null) {
-                return action;
+        Action selectedAction = null;
+
+        if (selectionStrategy == BehaviourSelection.DEFAULT) {
+            for (Behaviour behaviour : behaviours.values()) {
+                selectedAction = behaviour.getAction(this, map);
+                if (selectedAction != null) {
+                    break;
+                }
+            }
+
+        } else if (selectionStrategy == BehaviourSelection.RANDOM) {
+            if (!behaviours.isEmpty()) {
+                List<Behaviour> behaviorList = new ArrayList<>(behaviours.values());
+                Behaviour randomBehaviour = behaviorList.get(random.nextInt(behaviorList.size()));
+                selectedAction = randomBehaviour.getAction(this, map);
+                // If the selected behavior returns null, the creature does nothing
             }
         }
 
-        return new DoNothingAction();
+        if (selectedAction != null) {
+            return selectedAction;
+        } else {
+            return new DoNothingAction();
+        }
     }
 
     @Override
