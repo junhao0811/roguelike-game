@@ -69,7 +69,7 @@ public class Application {
         //gameMap.at(22, 14).addActor(guts);
 
         NPC sellen = new Sellen();
-        //gameMap.at(23, 14).addActor(sellen);
+        gameMap.at(23, 14).addActor(sellen);
 
         NPC merchantKale = new MerchantKale();
         gameMap.at(24, 14).addActor(merchantKale);
