@@ -23,7 +23,7 @@ import java.util.Random;
  * The Bed of Chaos is a unique creature that can only be attacked by the player.
  * It has a special behavior that allows it to attack the player when they are within range.
  *
- * @author Chong Jun Hao
+ * @author Ng Jun Xian
  */
 public class BedOfChaos extends Creature implements Growable {
 
@@ -123,11 +123,25 @@ public class BedOfChaos extends Creature implements Growable {
         return totalBonus;
     }
 
+
+    /**
+     * Returns a random growth part (either Branch or Leaf)
+     * Used for the initial growth of the Bed of Chaos
+     * Randomly selects between Branch and Leaf
+     *
+     * @return a randomly selected growth part
+     */
     private BossPart getRandomGrowthPart() {
 
         return random.nextBoolean() ? new Branch() : new Leaf();
     }
-    
+
+    /**
+     * Returns the behaviours of the Bed of Chaos
+     * Overrides the getBehaviours method to include growth and smack behaviours
+     *
+     * @return a list of behaviours for the Bed of Chaos
+     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
         // Drop BossTrophy before becoming unconscious

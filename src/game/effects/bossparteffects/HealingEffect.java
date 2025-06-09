@@ -35,6 +35,13 @@ public class HealingEffect extends Effect {
         this.healAmount = healAmount;
     }
 
+    /**
+     * Applies the healing effect to the target actor
+     *
+     * @param actor The actor the effect is tied to.
+     * @param map The map the actor is on.
+     * @return a description of what happened
+     */
     @Override
     public String applyEffect(Actor actor, GameMap map) {
         Actor target = getTarget(actor);
