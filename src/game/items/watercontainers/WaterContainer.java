@@ -25,6 +25,10 @@ public abstract class WaterContainer extends Item {
         StringBuilder result = new StringBuilder(actor + " successfully waters the " +
                 crop + " with " + this);
 
+        if (!crop.getBloomState()) {
+            result.append("\n").append(crop.bloom());
+        }
+
         for (Effect effect : effects) {
             result.append("\n").append(effect.applyEffect(actor, map));
 
@@ -35,8 +39,8 @@ public abstract class WaterContainer extends Item {
         }
 
         return result.toString();
-
     }
+
 
     /**
      * Appends the contents of another Effects list to the EffectList

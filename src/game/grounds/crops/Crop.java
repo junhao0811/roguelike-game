@@ -42,10 +42,20 @@ public abstract class Crop extends Ground {
     }
 
     /**
+     * Getter method for bloom state
+     */
+    public boolean getBloomState() {
+        return bloomState;
+    }
+
+    /**
      * Method to set the bloom state of the Crop to true (blooms the crop)
      */
-    public final void bloom() {
+    public final String bloom() {
         bloomState = true;
+        setDisplayChar(Character.toUpperCase(getDisplayChar()));
+
+        return "The " + this + " has bloomed";
     }
 
     /**
