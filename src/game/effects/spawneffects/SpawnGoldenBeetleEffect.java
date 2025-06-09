@@ -1,19 +1,16 @@
 package game.effects.spawneffects;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.creatures.GoldenBeetle;
 import game.enums.BehaviourSelection;
-import java.util.Random;
-import game.actors.creatures.Creature;
 
 /**
  * Class representing the spawn Golden Beetle effect
  *
  * @author Tan Choong Sheng and Lee Hao Zhe
  */
-public class SpawnGoldenBeetleEffect extends SpawnEffect {
-
-    private Random random = new Random();
+public class SpawnGoldenBeetleEffect extends SpawnCreatureEffect {
 
     /**
      * Constructor
@@ -32,15 +29,7 @@ public class SpawnGoldenBeetleEffect extends SpawnEffect {
     }
 
     @Override
-    protected Creature spawnCreature() {
-        // Randomly decide the behavior selection strategy for the spawned creature
-        BehaviourSelection offspringBehavior;
-        if (random.nextBoolean()) {
-            offspringBehavior = BehaviourSelection.RANDOM;
-        } else {
-            offspringBehavior = BehaviourSelection.DEFAULT;
-        }
-
-        return new GoldenBeetle(offspringBehavior);
+    public String applyEffect(Actor actor, GameMap map) {
+        return super.spawnCreature(actor, map, new GoldenBeetle(BehaviourSelection.DEFAULT));
     }
 }
