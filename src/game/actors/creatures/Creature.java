@@ -42,10 +42,23 @@ public abstract class Creature extends Actor {
      * @param name        the name of the Creature
      * @param displayChar the character that will represent the NPC in the display
      * @param hitPoints   the Creature's starting hit points
+     * @param selection   the Creature's strategy for selecting behaviours
      */
     protected Creature(String name, char displayChar, int hitPoints, BehaviourSelection selection ) {
         super(name, displayChar, hitPoints);
         this.selection = selection;
+    }
+
+    /**
+     * Constructor with default behaviour selection as default
+     *
+     * @param name        the name of the Creature
+     * @param displayChar the character that will represent the NPC in the display
+     * @param hitPoints   the Creature's starting hit points
+     */
+    protected Creature(String name, char displayChar, int hitPoints) {
+        super(name, displayChar, hitPoints);
+        this.selection = BehaviourSelection.DEFAULT;
     }
 
     /**
@@ -90,9 +103,9 @@ public abstract class Creature extends Actor {
 
         if (selectedAction != null) {
             return selectedAction;
-        } else {
-            return new DoNothingAction();
         }
+
+        return new DoNothingAction();
     }
 
     @Override

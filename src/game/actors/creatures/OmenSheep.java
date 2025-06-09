@@ -31,13 +31,27 @@ import game.items.affectionitems.SacredTear;
 public class OmenSheep extends Creature implements Curable, Reproducible, Hatchable {
 
     private int reproductionCounter = 0;
+    private final Random random = new Random();
 
-    private Random random = new Random();
     /**
      * Constructor
+     *
+     * @param selection the Omen Sheep's strategy for selecting behaviours
      */
     public OmenSheep(BehaviourSelection selection) {
         super("Omen Sheep", 'm', 75, selection);
+        this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
+        this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
+        this.addStatusEffect(new CrimsonRot(15));
+        this.addCapability(Ability.PRODUCE_EGG);
+        this.addCapability(Status.CURSED);
+    }
+
+    /**
+     * Constructor with default behaviour selection as default
+     */
+    public OmenSheep() {
+        super("Omen Sheep", 'm', 75);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
         this.addStatusEffect(new CrimsonRot(15));

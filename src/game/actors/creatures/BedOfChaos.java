@@ -20,7 +20,6 @@ import java.util.Random;
 
 /**
  * Class representing the Bed of Chaos, a creature in the game.
- *
  * The Bed of Chaos is a unique creature that can only be attacked by the player.
  * It has a special behavior that allows it to attack the player when they are within range.
  *
@@ -29,17 +28,30 @@ import java.util.Random;
 public class BedOfChaos extends Creature implements Growable {
 
     private final List<BossPart> growthParts;
-    private Random random = new Random();
+    private final Random random = new Random();
     
     /**
-     * Constructor for BedOfChaos.
+     * Constructor
+     *
+     @param selection the Bed of Chaos' strategy for selecting behaviours
      */
-    public BedOfChaos(BehaviourSelection selectionStrategy) {
-        super("Bed of Chaos", 'T', 1000, selectionStrategy);
-        this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
-        this.addCapability(Ability.GROW);
+    public BedOfChaos(BehaviourSelection selection) {
+        super("Bed of Chaos", 'T', 1000, selection);
         this.growthParts = new ArrayList<>();
+        this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new GrowthBehaviour(this));
+        this.addCapability(Ability.GROW);
+    }
+
+    /**
+     * Constructor with default behaviour selection as default
+     */
+    public BedOfChaos() {
+        super("Bed of Chaos", 'T', 1000);
+        this.growthParts = new ArrayList<>();
+        this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
+        this.addBehaviour(Integer.MAX_VALUE - 1, new GrowthBehaviour(this));
+        this.addCapability(Ability.GROW);
     }
 
     @Override
@@ -60,8 +72,7 @@ public class BedOfChaos extends Creature implements Growable {
             }
 
             // Get the next part in the growth chain
-            BossPart nextPart = currentPart.growPart();
-            currentPart = nextPart; // Move to next part or null to end chain
+            currentPart = currentPart.growPart(); // Move to next part or null to end chain
         }
 
         // Add the final part that cannot grow further

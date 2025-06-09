@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.npcs.NPC;
 import game.enums.Ability;
 import game.enums.BehaviourSelection;
 import game.enums.Status;
@@ -35,9 +34,23 @@ public class SpiritGoat extends Creature implements Curable, Reproducible {
 
     /**
      * Constructor
+     *
+     * @param selection the Spirit Goat's strategy for selecting behaviours
      */
     public SpiritGoat(BehaviourSelection selection) {
         super("Spirit Goat", 'y', 50, selection);
+        this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
+        this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
+        this.addStatusEffect(new CrimsonRot(10));
+        this.addCapability(Ability.PRODUCE_OFFSPRING);
+        this.addCapability(Status.CURSED);
+    }
+
+    /**
+     * Constructor with default behaviour selection as default
+     */
+    public SpiritGoat() {
+        super("Spirit Goat", 'y', 50);
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
         this.addStatusEffect(new CrimsonRot(10));
