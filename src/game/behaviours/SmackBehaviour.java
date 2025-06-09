@@ -33,11 +33,6 @@ public class SmackBehaviour implements Behaviour {
 
             if (destination.containsAnActor()) {
                 Actor target = destination.getActor();
-
-                // Check if target is hostile to this actor
-                if (target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                    return new AttackAction(target, exit.getName());
-                }
             }
         }
         return null; // No nearby targets to attack
