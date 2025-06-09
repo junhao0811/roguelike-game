@@ -7,8 +7,17 @@ import game.effects.attributeeffects.ReduceAttributeEffect;
 import game.enums.Status;
 import game.grounds.crops.Crop;
 
+/**
+ * Class representing a water container called the Demon Jug.
+ * This water container hurts the user when used, but is not usable on crops blessed by grace.
+ *
+ * @author Lee Hao Zhe
+ */
 public class DemonJug extends WaterContainer {
 
+    /**
+     * Constructor
+     */
     public DemonJug() {
         super("Demon Jug", 'd');
         this.addEffect(new ReduceAttributeEffect(BaseActorAttributes.HEALTH, 25));

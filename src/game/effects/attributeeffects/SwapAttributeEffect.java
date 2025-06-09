@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.effects.Effect;
 
 /**
- * Class representing a modify attribute effect
+ * Class representing a swap attribute effect
  *
  * @author Lee Hao Zhe
  */

@@ -13,14 +13,35 @@ import game.grounds.crops.Crop;
 
 import java.util.List;
 
+/**
+ * Class representing a water container that an actor can pick up, drop, and
+ * use to water crops
+ *
+ * @author Lee Hao Zhe
+ */
 public abstract class WaterContainer extends Item {
 
     private final EffectList effects = new EffectList();
 
+    /**
+     * Constructor
+     *
+     * @param name        name of the water container
+     * @param displayChar character to use for display when water container is on the ground
+     */
     protected WaterContainer(String name, char displayChar) {
         super(name, displayChar, true);
     }
 
+    /**
+     * Waters the crop which allows it to bloom if it has not done so before
+     * applying the effects tied to the water container
+     *
+     * @param actor the actor who performed the watering action
+     * @param map   the map on which the watering action was executed
+     * @param crop  the crop who is the target of the watering action
+     * @return a description of what happened when watering the crop
+     */
     public String water(Actor actor, GameMap map, Crop crop) {
         StringBuilder result = new StringBuilder(actor + " successfully waters the " +
                 crop + " with " + this);

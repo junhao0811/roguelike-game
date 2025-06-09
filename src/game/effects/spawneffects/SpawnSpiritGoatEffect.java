@@ -6,7 +6,7 @@ import game.actors.creatures.SpiritGoat;
 import game.enums.BehaviourSelection;
 
 /**
- * Class representing the spawn Golden Beetle effect
+ * Class representing the spawn Spirit Goat effect
  *
  * @author Lee Hao Zhe
  */

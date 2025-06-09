@@ -6,29 +6,34 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.grounds.crops.Crop;
 import game.items.watercontainers.WaterContainer;
 
+/**
+ * Class representing an action to water
+ *
+ * @author Lee Hao Zhe
+ */
 public class WaterAction extends Action {
 
-    private final Crop target;
+    private final Crop crop;
     private final WaterContainer waterContainer;
 
     /**
      * Constructor
      *
-     * @param target the target to water
+     * @param crop the crop to water
      * @param waterContainer the WaterContainer used to water the target
      */
-    public WaterAction(Crop target, WaterContainer waterContainer) {
-        this.target = target;
+    public WaterAction(Crop crop, WaterContainer waterContainer) {
+        this.crop = crop;
         this.waterContainer = waterContainer;
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return waterContainer.water(actor, map, target);
+        return waterContainer.water(actor, map, crop);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " waters the " + target + " with " + waterContainer;
+        return actor + " waters the " + crop + " with " + waterContainer;
     }
 }
