@@ -13,7 +13,6 @@ import game.enums.Status;
 import game.actions.SpeakAction;
 import game.capabilities.speakable.MonologueList;
 import game.behaviours.WanderBehaviour;
-import game.capabilities.speakable.Speakable;
 import game.conditions.EmptyInventoryCondition;
 import game.conditions.NearbyCondition;
 import game.conditions.comparisons.ComparisonOperations;
@@ -29,7 +28,7 @@ import game.weapons.DragonslayerGreatsword;
  *
  * @author Abaan Anwar and Lee Hao Zhe, modified by Chong Jun Hao
  */
-public class MerchantKale extends NPC implements Speakable, Merchant {
+public class MerchantKale extends NPC implements Merchant {
 
     /**
      * Constructor

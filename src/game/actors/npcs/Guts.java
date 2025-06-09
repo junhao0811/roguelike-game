@@ -8,7 +8,6 @@ import game.actions.SpeakAction;
 import game.behaviours.BerserkBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.capabilities.speakable.MonologueList;
-import game.capabilities.speakable.Speakable;
 import game.conditions.comparisons.AttributeComparisonCondition;
 import game.conditions.comparisons.ComparisonOperations;
 import game.enums.Ability;
@@ -21,7 +20,7 @@ import game.items.consumables.StaminaTonic;
  *
  * @author Abaan Anwar and Lee Hao Zhe, modified by Chong Jun Hao
  */
-public class Guts extends NPC implements Speakable {
+public class Guts extends NPC {
 
     /**
      * Constructor

@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.actions.GiveAction;
 import game.capabilities.Giveable;
+import game.capabilities.speakable.Speakable;
 import game.enums.Ability;
 import game.enums.Status;
 import game.items.affectionitems.AffectionItem;
@@ -23,7 +24,7 @@ import java.util.TreeMap;
  *
  * @author Lee Hao Zhe, modified by Chong Jun Hao
  */
-public abstract class NPC extends Actor implements Giveable {
+public abstract class NPC extends Actor implements Speakable, Giveable {
 
     /**
      * The behaviours TreeMap to store all the behaviours of the NPC

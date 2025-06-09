@@ -11,7 +11,6 @@ import game.capabilities.merchant.Stock;
 import game.capabilities.merchant.StockList;
 import game.capabilities.speakable.MonologueList;
 import game.behaviours.WanderBehaviour;
-import game.capabilities.speakable.Speakable;
 import game.effects.attributeeffects.RestoreAttributeEffect;
 import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
 import game.effects.spawneffects.SpawnGoldenBeetleEffect;
@@ -28,7 +27,7 @@ import game.enums.Status;
  *
  * @author Abaan Anwar and Lee Hao Zhe, modified by Chong Jun Hao
  */
-public class Sellen extends NPC implements Speakable, Merchant {
+public class Sellen extends NPC implements Merchant {
 
     /**
      * Constructor
