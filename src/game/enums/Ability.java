@@ -23,5 +23,6 @@ public enum Ability {
     GIVE,
     RECEIVE,
     CAUSE_BLEEDING,
-    CONSUME
+    CONSUME,
+    CAN_BE_WATERED,
 }

@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.enums.Ability;
 
 /**
  * A class representing a Crop
@@ -23,6 +24,7 @@ public abstract class Crop extends Ground {
         super(displayChar, name);
         this.name = name;
         this.staminaCost = staminaCost;
+        this.addCapability(Ability.CAN_BE_WATERED);
     }
 
     /**

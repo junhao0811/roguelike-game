@@ -1,10 +1,14 @@
 package game.items.watercontainers;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Ground;
+import game.actions.WaterAction;
 import game.effects.Effect;
 import game.effects.EffectList;
+import game.enums.Ability;
 import game.grounds.crops.Crop;
 
 import java.util.List;
@@ -61,5 +65,17 @@ public abstract class WaterContainer extends Item {
      */
     public void addEffect(Effect effect) {
         this.effects.add(effect);
+    }
+
+    @Override
+    public ActionList allowableActions(Actor owner, GameMap map) {
+        ActionList actions = new ActionList();
+        Ground ground = map.locationOf(owner).getGround();
+
+        if (ground.hasCapability(Ability.CAN_BE_WATERED)) {
+            actions.add(new WaterAction((Crop) ground, this));
+        }
+
+        return actions;
     }
 }
