@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class Branch extends BossPart {
 
-    private Random random = new Random();
+    private final Random random = new Random();
     private static final int ATTACK_BONUS = 3;
 
     /**
@@ -30,9 +30,8 @@ public class Branch extends BossPart {
     public BossPart growPart() {
         if (random.nextBoolean()) {
             return new Branch();
-        } else {
-            return new Leaf();
         }
-    }
 
+        return new Leaf();
+    }
 }

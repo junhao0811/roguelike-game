@@ -14,14 +14,14 @@ import edu.monash.fit2099.engine.items.Item;
  */
 public class GiveAction extends Action {
     
-    private Giveable targetNPC;
-    private Item gift;
-    private String direction;
+    private final Giveable targetNPC;
+    private final Item gift;
+    private String direction = "";
     
     public GiveAction(Giveable targetNPC, Item gift, String direction) {
         this.targetNPC = targetNPC;
         this.gift = gift;
-        this.direction = direction;
+        this.direction = " at " + direction;
     }
     
     public GiveAction(Giveable targetNPC, Item gift) {
@@ -36,6 +36,6 @@ public class GiveAction extends Action {
     
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " gives " + gift + " to " + targetNPC;
+        return actor + " gives " + gift + " to " + targetNPC + direction;
     }
 }

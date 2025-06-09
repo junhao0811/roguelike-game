@@ -13,8 +13,8 @@ import edu.monash.fit2099.engine.positions.Location;
  */
 public class TeleportAction extends Action {
 
-    private Location destination;
-    private String destinationName;
+    private final Location destination;
+    private final String destinationName;
 
     /**
      * Constructor

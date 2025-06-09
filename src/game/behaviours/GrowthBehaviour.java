@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.GrowthAction;
-import game.enums.Status;
 import game.capabilities.Growable;
 
 /**
@@ -17,7 +16,7 @@ import game.capabilities.Growable;
  */
 public class GrowthBehaviour implements Behaviour {
 
-    private Growable growable;
+    private final Growable growable;
 
     /**
      * Constructor for GrowthBehaviour
@@ -37,22 +36,16 @@ public class GrowthBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        Location actorLocation = map.locationOf(actor);
-
-        // Check all adjacent locations for hostile targets (players)
-        for (Exit exit : actorLocation.getExits()) {
+        // Check all adjacent locations for possible targets (actors)
+        for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
 
             if (destination.containsAnActor()) {
-                Actor target = destination.getActor();
-
-                // If there's a player nearby, don't grow
-                if (target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                    return null;
-                }
+                return null;
             }
         }
-        // No players nearby, can grow
+
+        // No targets (actors) nearby, can grow
         return new GrowthAction(growable);
     }
 }

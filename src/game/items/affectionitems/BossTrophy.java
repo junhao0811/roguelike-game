@@ -13,7 +13,6 @@ public class BossTrophy extends AffectionItem {
     
     private static final int POSITIVE_AFFECTION = 25;
     
-    
     /**
      * Constructor for BossTrophy
      */

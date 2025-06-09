@@ -38,8 +38,8 @@ public class ReproduceBehaviour implements Behaviour {
         // Check if the actor can reproduce (logic in actor classes)
         if (reproducible.canReproduce(actor, map)) {
             return new ReproduceAction(reproducible);
-        } else {
-            return null;
         }
+
+        return null;
     }
 }

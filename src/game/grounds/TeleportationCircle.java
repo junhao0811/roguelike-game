@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class TeleportationCircle extends Ground {
 
-    private List<Location> destinations;
-    private List<String> destinationNames;
+    private final List<Location> destinations;
+    private final List<String> destinationNames;
 
     /**
      * Constructor
@@ -51,7 +51,6 @@ public class TeleportationCircle extends Ground {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-
 
         if (actor.hasCapability(Ability.TELEPORT)) {
             if (location.containsAnActor() && location.getActor() == actor) {

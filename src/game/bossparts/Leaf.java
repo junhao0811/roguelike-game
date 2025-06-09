@@ -29,5 +29,4 @@ public class Leaf extends BossPart {
     public BossPart growPart() {
         return null; // A leaf cannot grow further
     }
-
 }

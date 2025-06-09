@@ -14,7 +14,7 @@ import game.capabilities.Growable;
  */
 public class GrowthAction extends Action {
 
-    private Growable boss;
+    private final Growable boss;
 
     /**
      * Constructor
@@ -28,7 +28,7 @@ public class GrowthAction extends Action {
     /**
      * Executes the growth action
      * Checks if the actor has the ability to grow
-     * If so, it calls the grow method on the boss
+     * If so, it calls the grow() method on the boss
      *
      * @param actor The actor performing the action
      * @param map The current game map
