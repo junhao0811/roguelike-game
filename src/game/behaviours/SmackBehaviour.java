@@ -7,7 +7,10 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
-import game.enums.Status;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A behaviour that makes an actor attack nearby hostile targets
@@ -15,6 +18,8 @@ import game.enums.Status;
  * @author Ng Jun Xian
  */
 public class SmackBehaviour implements Behaviour {
+
+    private final Random random = new Random();
 
     /**
      * Returns an AttackAction if there's a hostile target nearby, null otherwise
@@ -25,16 +30,21 @@ public class SmackBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        Location actorLocation = map.locationOf(actor);
+        List<Action> actions = new ArrayList<>();
 
-        // Check all adjacent locations for hostile targets
-        for (Exit exit : actorLocation.getExits()) {
+        for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
 
             if (destination.containsAnActor()) {
                 Actor target = destination.getActor();
+                actions.add(new AttackAction(target, exit.getName()));
             }
         }
+
+        if (!actions.isEmpty()) {
+            return actions.get(random.nextInt(actions.size()));
+        }
+
         return null; // No nearby targets to attack
     }
 }
