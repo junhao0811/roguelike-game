@@ -9,7 +9,7 @@ import game.enums.Status;
  * This water container is cursed and swaps the user's stamina and health
  * (both max and current value) when used
  *
- * @author Lee Hao Zhe
+ * @author Lee Hao Zhe and Abaan Anwar
  */
 public class CursedPot extends WaterContainer {
 

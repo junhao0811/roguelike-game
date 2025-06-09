@@ -11,7 +11,7 @@ import game.grounds.crops.Crop;
  * Class representing a water container called the Demon Jug.
  * This water container hurts the user when used, but is not usable on crops blessed by grace.
  *
- * @author Lee Hao Zhe
+ * @author Lee Hao Zhe and Abaan Anwar
  */
 public class DemonJug extends WaterContainer {
 

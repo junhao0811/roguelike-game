@@ -9,7 +9,7 @@ import game.items.watercontainers.WaterContainer;
 /**
  * Class representing an action to water
  *
- * @author Lee Hao Zhe
+ * @author Lee Hao Zhe and Abaan Anwar
  */
 public class WaterAction extends Action {
 

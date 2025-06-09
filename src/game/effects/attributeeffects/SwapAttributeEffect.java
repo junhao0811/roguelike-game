@@ -9,7 +9,7 @@ import game.effects.Effect;
 /**
  * Class representing a swap attribute effect
  *
- * @author Lee Hao Zhe
+ * @author Lee Hao Zhe and Abaan Anwar
  */
 public class SwapAttributeEffect extends Effect {
 

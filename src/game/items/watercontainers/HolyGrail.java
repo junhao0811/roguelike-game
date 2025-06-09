@@ -9,7 +9,7 @@ import game.enums.Status;
  * Class representing a water container called the Holy Grail.
  * This water container is blessed by grace, heals the user, and spawns a Spirit Goat when used.
  *
- * @author Lee Hao Zhe
+ * @author Lee Hao Zhe and Abaan Anwar
  */
 public class HolyGrail extends WaterContainer {
 

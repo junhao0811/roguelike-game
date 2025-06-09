@@ -17,7 +17,7 @@ import java.util.List;
  * Class representing a water container that an actor can pick up, drop, and
  * use to water crops
  *
- * @author Lee Hao Zhe
+ * @author Lee Hao Zhe and Abaan Anwar
  */
 public abstract class WaterContainer extends Item {
 
@@ -61,7 +61,6 @@ public abstract class WaterContainer extends Item {
 
         return result.toString();
     }
-
 
     /**
      * Appends the contents of another Effects list to the EffectList
