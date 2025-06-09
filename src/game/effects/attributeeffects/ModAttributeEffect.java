@@ -27,9 +27,9 @@ public abstract class ModAttributeEffect extends Effect {
      * @param verb the verb uses to describe the attribute modification
      * @param target the target of the effect
      */
-    public ModAttributeEffect(BaseActorAttributes attribute,
-                              ActorAttributeOperations operation,
-                              int value, String verb, Actor target) {
+    protected ModAttributeEffect(BaseActorAttributes attribute,
+                                 ActorAttributeOperations operation,
+                                 int value, String verb, Actor target) {
         super(target);
         this.attribute = attribute;
         this.operation = operation;
@@ -45,9 +45,9 @@ public abstract class ModAttributeEffect extends Effect {
      * @param value the value to modify the attribute by
      * @param verb the verb uses to describe the attribute modification
      */
-    public ModAttributeEffect(BaseActorAttributes attribute,
-                              ActorAttributeOperations operation,
-                              int value, String verb) {
+    protected ModAttributeEffect(BaseActorAttributes attribute,
+                                 ActorAttributeOperations operation,
+                                 int value, String verb) {
         super();
         this.attribute = attribute;
         this.operation = operation;
