@@ -4,8 +4,8 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
 
 /**
- * Class representing a weapon item called a broadsword.
- * This weapon item deals 30 damage points with a 50% chance to hit the target.
+ * Class representing a weapon item called a BossWeapon.
+ * This weapon item deals 25 base damage points with a 75% chance to hit the target.
  *
  * @author Ng Jun Xian
  */
