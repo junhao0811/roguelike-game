@@ -23,6 +23,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.items.watercontainers.CursedPot;
+import game.items.watercontainers.DemonJug;
+import game.items.watercontainers.HolyGrail;
 
 
 /**
@@ -142,6 +145,10 @@ public class Application {
         // one seed of "Bloodrose" in their inventory
         player.addItemToInventory(new Seed(new Inheritree()));
         player.addItemToInventory(new Seed(new Bloodrose()));
+
+        player.addItemToInventory(new CursedPot());
+        player.addItemToInventory(new DemonJug());
+        player.addItemToInventory(new HolyGrail());
 
         player.addBalance(5000);
 

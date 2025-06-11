@@ -3,6 +3,7 @@ package game.items.watercontainers;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Ground;
 import game.effects.attributeeffects.ReduceAttributeEffect;
 import game.enums.Status;
 import game.grounds.crops.Crop;
@@ -24,7 +25,9 @@ public class DemonJug extends WaterContainer {
     }
 
     @Override
-    public String water(Actor actor, GameMap map, Crop crop) {
+    public String water(Actor actor, GameMap map, Ground target) {
+        Crop crop = (Crop) target;
+
         if (crop.hasCapability(Status.BLESSED)) {
             return actor + " is unable to water the " + crop + " with " + this +
                     " as the " + crop + " is blessed by grace";

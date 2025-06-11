@@ -34,17 +34,19 @@ public abstract class WaterContainer extends Item {
     }
 
     /**
-     * Waters the crop which allows it to bloom if it has not done so before
+     * Waters the target which allows it to bloom if it has not done so before
      * applying the effects tied to the water container
      *
      * @param actor the actor who performed the watering action
      * @param map   the map on which the watering action was executed
-     * @param crop  the crop who is the target of the watering action
-     * @return a description of what happened when watering the crop
+     * @param target  the target of the watering action
+     * @return a description of what happened when watering the target
      */
-    public String water(Actor actor, GameMap map, Crop crop) {
+    public String water(Actor actor, GameMap map, Ground target) {
+        Crop crop = (Crop) target;
         StringBuilder result = new StringBuilder(actor + " successfully waters the " +
                 crop + " with " + this);
+
 
         if (!crop.getBloomState()) {
             result.append("\n").append(crop.bloom());
@@ -97,7 +99,7 @@ public abstract class WaterContainer extends Item {
         Ground ground = map.locationOf(owner).getGround();
 
         if (ground.hasCapability(Ability.CAN_BE_WATERED)) {
-            actions.add(new WaterAction((Crop) ground, this));
+            actions.add(new WaterAction(ground, this));
         }
 
         return actions;
