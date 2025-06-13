@@ -9,7 +9,7 @@ import game.actors.creatures.OmenSheep;
  *
  * @author Tan Choong Sheng and Lee Hao Zhe
  */
-public class SpawnOmenSheepEffect extends SpawnCreatureEffect {
+public class SpawnOmenSheepEffect extends SpawnActorEffect {
 
     /**
      * Constructor
@@ -29,6 +29,6 @@ public class SpawnOmenSheepEffect extends SpawnCreatureEffect {
 
     @Override
     public String applyEffect(Actor actor, GameMap map) {
-        return super.spawnCreature(actor, map, new OmenSheep());
+        return super.spawn(actor, map, new OmenSheep());
     }
 }

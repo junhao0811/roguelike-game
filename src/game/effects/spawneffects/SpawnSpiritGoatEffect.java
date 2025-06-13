@@ -9,7 +9,7 @@ import game.actors.creatures.SpiritGoat;
  *
  * @author Lee Hao Zhe
  */
-public class SpawnSpiritGoatEffect extends SpawnCreatureEffect {
+public class SpawnSpiritGoatEffect extends SpawnActorEffect {
 
     /**
      * Constructor
@@ -29,6 +29,6 @@ public class SpawnSpiritGoatEffect extends SpawnCreatureEffect {
 
     @Override
     public String applyEffect(Actor actor, GameMap map) {
-        return super.spawnCreature(actor, map, new SpiritGoat());
+        return super.spawn(actor, map, new SpiritGoat());
     }
 }

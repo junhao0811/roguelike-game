@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.creatures.Creature;
 import game.effects.Effect;
 
 import java.util.ArrayList;
@@ -16,21 +15,21 @@ import java.util.Random;
  *
  * @author Tan Choong Sheng and Lee Hao Zhe
  */
-public abstract class SpawnCreatureEffect extends Effect {
+public abstract class SpawnActorEffect extends Effect {
 
     /**
      * Constructor
      *
      * @param target the target of the effect
      */
-    protected SpawnCreatureEffect(Actor target) {
+    protected SpawnActorEffect(Actor target) {
         super(target);
     }
 
     /**
      * Constructor with no target as default
      */
-    protected SpawnCreatureEffect() {
+    protected SpawnActorEffect() {
         super();
     }
 
@@ -39,10 +38,10 @@ public abstract class SpawnCreatureEffect extends Effect {
      *
      * @param actor The actor the effect is tied to.
      * @param map The map the actor is on.
-     * @param creature The creature to spawn.
+     * @param spawnedActor The actor to spawn.
      * @return a description of what happened
      */
-    protected String spawnCreature(Actor actor, GameMap map, Creature creature) {
+    public String spawn(Actor actor, GameMap map, Actor spawnedActor) {
         List<Location> destinations = new ArrayList<>();
         Random random = new Random();
         Actor target = this.getTarget(actor);
@@ -56,11 +55,11 @@ public abstract class SpawnCreatureEffect extends Effect {
         }
 
         if (!destinations.isEmpty()) {
-            destinations.get(random.nextInt(destinations.size())).addActor(creature);
-            return creature + " is spawned within the surroundings of " + target;
+            destinations.get(random.nextInt(destinations.size())).addActor(spawnedActor);
+            return spawnedActor + " is spawned within the surroundings of " + target;
         }
 
         return "There are no valid locations surrounding " + target + " for " +
-                creature + " to spawn";
+                spawnedActor + " to spawn";
     }
 }

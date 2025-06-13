@@ -9,7 +9,7 @@ import game.actors.creatures.GoldenBeetle;
  *
  * @author Tan Choong Sheng and Lee Hao Zhe
  */
-public class SpawnGoldenBeetleEffect extends SpawnCreatureEffect {
+public class SpawnGoldenBeetleEffect extends SpawnActorEffect {
 
     /**
      * Constructor
@@ -29,6 +29,6 @@ public class SpawnGoldenBeetleEffect extends SpawnCreatureEffect {
 
     @Override
     public String applyEffect(Actor actor, GameMap map) {
-        return super.spawnCreature(actor, map, new GoldenBeetle());
+        return super.spawn(actor, map, new GoldenBeetle());
     }
 }
