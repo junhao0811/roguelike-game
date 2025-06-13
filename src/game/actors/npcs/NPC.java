@@ -10,7 +10,8 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.actions.GiveAction;
-import game.capabilities.Giveable;
+import game.behaviours.ReceiveBehaviour;
+import game.capabilities.Receivable;
 import game.capabilities.speakable.Speakable;
 import game.enums.Ability;
 import game.enums.Status;
@@ -24,7 +25,7 @@ import java.util.TreeMap;
  *
  * @author Lee Hao Zhe, modified by Chong Jun Hao
  */
-public abstract class NPC extends Actor implements Speakable, Giveable {
+public abstract class NPC extends Actor implements Speakable, Receivable {
 
     /**
      * The behaviours TreeMap to store all the behaviours of the NPC
@@ -43,6 +44,7 @@ public abstract class NPC extends Actor implements Speakable, Giveable {
         super(name, displayChar, hitPoints);
         this.affectionLevel = affectionLevel;
         this.addCapability(Ability.RECEIVE);
+        this.addBehaviour(Integer.MAX_VALUE, new ReceiveBehaviour(this));
     }
     
     public int getAffectionLevel() {
@@ -93,11 +95,11 @@ public abstract class NPC extends Actor implements Speakable, Giveable {
      * @return a message indicating the result of the gifting operation
      */
     @Override
-    public String gift(Actor actor, Item gift, GameMap map) {
+    public String receive(Actor actor, Item gift, GameMap map) {
         if (this.hasCapability(Ability.RECEIVE) && gift.hasCapability(Ability.GIVE)) {
             actor.removeItemFromInventory(gift);
             this.addItemToInventory(gift);
-            return ((AffectionItem) gift).applyAffection(actor, this, map);
+            return gift.applyAffection(actor, this, map);
         }
         return actor + " cannot give " + gift + " to " + this;
     }

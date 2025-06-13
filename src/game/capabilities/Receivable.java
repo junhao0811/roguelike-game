@@ -8,9 +8,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * Interface defining a contract for how items can affect NPC affection levels
  * Follows Interface Segregation Principle - only affection-related methods
  *
- * @author Ng Jun Xian, modified by Chong Jun Hao
+ * @author Chong Jun Hao
  */
-public interface Giveable {
+public interface Receivable {
     
     /**
      * Applies affection changes to the target NPC
@@ -20,6 +20,5 @@ public interface Giveable {
      * @param map the game map
      * @return description of the affection change
      */
-    String gift(Actor actor, Item item, GameMap map);
-    
+    String receive(Actor actor, Item item, GameMap map);
 }

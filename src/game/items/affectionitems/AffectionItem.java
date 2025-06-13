@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.GiveAction;
 import game.actors.npcs.NPC;
-import game.capabilities.Giveable;
+import game.capabilities.Receivable;
 import game.enums.Ability;
 
 /**
@@ -80,7 +80,7 @@ public abstract class AffectionItem extends Item {
         }
     }
     
-    public GiveAction getGiftAction(Giveable targetNPC) {
+    public GiveAction getGiftAction(Receivable targetNPC) {
         return new GiveAction(targetNPC, this);
     }
     
@@ -98,7 +98,7 @@ public abstract class AffectionItem extends Item {
     public ActionList allowableActions(Actor targetNPC, Location location){
         ActionList actions = new ActionList();
         if (targetNPC.hasCapability(Ability.RECEIVE)) {
-            actions.add(new GiveAction((Giveable) targetNPC, this));
+            actions.add(new GiveAction((Receivable) targetNPC, this));
         }
         return actions;
     }

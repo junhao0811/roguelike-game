@@ -66,6 +66,7 @@ public class Player extends Actor {
 
         // return/print the console menu
         Menu menu = new Menu(actions);
+        display.println(this.getItemInventory().toString());
         return menu.showMenu(this, display);
     }
 
