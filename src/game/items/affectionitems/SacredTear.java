@@ -28,8 +28,9 @@ public class SacredTear extends AffectionItem {
         // Heal the receiver slightly
         receiver.heal(HEALING_AMOUNT);
         result.append("The sacred tear heals ").append(receiver)
-            .append(" for ").append(HEALING_AMOUNT).append(" points");
+                .append(" for ").append(HEALING_AMOUNT).append(" points");
         result.append("\n").append("\"Such purity... it reminds me of the academy's true purpose\"");
+
         return result.toString();
     }
 }
