@@ -30,7 +30,6 @@ public class Player extends Actor {
     public Player(String name, char displayChar, int hitPoints, int stamina) {
         super(name, displayChar, hitPoints);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
-        this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.setIntrinsicWeapon(new BareFist());
         this.setupCapabilities();
     }
@@ -39,8 +38,9 @@ public class Player extends Actor {
      * Method to setup all the capabilities of the Player
      */
     private void setupCapabilities() {
+        this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Ability.PLANT_CROPS);
-        this.addCapability(Ability.EAT);
+        this.addCapability(Ability.CONSUME);
         this.addCapability(Ability.CAN_BE_FOLLOWED);
         this.addCapability(Ability.LISTEN);
         this.addCapability(Ability.PURCHASE);

@@ -42,10 +42,10 @@ public class MerchantKale extends NPC implements Merchant {
     public StockList getStocks() {
         StockList stocks = new StockList();
 
-        Stock<?> broadsword = new Stock<>(new Broadsword(), 150);
+        Stock<Broadsword> broadsword = new Stock<>(new Broadsword(), 150);
         broadsword.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.STAMINA, 30));
 
-        Stock<?> dragonslayerGreatsword = new Stock<>(new DragonslayerGreatsword(), 1700);
+        Stock<DragonslayerGreatsword> dragonslayerGreatsword = new Stock<>(new DragonslayerGreatsword(), 1700);
         dragonslayerGreatsword.addEffect(new RestoreAttributeEffect(BaseActorAttributes.STAMINA, 20));
 
         stocks.add(broadsword);
