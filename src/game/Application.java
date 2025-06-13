@@ -23,6 +23,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.items.watercontainers.CursedPot;
+import game.items.watercontainers.DemonJug;
+import game.items.watercontainers.HolyGrail;
 
 
 /**
@@ -117,10 +120,10 @@ public class Application {
         //gameMap.at(22, 14).addActor(guts);
 
         NPC sellen = new Sellen();
-        gameMap.at(23, 14).addActor(sellen);
+        //gameMap.at(23, 14).addActor(sellen);
 
         NPC merchantKale = new MerchantKale();
-        gameMap.at(24, 14).addActor(merchantKale);
+        //gameMap.at(24, 14).addActor(merchantKale);
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {
@@ -142,6 +145,10 @@ public class Application {
         // one seed of "Bloodrose" in their inventory
         player.addItemToInventory(new Seed(new Inheritree()));
         player.addItemToInventory(new Seed(new Bloodrose()));
+
+        player.addItemToInventory(new CursedPot());
+        player.addItemToInventory(new DemonJug());
+        player.addItemToInventory(new HolyGrail());
 
         player.addBalance(5000);
 
