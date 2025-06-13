@@ -4,10 +4,13 @@ import java.util.Random;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.conditions.CounterCondition;
+import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
 import game.enums.Ability;
 import game.enums.BehaviourSelection;
 import game.enums.Status;
@@ -30,9 +33,6 @@ import game.items.affectionitems.SacredTear;
  */
 public class OmenSheep extends Creature implements Curable, Reproducible, Hatchable {
 
-    private int reproductionCounter = 0;
-    private final Random random = new Random();
-
     /**
      * Constructor
      *
@@ -40,11 +40,6 @@ public class OmenSheep extends Creature implements Curable, Reproducible, Hatcha
      */
     public OmenSheep(BehaviourSelection selection) {
         super("Omen Sheep", 'm', 75, selection);
-        this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
-        this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
-        this.addStatusEffect(new CrimsonRot(15));
-        this.addCapability(Ability.PRODUCE_EGG);
-        this.addCapability(Status.CURSED);
     }
 
     /**
@@ -52,11 +47,57 @@ public class OmenSheep extends Creature implements Curable, Reproducible, Hatcha
      */
     public OmenSheep() {
         super("Omen Sheep", 'm', 75);
+    }
+
+    @Override
+    protected void setup() {
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
-        this.addBehaviour(Integer.MAX_VALUE - 1, new ReproduceBehaviour(this));
+        this.addBehaviour(Integer.MAX_VALUE - 1,
+                new ReproduceBehaviour(this, new CounterCondition(7)));
         this.addStatusEffect(new CrimsonRot(15));
         this.addCapability(Ability.PRODUCE_EGG);
         this.addCapability(Status.CURSED);
+    }
+
+    /**
+     * Handles the rare drop of SacredTear when OmenSheep dies
+     * Low drop rate of approximately 15%
+     */
+    private String dropSacredTear(GameMap map) {
+        String result = null;
+        Random random = new Random();
+
+        if (random.nextDouble() < 0.15) {
+            Location currentLocation = map.locationOf(this);
+            if (currentLocation != null) {
+                SacredTear sacredTear = new SacredTear();
+                currentLocation.addItem(sacredTear);
+
+                result = "A Sacred Tear drops from the fallen " + this + "!";
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        super.unconscious(map);
+        return dropSacredTear(map);
+    }
+
+    @Override
+    public String reproduce(Actor actor, Location location) {
+        Egg<OmenSheep> egg = new Egg<>(this, new CounterCondition(3));
+        egg.addEffect(new IncreaseMaxAttributeEffect(BaseActorAttributes.HEALTH, 10));
+        location.addItem(egg);
+
+        return this + " produces a new " + egg;
+    }
+
+    @Override
+    public Creature hatch() {
+        return new OmenSheep(getSelection());
     }
 
     @Override
@@ -66,57 +107,6 @@ public class OmenSheep extends Creature implements Curable, Reproducible, Hatcha
             destination.setGround(new Inheritree());
         }
         return actor + " cures the " + this + ", Inheritrees grow at each tile surrounding it";
-    }
-
-    @Override
-    public void reproduce(Actor actor, Location location) {
-        location.addItem(new Egg(this, "Egg"));
-    }
-
-    @Override
-    public boolean canReproduce(Actor actor, GameMap map) {
-        reproductionCounter++;
-        return reproductionCounter % 7 == 0;
-    }
-    
-    @Override
-    public String unconscious(Actor actor, GameMap map) {
-        super.unconscious(map);
-        return dropSacredTear(map);
-    }
-    
-    /**
-     * Handles the rare drop of SacredTear when OmenSheep dies
-     * Low drop rate of approximately 15%
-     */
-    private String dropSacredTear(GameMap map) {
-        String result = null;
-        if (random.nextDouble() < 0.15) {
-            Location currentLocation = map.locationOf(this);
-            if (currentLocation != null) {
-                SacredTear sacredTear = new SacredTear();
-                currentLocation.addItem(sacredTear);
-                
-                result = "A Sacred Tear drops from the fallen " + this + "!";
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public Creature hatch() {
-        BehaviourSelection offspringBehavior;
-        if (random.nextBoolean()) {
-            offspringBehavior = BehaviourSelection.RANDOM;
-        } else {
-            offspringBehavior = BehaviourSelection.DEFAULT;
-        }
-        return new OmenSheep(offspringBehavior);
-    }
-
-    @Override
-    public boolean isReadyToHatch(int counter, Location location) {
-        return counter == 3;
     }
 
     @Override

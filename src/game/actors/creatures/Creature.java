@@ -47,6 +47,7 @@ public abstract class Creature extends Actor {
     protected Creature(String name, char displayChar, int hitPoints, BehaviourSelection selection ) {
         super(name, displayChar, hitPoints);
         this.selection = selection;
+        this.setup();
     }
 
     /**
@@ -59,7 +60,14 @@ public abstract class Creature extends Actor {
     protected Creature(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.selection = BehaviourSelection.DEFAULT;
+        this.setup();
     }
+
+    /**
+     * Method to setup the basic behaviours, capabilities,
+     * and/or status effects of the Creature
+     */
+    protected abstract void setup();
 
     /**
      * Add behaviour to the behaviours TreeMap
@@ -78,6 +86,15 @@ public abstract class Creature extends Actor {
      */
     public Collection<Behaviour> getBehaviours() {
         return behaviours.values();
+    }
+
+    /**
+     * Gets the behaviour selection of the creature
+     *
+     * @return the behaviour selection
+     */
+    public BehaviourSelection getSelection() {
+        return selection;
     }
 
     @Override

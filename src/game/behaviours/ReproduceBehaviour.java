@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.ReproduceAction;
 import game.capabilities.Reproducible;
+import game.conditions.Condition;
 
 /**
  * Class representing the reproduce behaviour
@@ -15,14 +16,16 @@ import game.capabilities.Reproducible;
 public class ReproduceBehaviour implements Behaviour {
 
     private final Reproducible reproducible;
+    private final Condition condition;
 
     /**
      * Constructor
      *
      * @param reproducible the Reproducible object that will reproduce
      */
-    public ReproduceBehaviour(Reproducible reproducible) {
+    public ReproduceBehaviour(Reproducible reproducible, Condition condition) {
         this.reproducible = reproducible;
+        this.condition = condition;
     }
 
     /**
@@ -35,8 +38,7 @@ public class ReproduceBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        // Check if the actor can reproduce (logic in actor classes)
-        if (reproducible.canReproduce(actor, map)) {
+        if (condition.check(actor, map)) {
             return new ReproduceAction(reproducible);
         }
 

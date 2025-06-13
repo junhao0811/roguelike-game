@@ -25,8 +25,7 @@ public class ReproduceAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        reproducible.reproduce(actor, map.locationOf(actor));
-        return menuDescription(actor);
+        return reproducible.reproduce(actor, map.locationOf(actor));
     }
 
     @Override

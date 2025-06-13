@@ -99,22 +99,22 @@ public class Application {
         gameMap.at(22, 13).addActor(spiritGoat);
 
         Creature omenSheep = new OmenSheep(BehaviourSelection.DEFAULT);
-        //gameMap.at(24, 13).addActor(omenSheep);
+        gameMap.at(24, 13).addActor(omenSheep);
 
         Creature goldenBeetle = new GoldenBeetle(BehaviourSelection.DEFAULT);
+        gameMap.at(23, 13).addActor(goldenBeetle);
 
-        //gameMap.at(23, 13).addActor(goldenBeetle);
         Creature spiritGoat2 = new SpiritGoat(BehaviourSelection.RANDOM);
-        limveldGameMap.at(6, 6).addActor(spiritGoat2);
+        //limveldGameMap.at(6, 6).addActor(spiritGoat2);
 
         Creature omenSheep2 = new OmenSheep(BehaviourSelection.RANDOM);
-        limveldGameMap.at(9, 9).addActor(omenSheep2);
+        //limveldGameMap.at(9, 9).addActor(omenSheep2);
 
         Creature goldenBeetle2 = new GoldenBeetle(BehaviourSelection.RANDOM);
-        limveldGameMap.at(10, 10).addActor(goldenBeetle2);
+        //limveldGameMap.at(10, 10).addActor(goldenBeetle2);
 
         Creature bedofchaos = new BedOfChaos(BehaviourSelection.DEFAULT);
-        limveldGameMap.at(8, 8).addActor(bedofchaos);
+        //limveldGameMap.at(8, 8).addActor(bedofchaos);
 
         NPC guts = new Guts();
         //gameMap.at(22, 14).addActor(guts);

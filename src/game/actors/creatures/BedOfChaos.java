@@ -38,9 +38,6 @@ public class BedOfChaos extends Creature implements Growable {
     public BedOfChaos(BehaviourSelection selection) {
         super("Bed of Chaos", 'T', 1000, selection);
         this.growthParts = new ArrayList<>();
-        this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
-        this.addBehaviour(Integer.MAX_VALUE - 1, new GrowthBehaviour(this));
-        this.addCapability(Ability.GROW);
     }
 
     /**
@@ -49,6 +46,10 @@ public class BedOfChaos extends Creature implements Growable {
     public BedOfChaos() {
         super("Bed of Chaos", 'T', 1000);
         this.growthParts = new ArrayList<>();
+    }
+
+    @Override
+    protected void setup() {
         this.addBehaviour(Integer.MAX_VALUE, new SmackBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new GrowthBehaviour(this));
         this.addCapability(Ability.GROW);
