@@ -13,7 +13,6 @@ import game.enums.Ability;
  */
 public abstract class Crop extends Ground {
 
-    private final String name;
     private final int staminaCost;
     private boolean bloomState = false;
 
@@ -22,16 +21,8 @@ public abstract class Crop extends Ground {
      */
     protected Crop(char displayChar, String name, int staminaCost) {
         super(displayChar, name);
-        this.name = name;
         this.staminaCost = staminaCost;
         this.addCapability(Ability.CAN_BE_WATERED);
-    }
-
-    /**
-     * Getter method for name
-     */
-    public String getName() {
-        return name;
     }
 
     /**

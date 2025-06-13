@@ -24,7 +24,7 @@ public class Seed extends Item {
      * Constructor
      */
     public Seed(Crop crop) {
-        super(crop.getName()+" Seed", '*', true);
+        super(crop + " Seed", '*', true);
         this.crop = crop;
     }
 
