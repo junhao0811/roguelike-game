@@ -1,5 +1,6 @@
 package game.items.watercontainers;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
@@ -9,7 +10,6 @@ import game.actions.WaterAction;
 import game.effects.Effect;
 import game.effects.EffectList;
 import game.enums.Ability;
-import game.grounds.crops.Crop;
 
 import java.util.List;
 
@@ -42,15 +42,11 @@ public abstract class WaterContainer extends Item {
      * @param target  the target of the watering action
      * @return a description of what happened when watering the target
      */
-    public String water(Actor actor, GameMap map, Ground target) {
-        Crop crop = (Crop) target;
+    public String water(Actor actor, GameMap map, Ground target, Action bloomAction) {
         StringBuilder result = new StringBuilder(actor + " successfully waters the " +
-                crop + " with " + this);
+                target + " with " + this);
 
-
-        if (!crop.getBloomState()) {
-            result.append("\n").append(crop.bloom());
-        }
+        result.append(bloomAction.execute(actor, map));
 
         for (Effect effect : effects) {
             result.append("\n").append(effect.applyEffect(actor, map));
@@ -99,7 +95,10 @@ public abstract class WaterContainer extends Item {
         Ground ground = map.locationOf(owner).getGround();
 
         if (ground.hasCapability(Ability.CAN_BE_WATERED)) {
-            actions.add(new WaterAction(ground, this));
+            Action bloomAction = ground.allowableActions(owner,
+                    map.locationOf(owner), "crop").get(0);
+
+            actions.add(new WaterAction(ground, this, bloomAction));
         }
 
         return actions;

@@ -15,21 +15,24 @@ public class WaterAction extends Action {
 
     private final Ground target;
     private final WaterContainer waterContainer;
+    private final Action bloomAction;
 
     /**
      * Constructor
      *
      * @param target the target to water
      * @param waterContainer the WaterContainer used to water the target
+     * @param bloomAction the Action that will be executed when watering the target to cause it to bloom
      */
-    public WaterAction(Ground target, WaterContainer waterContainer) {
+    public WaterAction(Ground target, WaterContainer waterContainer, Action bloomAction) {
         this.target = target;
         this.waterContainer = waterContainer;
+        this.bloomAction = bloomAction;
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return waterContainer.water(actor, map, target);
+        return waterContainer.water(actor, map, target, bloomAction);
     }
 
     @Override

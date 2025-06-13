@@ -1,5 +1,6 @@
 package game.items.watercontainers;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -24,12 +25,12 @@ public class DemonJug extends WaterContainer {
     }
 
     @Override
-    public String water(Actor actor, GameMap map, Ground target) {
+    public String water(Actor actor, GameMap map, Ground target, Action bloomAction) {
         if (target.hasCapability(Status.BLESSED)) {
             return actor + " is unable to water the " + target + " with " + this +
                     " as the " + target + " is blessed by grace";
         }
 
-        return super.water(actor, map, target);
+        return super.water(actor, map, target, bloomAction);
     }
 }

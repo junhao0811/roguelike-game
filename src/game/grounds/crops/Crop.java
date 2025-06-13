@@ -1,9 +1,11 @@
 package game.grounds.crops;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.BloomAction;
 import game.enums.Ability;
 
 /**
@@ -33,20 +35,16 @@ public abstract class Crop extends Ground {
     }
 
     /**
-     * Getter method for bloom state
-     */
-    public boolean getBloomState() {
-        return bloomState;
-    }
-
-    /**
      * Method to set the bloom state of the Crop to true (blooms the crop)
      */
     public final String bloom() {
-        bloomState = true;
-        setDisplayChar(Character.toUpperCase(getDisplayChar()));
+        if (!bloomState) {
+            bloomState = true;
+            setDisplayChar(Character.toUpperCase(getDisplayChar()));
+            return "\nThe " + this + " blooms";
+        }
 
-        return "The " + this + " has bloomed";
+        return "";
     }
 
     /**
@@ -65,5 +63,16 @@ public abstract class Crop extends Ground {
         if (bloomState) {
             this.cropEffect(location);
         }
+    }
+
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        ActionList actions = new ActionList();
+
+        if (direction.equals("crop")) {
+            actions.add(new BloomAction(this));
+        }
+
+        return actions;
     }
 }
