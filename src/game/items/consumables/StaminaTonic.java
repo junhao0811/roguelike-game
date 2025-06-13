@@ -18,12 +18,12 @@ public class StaminaTonic extends ConsumableItem {
     }
     
     @Override
-    protected void applyConsumptionEffect(Actor actor, GameMap map) {
+    protected String applyConsumptionEffect(Actor actor, GameMap map) {
         if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
             actor.modifyAttribute(BaseActorAttributes.STAMINA,
-                ActorAttributeOperations.INCREASE,
-                effectValue);
+                    ActorAttributeOperations.INCREASE, effectValue);
         }
+
+        return "";
     }
-    
 }

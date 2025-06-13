@@ -16,8 +16,8 @@ public class HealingPotion extends ConsumableItem {
     }
     
     @Override
-    protected void applyConsumptionEffect(Actor actor, GameMap map) {
+    protected String applyConsumptionEffect(Actor actor, GameMap map) {
         actor.heal(effectValue);
+        return "";
     }
-    
 }

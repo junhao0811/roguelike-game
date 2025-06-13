@@ -17,5 +17,5 @@ public interface Consumable {
      * @param actor the actor consuming the item
      * @param map the current game map
      */
-    void consume(Actor actor, GameMap map);
+    String consume(Actor actor, GameMap map);
 }

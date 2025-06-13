@@ -35,19 +35,19 @@ public abstract class ConsumableItem extends Item implements Consumable {
     }
     
     @Override
-    public void consume(Actor actor, GameMap map) {
+    public String consume(Actor actor, GameMap map) {
         // Remove item from actor's inventory
         actor.removeItemFromInventory(this);
         
         // Apply specific consumption effect
-        applyConsumptionEffect(actor, map);
+        return applyConsumptionEffect(actor, map);
     }
     
     /**
      * Template method for specific consumption effects
      * Subclasses override this for their unique effects
      */
-    protected abstract void applyConsumptionEffect(Actor actor, GameMap map);
+    protected abstract String applyConsumptionEffect(Actor actor, GameMap map);
     
     @Override
     public ActionList allowableActions(Actor owner, GameMap map) {
