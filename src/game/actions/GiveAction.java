@@ -3,9 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.capabilities.Receivable;
-import edu.monash.fit2099.engine.items.Item;
-import game.enums.Ability;
+import game.items.affectionitems.AffectionItem;
 
 /**
  * Action for giving items to NPCs
@@ -15,31 +13,28 @@ import game.enums.Ability;
  */
 public class GiveAction extends Action {
     
-    private final Receivable targetNPC;
-    private final Item gift;
+    private final Actor target;
+    private final AffectionItem gift;
     private String direction = "";
     
-    public GiveAction(Receivable targetNPC, Item gift, String direction) {
-        this.targetNPC = targetNPC;
+    public GiveAction(Actor target, AffectionItem gift, String direction) {
+        this.target = target;
         this.gift = gift;
         this.direction = " at " + direction;
     }
     
-    public GiveAction(Receivable targetNPC, Item gift) {
-        this.targetNPC = targetNPC;
+    public GiveAction(Actor target, AffectionItem gift) {
+        this.target = target;
         this.gift = gift;
     }
     
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (actor.hasCapability(Ability.GIVE)) {
-            actor.removeItemFromInventory(gift);
-        }
-        return targetNPC.receive(actor, gift, map);
+        return gift.applyAffection(actor, target, map);
     }
     
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " gives " + gift + " to " + targetNPC + direction;
+        return actor + " gives " + gift + " to " + target + direction;
     }
 }

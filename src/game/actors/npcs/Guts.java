@@ -33,12 +33,12 @@ public class Guts extends NPC {
     }
     
     public void updateBerserkBehavior(){
-        if (getAffectionLevel() < 0 && !this.hasCapability(Status.UNFRIENDLY))  {
+        if (getAttribute(Status.AFFECTION) < 0 && !this.hasCapability(Status.UNFRIENDLY))  {
             this.addCapability(Status.UNFRIENDLY);
             this.addBehaviour(Integer.MAX_VALUE - 1,
                 new BerserkBehaviour(new AttributeComparisonCondition(ComparisonOperations.LT,
                     BaseActorAttributes.HEALTH, 50)));
-        } else if(getAffectionLevel() >= 0) {
+        } else if(getAttribute(Status.AFFECTION) >= 0) {
             this.removeCapability(Status.UNFRIENDLY);
             this.removeBehaviour(Integer.MAX_VALUE - 1);
         }
@@ -51,7 +51,7 @@ public class Guts extends NPC {
         
         // Different monologues based on affection level
         // Check for special gift at 50+ affection
-        if (getAffectionLevel() >= 20 && !this.hasCapability(Status.STAMINA_POTION_GIVEN)) {
+        if (getAttribute(Status.AFFECTION) >= 20 && !this.hasCapability(Status.STAMINA_POTION_GIVEN)) {
             // Give attack potion
             StaminaTonic staminaPotion = new StaminaTonic();
             actor.addItemToInventory(staminaPotion);
@@ -60,12 +60,12 @@ public class Guts extends NPC {
             monologues.add("You've proven yourself, warrior. Take this - it will make you even stronger in battle!");
             monologues.add("This potion contains the fury of a thousand battles. Use it to crush your enemies!");
             return monologues;
-        } else if (getAffectionLevel() > 0) {
+        } else if (getAttribute(Status.AFFECTION) > 0) {
             // Low positive affection - neutral/respectful monologues
             monologues.add("You're not as weak as I thought.");
             monologues.add("Hmph. You show some promise.");
             monologues.add("Keep training. You might be worthy of my respect.");
-        } else if (getAffectionLevel() > -20) {
+        } else if (getAttribute(Status.AFFECTION) > -20) {
             // Neutral/slightly negative - standard aggressive monologues
             monologues.add("RAAAAGH!");
             monologues.add("I'LL CRUSH YOU ALL!");

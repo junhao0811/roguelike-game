@@ -12,7 +12,7 @@ public enum Status {
     CURSED,
     BLESSED,
     BLEEDING,
-    FRIENDLY,
+    AFFECTION,
     UNFRIENDLY,
     HEAL_POTION_GIVEN,
     STAMINA_POTION_GIVEN,

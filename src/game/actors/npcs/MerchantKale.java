@@ -59,7 +59,7 @@ public class MerchantKale extends NPC implements Merchant {
         MonologueList monologues = new MonologueList(actor, map);
         
         // Different monologues based on affection level
-        if (getAffectionLevel() >= 50 && !this.hasCapability(Status.SECRET_WEAPON_GIVEN)) {
+        if (getAttribute(Status.AFFECTION) >= 50 && !this.hasCapability(Status.SECRET_WEAPON_GIVEN)) {
             // Give secret weapon
             DemonKingsDaggers secretWeapon = new DemonKingsDaggers();
             actor.addItemToInventory(secretWeapon);
@@ -69,19 +69,19 @@ public class MerchantKale extends NPC implements Merchant {
             monologues.add("These are the Demon King's Daggers - a weapon of immense power. Please, accept this as a gift for your loyalty!");
             return monologues;
             
-        } else if (getAffectionLevel() >= 20) {
+        } else if (getAttribute(Status.AFFECTION) >= 20) {
             // Friendly affection - discounts and preferential treatment
             monologues.add("Welcome back, friend! I always have good deals for valued customers.");
             monologues.add("For you, I can offer a special discount on my finest weapons.");
             monologues.add("Your continued patronage keeps my business alive. Thank you!");
             monologues.add("I've set aside some quality goods just for trusted customers like you.");
             
-        } else if (getAffectionLevel() > 0) {
+        } else if (getAttribute(Status.AFFECTION) > 0) {
             // Low positive affection - slightly better treatment
             monologues.add("Good to see a returning customer. Perhaps we can make a deal.");
             monologues.add("You've been fair in our dealings. I appreciate honest customers.");
             monologues.add("Business has been slow, but customers like you give me hope.");
-        } else if (getAffectionLevel() == 0) {
+        } else if (getAttribute(Status.AFFECTION) == 0) {
             // Neutral affection - standard merchant dialogue
             monologues.add("Ah, hard times, I see. Keep your head low and your blade sharp.",
                 new RunesComparisonCondition(ComparisonOperations.LT, 50));
@@ -92,7 +92,7 @@ public class MerchantKale extends NPC implements Merchant {
             monologues.add("A merchant's life is a lonely one. But the roads... they whisper " +
                 "secrets to those who listen.");
             
-        } else if (getAffectionLevel() >= -20) {
+        } else if (getAttribute(Status.AFFECTION) >= -20) {
             // Slightly negative affection - less friendly but still professional
             monologues.add("Business is business, I suppose. What do you need?");
             monologues.add("My prices are fair, even if some customers think otherwise.");

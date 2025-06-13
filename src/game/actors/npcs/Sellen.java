@@ -64,7 +64,7 @@ public class Sellen extends NPC implements Merchant {
         MonologueList monologues = new MonologueList(actor, map);
         
         // Different monologues based on affection level
-        if (getAffectionLevel() >= 50 && !this.hasCapability(Status.HEAL_POTION_GIVEN)) {
+        if (getAttribute(Status.AFFECTION) >= 50 && !this.hasCapability(Status.HEAL_POTION_GIVEN)) {
             HealingPotion healPotion = new HealingPotion();
             actor.addItemToInventory(healPotion);
             this.addCapability(Status.HEAL_POTION_GIVEN);
@@ -73,7 +73,7 @@ public class Sellen extends NPC implements Merchant {
             monologues.add("This potion contains the essence of ancient knowledge - use it wisely.");
             return monologues;
             
-        } else if (getAffectionLevel() >= 20) {
+        } else if (getAttribute(Status.AFFECTION) >= 20) {
             // Friendly affection - encouraging scholarly dialogue
             monologues.add("Your thirst for knowledge reminds me of my younger days at the academy. Most refreshing.");
             monologues.add("I see potential in you that others overlook. True wisdom recognizes true wisdom.");
@@ -81,13 +81,13 @@ public class Sellen extends NPC implements Merchant {
             monologues.add("Perhaps one day you too will challenge the established order as I have done.");
             monologues.add("Knowledge shared is knowledge multiplied. I am pleased to guide a willing mind.");
             
-        } else if (getAffectionLevel() > 0) {
+        } else if (getAttribute(Status.AFFECTION) > 0) {
             // Low positive affection - cautiously optimistic
             monologues.add("You show more sense than most who wander these lands. A curious mind is a valuable thing.");
             monologues.add("The pursuit of knowledge requires courage. I sense you possess this quality.");
             monologues.add("Perhaps there is hope yet for those who seek truth beyond convention.");
             monologues.add("The Glintstone responds to sincere seekers. Your presence does not disturb its harmony.");
-        } else if (getAffectionLevel() == 0) {
+        } else if (getAttribute(Status.AFFECTION) == 0) {
             // Neutral affection - original scholarly dialogue
             monologues.add("The academy casts out those it fears. Yet knowledge, " +
                 "like the stars, cannot be bound forever.");
@@ -95,7 +95,7 @@ public class Sellen extends NPC implements Merchant {
             monologues.add("Forbidden knowledge is often the most valuable. The academy's loss is my gain.");
             monologues.add("Magic flows through all things, yet so few truly understand its nature.");
             
-        } else if (getAffectionLevel() >= -20) {
+        } else if (getAttribute(Status.AFFECTION) >= -20) {
             // Slightly negative affection - dismissive but professional
             monologues.add("Another seeker who lacks the dedication for true understanding, I suppose.");
             monologues.add("The mysteries of the cosmos are not for the faint of heart or weak of mind.");

@@ -20,7 +20,6 @@ public enum Ability {
     PURCHASE,
     TELEPORT,
     GROW,
-    GIVE,
     RECEIVE,
     CAUSE_BLEEDING,
     CONSUME,

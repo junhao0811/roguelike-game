@@ -2,13 +2,13 @@ package game.items.affectionitems;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.GiveAction;
-import game.actors.npcs.NPC;
-import game.capabilities.Receivable;
 import game.enums.Ability;
+import game.enums.Status;
 
 /**
  * Abstract base class for all items that can influence NPC affection
@@ -31,23 +31,18 @@ public abstract class AffectionItem extends Item {
     protected AffectionItem(String name, char displayChar, int affectionValue) {
         super(name, displayChar, true);
         this.affectionValue = affectionValue;
-        this.addCapability(Ability.GIVE);
     }
     
-    public int getAffectionValue() {
-        return affectionValue;
-    }
-    
-    public String applyAffection(Actor giver, NPC receiver, GameMap map) {
+    public String applyAffection(Actor giver, Actor target, GameMap map) {
         StringBuilder result = new StringBuilder();
         
         // Apply the specific affection effect
-        result.append(applySpecificEffect(giver, receiver, map));
+        result.append(applySpecificEffect(giver, target, map));
         
         // Update NPC affection level if they support it
-        if (receiver.hasCapability(Ability.RECEIVE)) {
-            updateNPCAffection(receiver, giver);
-            result.append("\n").append(getAffectionMessage(receiver));
+        if (target.hasCapability(Ability.RECEIVE)) {
+            target.modifyAttribute(Status.AFFECTION, ActorAttributeOperations.INCREASE, affectionValue);
+            result.append("\n").append(getAffectionMessage(target));
         }
         
         return result.toString();
@@ -60,28 +55,14 @@ public abstract class AffectionItem extends Item {
     protected abstract String applySpecificEffect(Actor giver, Actor receiver, GameMap map);
     
     /**
-     * Updates the NPC's affection level towards the giver
-     */
-    private void updateNPCAffection(NPC receiver, Actor giver) {
-        if (receiver.hasCapability(Ability.RECEIVE)) {
-            int newAffectionLevel = receiver.getAffectionLevel() + affectionValue;
-            receiver.setAffectionLevel(newAffectionLevel);
-        }
-    }
-    
-    /**
      * Gets the appropriate affection message
      */
-    private String getAffectionMessage(NPC receiver) {
-        if (receiver.affectionIsPositive()) {
-            return receiver + " seems pleased with the gift";
+    private String getAffectionMessage(Actor target) {
+        if (target.getAttribute(Status.AFFECTION) >= 0) {
+            return target + " seems pleased with the gift";
         } else {
-            return receiver + " looks disgusted with the gift";
+            return target + " looks disgusted with the gift";
         }
-    }
-    
-    public GiveAction getGiftAction(Receivable targetNPC) {
-        return new GiveAction(targetNPC, this);
     }
     
     /**
@@ -90,16 +71,18 @@ public abstract class AffectionItem extends Item {
      * Example #2: if the weapon has a special ability, it can return an action to use the special ability.
      * Example #3: a food can return an action to feed the other actor.
      *
-     * @param targetNPC the other actor
+     * @param target the other actor
      * @param location the location of the other actor
      * @return an unmodifiable list of Actions
      */
     @Override
-    public ActionList allowableActions(Actor targetNPC, Location location){
+    public ActionList allowableActions(Actor target, Location location){
         ActionList actions = new ActionList();
-        if (targetNPC.hasCapability(Ability.RECEIVE)) {
-            actions.add(new GiveAction((Receivable) targetNPC, this));
+
+        if (target.hasCapability(Ability.RECEIVE)) {
+            actions.add(new GiveAction(target, this));
         }
+
         return actions;
     }
 }

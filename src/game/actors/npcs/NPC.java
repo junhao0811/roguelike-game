@@ -5,17 +5,14 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
-import game.actions.GiveAction;
-import game.behaviours.ReceiveBehaviour;
-import game.capabilities.Receivable;
 import game.capabilities.speakable.Speakable;
 import game.enums.Ability;
 import game.enums.Status;
-import game.items.affectionitems.AffectionItem;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -25,13 +22,12 @@ import java.util.TreeMap;
  *
  * @author Lee Hao Zhe, modified by Chong Jun Hao
  */
-public abstract class NPC extends Actor implements Speakable, Receivable {
+public abstract class NPC extends Actor implements Speakable {
 
     /**
      * The behaviours TreeMap to store all the behaviours of the NPC
      */
     private final Map<Integer, Behaviour> behaviours = new TreeMap<>();
-    private int affectionLevel;
 
     /**
      * Constructor
@@ -40,29 +36,19 @@ public abstract class NPC extends Actor implements Speakable, Receivable {
      * @param displayChar the character that will represent the NPC in the display
      * @param hitPoints   the NPC's starting hit points
      */
-    protected NPC(String name, char displayChar, int hitPoints, int affectionLevel) {
+    protected NPC(String name, char displayChar, int hitPoints, int affection) {
         super(name, displayChar, hitPoints);
-        this.affectionLevel = affectionLevel;
         this.addCapability(Ability.RECEIVE);
-        this.addBehaviour(Integer.MAX_VALUE, new ReceiveBehaviour(this));
+        this.addAttribute(Status.AFFECTION, new BaseActorAttribute(100));
+        this.modifyAttribute(Status.AFFECTION, ActorAttributeOperations.UPDATE, affection);
     }
-    
-    public int getAffectionLevel() {
-        return affectionLevel;
-    }
-    
-    public boolean affectionIsPositive(){
-        return affectionLevel > 0;
-    }
-    
-    public void setAffectionLevel(int affectionLevel) {
-        this.affectionLevel = affectionLevel;
-    }
-    
+
+    /**
+     * Remove behaviour from the behaviours TreeMap
+     */
     public void removeBehaviour(int key) {
         this.behaviours.remove(key);
     }
-    
     
     /**
      * Add behaviour to the behaviours TreeMap
@@ -81,27 +67,6 @@ public abstract class NPC extends Actor implements Speakable, Receivable {
      */
     public Collection<Behaviour> getBehaviours() {
         return behaviours.values();
-    }
-    
-    /**
-     * Allows the farmer to gift an affection item to this NPC. The gifting operation checks
-     * whether the NPC has the capability to receive the gift and if the item can be given.
-     * If successful, the item is removed from the actor's inventory, added to the NPC's inventory,
-     * and any associated affection effect of the gift is applied between the actor and this NPC.
-     *
-     * @param actor the Player attempting to gift the item
-     * @param gift the item to be gifted
-     * @param map the map where the operation occurs
-     * @return a message indicating the result of the gifting operation
-     */
-    @Override
-    public String receive(Actor actor, Item gift, GameMap map) {
-        if (this.hasCapability(Ability.RECEIVE) && gift.hasCapability(Ability.GIVE)) {
-            actor.removeItemFromInventory(gift);
-            this.addItemToInventory(gift);
-            return gift.applyAffection(actor, this, map);
-        }
-        return actor + " cannot give " + gift + " to " + this;
     }
     
     @Override
@@ -123,14 +88,7 @@ public abstract class NPC extends Actor implements Speakable, Receivable {
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
         }
-        
-        if (otherActor.hasCapability(Ability.RECEIVE)) {
-            for(Item item : otherActor.getItemInventory()) {
-                if (item.hasCapability(Ability.GIVE)){
-                    actions.add(new GiveAction(this, item, direction));
-                }
-            }
-        }
+
         return actions;
     }
 }
