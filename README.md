@@ -95,7 +95,8 @@ I want to water to an Inheritree with the HolyGrail.
 Story:
 The player, "Farmer", approaches an Inheritree. "Farmer" has a "Holy Grail" in his inventory. He opens the interaction 
 menu and selects the "Water Inheritree with Holy Grail" option. The "Farmer" is healed and a Spirit Goat is spawned 
-within his surroundings, the Inheritree is watered.
+within his surroundings, the Inheritree is watered. 
+This causes the Inheritree to bloom (displayChar changes from lowercase to uppercase to indicate the change).
 
 Scenario 2: Watering an Inheritree with the DemonJug
 As a Player,
