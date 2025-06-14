@@ -14,7 +14,7 @@ public class StaminaTonic extends ConsumableItem {
     private static final int STAMINA_RESTORE = 50;
     
     public StaminaTonic() {
-        super("Guts' Stamina Potion", 'S', STAMINA_RESTORE, "restores");
+        super("Stamina Tonic", 'S', STAMINA_RESTORE, "restores");
     }
     
     @Override

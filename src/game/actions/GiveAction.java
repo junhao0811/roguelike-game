@@ -30,7 +30,7 @@ public class GiveAction extends Action {
     
     @Override
     public String execute(Actor actor, GameMap map) {
-        return gift.applyAffection(actor, target, map);
+        return gift.give(actor, target, map);
     }
     
     @Override

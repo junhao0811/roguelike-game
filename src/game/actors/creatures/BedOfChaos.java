@@ -44,7 +44,7 @@ public class BedOfChaos extends Creature implements Growable {
      * Constructor with default behaviour selection as default
      */
     public BedOfChaos() {
-        super("Bed of Chaos", 'T', 1000);
+        super("Bed of Chaos", 'T', 1);
         this.growthParts = new ArrayList<>();
     }
 
@@ -145,9 +145,19 @@ public class BedOfChaos extends Creature implements Growable {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        // Drop BossTrophy before becoming unconscious
+        Location currentLocation = map.locationOf(this);
         super.unconscious(map);
-        return dropBossTrophy(map);
+        
+        String result = null;
+        
+        if (currentLocation != null) {
+            // drops BossTrophy
+            BossTrophy bossTrophy = new BossTrophy();
+            currentLocation.addItem(bossTrophy);
+            result = this + " drops a trophy as a proof of your victory!";
+        }
+        
+        return result;
     }
     
     /**

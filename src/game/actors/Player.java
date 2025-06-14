@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
@@ -66,8 +67,28 @@ public class Player extends Actor {
 
         // return/print the console menu
         Menu menu = new Menu(actions);
-        display.println(this.getItemInventory().toString());
+        this.displayInventory(display);
         return menu.showMenu(this, display);
+    }
+    
+    /**
+     * Displays the player's inventory with each item numbered and on a new line
+     *
+     * @param display The display used for output to the player
+     */
+    private void displayInventory(Display display) {
+        // Print header
+        display.println("\nFarmer's Inventory:");
+        
+        if (this.getItemInventory().isEmpty()) {
+            display.println("There are currently no items in the inventory.");
+        } else {
+            // display each item
+            for (Item item : this.getItemInventory()) {
+                display.println(item.toString());
+            }
+        }
+        display.println("");
     }
 
     /**

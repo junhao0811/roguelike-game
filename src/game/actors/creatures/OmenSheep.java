@@ -58,32 +58,24 @@ public class OmenSheep extends Creature implements Curable, Reproducible, Hatcha
         this.addCapability(Ability.PRODUCE_EGG);
         this.addCapability(Status.CURSED);
     }
-
-    /**
-     * Handles the rare drop of SacredTear when OmenSheep dies
-     * Low drop rate of approximately 15%
-     */
-    private String dropSacredTear(GameMap map) {
-        String result = null;
-        Random random = new Random();
-
-        if (random.nextDouble() < 0.15) {
-            Location currentLocation = map.locationOf(this);
-            if (currentLocation != null) {
-                SacredTear sacredTear = new SacredTear();
-                currentLocation.addItem(sacredTear);
-
-                result = "A Sacred Tear drops from the fallen " + this + "!";
-            }
-        }
-
-        return result;
-    }
-
+    
     @Override
     public String unconscious(Actor actor, GameMap map) {
+        // Get the location before removing the sheep
+        Location currentLocation = map.locationOf(this);
         super.unconscious(map);
-        return dropSacredTear(map);
+        
+        String result = null;
+        Random random = new Random();
+        
+        if (currentLocation != null) {
+            // drops SacredTear
+            SacredTear sacredTear = new SacredTear();
+            currentLocation.addItem(sacredTear);
+            result = "A Sacred Tear drops from the fallen " + this + "!";
+        }
+        
+        return result;
     }
 
     @Override

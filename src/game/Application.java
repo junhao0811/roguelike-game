@@ -97,7 +97,6 @@ public class Application {
         // Add spirit goat and omen sheep to the game map
         Creature spiritGoat = new SpiritGoat(BehaviourSelection.DEFAULT);
         gameMap.at(22, 13).addActor(spiritGoat);
-
         Creature omenSheep = new OmenSheep(BehaviourSelection.DEFAULT);
         gameMap.at(24, 13).addActor(omenSheep);
 
@@ -105,25 +104,25 @@ public class Application {
         gameMap.at(23, 13).addActor(goldenBeetle);
 
         Creature spiritGoat2 = new SpiritGoat(BehaviourSelection.RANDOM);
-        //limveldGameMap.at(6, 6).addActor(spiritGoat2);
+        limveldGameMap.at(6, 6).addActor(spiritGoat2);
 
         Creature omenSheep2 = new OmenSheep(BehaviourSelection.RANDOM);
-        //limveldGameMap.at(9, 9).addActor(omenSheep2);
+        limveldGameMap.at(9, 9).addActor(omenSheep2);
 
         Creature goldenBeetle2 = new GoldenBeetle(BehaviourSelection.RANDOM);
-        //limveldGameMap.at(10, 10).addActor(goldenBeetle2);
+        limveldGameMap.at(10, 10).addActor(goldenBeetle2);
 
-        Creature bedofchaos = new BedOfChaos(BehaviourSelection.DEFAULT);
-        //limveldGameMap.at(8, 8).addActor(bedofchaos);
+        Creature bedOfChaos = new BedOfChaos(BehaviourSelection.DEFAULT);
+        limveldGameMap.at(8, 8).addActor(bedOfChaos);
 
         NPC guts = new Guts();
-        //gameMap.at(22, 14).addActor(guts);
+        gameMap.at(22, 14).addActor(guts);
 
         NPC sellen = new Sellen();
-        //gameMap.at(23, 14).addActor(sellen);
+        gameMap.at(23, 14).addActor(sellen);
 
         NPC merchantKale = new MerchantKale();
-        //gameMap.at(24, 14).addActor(merchantKale);
+        gameMap.at(24, 14).addActor(merchantKale);
         
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {

@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.GiveAction;
+import game.capabilities.Giveable;
 import game.enums.Ability;
 import game.enums.Status;
 
@@ -17,7 +18,7 @@ import game.enums.Status;
  *
  * @author Chong Jun Hao
  */
-public abstract class AffectionItem extends Item {
+public abstract class AffectionItem extends Item implements Giveable {
     
     protected final int affectionValue;
     
@@ -33,8 +34,12 @@ public abstract class AffectionItem extends Item {
         this.affectionValue = affectionValue;
     }
     
-    public String applyAffection(Actor giver, Actor target, GameMap map) {
+    public String give(Actor giver, Actor target, GameMap map) {
         StringBuilder result = new StringBuilder();
+        
+        // Transfer the item from giver to target
+        giver.removeItemFromInventory(this);
+        target.addItemToInventory(this);
         
         // Apply the specific affection effect
         result.append(applySpecificEffect(giver, target, map));
@@ -58,10 +63,10 @@ public abstract class AffectionItem extends Item {
      * Gets the appropriate affection message
      */
     private String getAffectionMessage(Actor target) {
-        if (target.getAttribute(Status.AFFECTION) >= 0) {
-            return target + " seems pleased with the gift";
+        if (this.affectionValue > 0) {
+            return target + " seems pleased with the gift! " + target + " affection level towards Farmer has been increased to level " + target.getAttribute(Status.AFFECTION) +  "!";
         } else {
-            return target + " looks disgusted with the gift";
+            return target + " looks disgusted with the gift... " + target + " affection level towards Farmer has been decreased to level " + target.getAttribute(Status.AFFECTION) +  "!";
         }
     }
     

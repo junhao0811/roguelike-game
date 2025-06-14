@@ -14,7 +14,7 @@ import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
 public class DemonKingsDaggers extends WeaponItem implements Sellable {
     
     public DemonKingsDaggers() {
-        super("Demon King's Daggers", 'V', 45, "slashes", 90);
+        super("Demon King's Daggers", 'V', 999, "slashes", 90);
     }
     
     @Override
@@ -27,6 +27,6 @@ public class DemonKingsDaggers extends WeaponItem implements Sellable {
     
     @Override
     public String toString() {
-        return "Demon King's Daggers (Legendary)";
+        return "Demon King's Daggers";
     }
 }

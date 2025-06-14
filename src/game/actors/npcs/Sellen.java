@@ -64,10 +64,10 @@ public class Sellen extends NPC implements Merchant {
         MonologueList monologues = new MonologueList(actor, map);
         
         // Different monologues based on affection level
-        if (getAttribute(Status.AFFECTION) >= 50 && !this.hasCapability(Status.HEAL_POTION_GIVEN)) {
+        if (getAttribute(Status.AFFECTION) >= 50 && !this.hasCapability(Status.DELIVERED_HEAL_POTION)) {
             HealingPotion healPotion = new HealingPotion();
             actor.addItemToInventory(healPotion);
-            this.addCapability(Status.HEAL_POTION_GIVEN);
+            this.addCapability(Status.DELIVERED_HEAL_POTION);
             
             monologues.add("My dear student, you have proven yourself worthy. Please accept this healing draught as a token of my appreciation!");
             monologues.add("This potion contains the essence of ancient knowledge - use it wisely.");

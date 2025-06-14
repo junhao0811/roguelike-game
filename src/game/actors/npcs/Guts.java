@@ -51,11 +51,11 @@ public class Guts extends NPC {
         
         // Different monologues based on affection level
         // Check for special gift at 50+ affection
-        if (getAttribute(Status.AFFECTION) >= 20 && !this.hasCapability(Status.STAMINA_POTION_GIVEN)) {
+        if (getAttribute(Status.AFFECTION) >= 20 && !this.hasCapability(Status.DELIVERED_STAMINA_TONIC)) {
             // Give attack potion
             StaminaTonic staminaPotion = new StaminaTonic();
             actor.addItemToInventory(staminaPotion);
-            this.addCapability(Status.STAMINA_POTION_GIVEN);
+            this.addCapability(Status.DELIVERED_STAMINA_TONIC);
             
             monologues.add("You've proven yourself, warrior. Take this - it will make you even stronger in battle!");
             monologues.add("This potion contains the fury of a thousand battles. Use it to crush your enemies!");

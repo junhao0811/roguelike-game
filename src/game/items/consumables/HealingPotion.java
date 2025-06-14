@@ -12,7 +12,7 @@ public class HealingPotion extends ConsumableItem {
     private static final int HEAL_AMOUNT = 50;
     
     public HealingPotion() {
-        super("Sellen's Heal Potion", 'P', HEAL_AMOUNT, "restores");
+        super("Healing Potion", 'P', HEAL_AMOUNT, "restores");
     }
     
     @Override

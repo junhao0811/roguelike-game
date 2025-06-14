@@ -59,11 +59,12 @@ public class MerchantKale extends NPC implements Merchant {
         MonologueList monologues = new MonologueList(actor, map);
         
         // Different monologues based on affection level
-        if (getAttribute(Status.AFFECTION) >= 50 && !this.hasCapability(Status.SECRET_WEAPON_GIVEN)) {
-            // Give secret weapon
+        // INITIAL >= 50
+        if (getAttribute(Status.AFFECTION) >= 50 && !this.hasCapability(Status.DELIVERED_SECRET_WEAPON)) {
+            // Delivers secret weapon
             DemonKingsDaggers secretWeapon = new DemonKingsDaggers();
             actor.addItemToInventory(secretWeapon);
-            this.addCapability(Status.SECRET_WEAPON_GIVEN);
+            this.addCapability(Status.DELIVERED_SECRET_WEAPON);
             
             monologues.add("Ah, my most valued customer! I've been saving this legendary weapon for someone truly worthy.");
             monologues.add("These are the Demon King's Daggers - a weapon of immense power. Please, accept this as a gift for your loyalty!");
