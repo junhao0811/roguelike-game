@@ -84,6 +84,6 @@ public abstract class ConsumableItem extends Item implements Consumable {
      */
     @Override
     public String toString() {
-        return super.toString() + " (" + effectType + " " + effectValue + ")";
+        return super.toString();
     }
 }

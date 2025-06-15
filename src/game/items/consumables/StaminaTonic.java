@@ -33,6 +33,6 @@ public class StaminaTonic extends ConsumableItem {
                     ActorAttributeOperations.INCREASE, effectValue);
         }
 
-        return actor + " restores " + effectValue + " stamina.";
+        return "\n" + actor + " restores " + effectValue + " stamina.";
     }
 }

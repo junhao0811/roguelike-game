@@ -16,6 +16,8 @@ import game.grounds.Soil;
 import game.grounds.Wall;
 import game.grounds.TeleportationCircle;
 import game.items.Seed;
+import game.items.consumables.HealingPotion;
+import game.items.consumables.StaminaTonic;
 import java.util.Arrays;
 import java.util.List;
 

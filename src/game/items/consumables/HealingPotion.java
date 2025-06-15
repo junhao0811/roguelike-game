@@ -27,6 +27,6 @@ public class HealingPotion extends ConsumableItem {
     @Override
     protected String applyConsumptionEffect(Actor actor, GameMap map) {
         actor.heal(effectValue);
-        return actor + " recovers by " + effectValue + " HP.";
+        return "\n" + actor + " recovers by " + effectValue + " HP.";
     }
 }
