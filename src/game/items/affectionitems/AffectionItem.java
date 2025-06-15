@@ -81,9 +81,9 @@ public abstract class AffectionItem extends Item implements Giveable {
      */
     private String getAffectionMessage(Actor target) {
         if (this.affectionValue > 0) {
-            return target + " seems pleased with the gift!\n" + target + " affection level towards Farmer has been increased to level " + target.getAttribute(Status.AFFECTION) +  "!";
+            return target + " seems pleased with the gift!\n" + target + " affection level towards Farmer has been increased to " + target.getAttribute(Status.AFFECTION) +  "!";
         } else {
-            return target + " looks disgusted with the gift...\n" + target + " affection level towards Farmer has been decreased to level " + target.getAttribute(Status.AFFECTION) +  "!";
+            return target + " looks disgusted with the gift...\n" + target + " affection level towards Farmer has been decreased to " + target.getAttribute(Status.AFFECTION) +  "...";
         }
     }
     

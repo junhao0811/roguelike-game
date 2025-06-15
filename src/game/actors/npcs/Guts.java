@@ -59,7 +59,7 @@ public class Guts extends NPC {
         MonologueList monologues = new MonologueList(actor, map);
         
         // Different monologues based on affection level
-        // Check for special gift at 50+ affection
+        // Check for special gift at 20+ affection
         if (getAttribute(Status.AFFECTION) >= 20 && !this.hasCapability(Status.DELIVERED_STAMINA_TONIC)) {
             // Give attack potion
             StaminaTonic staminaPotion = new StaminaTonic();
