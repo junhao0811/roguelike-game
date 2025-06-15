@@ -38,7 +38,7 @@ public class ReproduceBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        if (condition.check(actor, map)) {
+        if (condition.check(actor, map.locationOf(actor))) {
             return new ReproduceAction(reproducible);
         }
 

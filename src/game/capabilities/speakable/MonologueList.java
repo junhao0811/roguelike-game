@@ -47,7 +47,7 @@ public class MonologueList {
      * added once it passes the condition
      */
     public void add(String monologue, Condition condition) {
-        if (condition.check(actor, map)) {
+        if (condition.check(actor, map.locationOf(actor))) {
             add(monologue);
         }
     }

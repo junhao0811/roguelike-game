@@ -52,7 +52,7 @@ public class BerserkBehaviour implements Behaviour {
             if (destination.containsAnActor()) {
                 Actor target  = destination.getActor();
 
-                if (condition.check(target, map)) {
+                if (condition.check(target, map.locationOf(actor))) {
                     actions.add(new AttackAction(target));
                 }
             }
