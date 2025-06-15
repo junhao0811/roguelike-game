@@ -1,7 +1,7 @@
 package game.conditions.comparisons;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 
 /**
  * Class representing the runes comparison condition
@@ -21,7 +21,7 @@ public class RunesComparisonCondition extends ComparisonCondition {
     }
 
     @Override
-    public boolean check(Actor actor, GameMap map) {
+    public boolean check(Actor actor, Location location) {
         return super.comparisonCheck(actor.getBalance());
     }
 }

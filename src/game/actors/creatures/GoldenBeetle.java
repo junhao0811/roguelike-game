@@ -27,7 +27,7 @@ import game.items.Egg;
  * @version 22.0.1
  */
 public class GoldenBeetle extends Creature implements Reproducible, Hatchable, Consumable {
-
+    
     /**
      * Constructor
      *
@@ -36,55 +36,56 @@ public class GoldenBeetle extends Creature implements Reproducible, Hatchable, C
     public GoldenBeetle(BehaviourSelection selection) {
         super("Golden Beetle", 'b', 25, selection);
     }
-
+    
     /**
      * Constructor with default behaviour selection as default
      */
     public GoldenBeetle() {
         super("Golden Beetle", 'b', 25);
     }
-
+    
     @Override
     protected void setup() {
         this.addBehaviour(Integer.MAX_VALUE, new WanderBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 1, new FollowBehaviour());
         this.addBehaviour(Integer.MAX_VALUE - 2,
-                new ReproduceBehaviour(this, new CounterCondition(5)));
+            new ReproduceBehaviour(this, new CounterCondition(5)));
         this.addCapability(Ability.PRODUCE_EGG);
     }
-
+    
     @Override
     public String reproduce(Actor actor, Location location) {
         Egg<GoldenBeetle> egg = new Egg<>(this, new NearbyCondition(Status.CURSED),
-                "Golden");
+            "Golden");
         egg.addEffect(new RestoreAttributeEffect(BaseActorAttributes.STAMINA, 20));
         location.addItem(egg);
-
+        
         return this + " produces a new " + egg;
     }
-
+    
     @Override
     public Creature hatch() {
         return new GoldenBeetle(getSelection());
     }
-
+    
     @Override
     public String consume(Actor actor, GameMap map) {
         actor.heal(15);
         actor.addBalance(1000);
         this.unconscious(actor, map);
-
-        return "";
+        
+        return "\n" + actor + " recovers 15 health" +
+            "\n" + actor + " gains 1000 Runes";
     }
-
+    
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
-
+        
         if (otherActor.hasCapability(Ability.CONSUME)) {
             actions.add(new ConsumeAction(this));
         }
-
+        
         return actions;
     }
 }

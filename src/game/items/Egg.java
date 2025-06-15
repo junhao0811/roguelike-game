@@ -28,7 +28,7 @@ import java.util.Random;
  * @version 22.0.1
  */
 public class Egg<C extends Creature & Hatchable> extends Item implements Consumable {
-
+    
     private final C creature;
     private final Condition condition;
     private final EffectList effects = new EffectList();
@@ -41,7 +41,7 @@ public class Egg<C extends Creature & Hatchable> extends Item implements Consuma
         this.creature = creature;
         this.condition = condition;
     }
-
+    
     /**
      * Constructor with no prefix as default
      */
@@ -61,37 +61,37 @@ public class Egg<C extends Creature & Hatchable> extends Item implements Consuma
     public void tick(Location location) {
         Display display = new Display();
         Random random = new Random();
-
-        if (condition.check(creature, location.map())) {
+        
+        if (condition.check(creature, location)) {
             Creature child = creature.hatch();
-
+            
             if (!location.canActorEnter(child)) {
                 List<Location> destinations = new ArrayList<>();
-
+                
                 for (Exit exit : location.getExits()) {
                     Location destination = exit.getDestination();
-
+                    
                     if (destination.canActorEnter(child)) {
                         destinations.add(destination);
                     }
                 }
-
+                
                 if (destinations.isEmpty()) {
                     display.println(this + " is ready to hatch but is unable to as there is no space");
                     return;
                 }
-
+                
                 destinations.get(random.nextInt(destinations.size())).addActor(child);
-
+                
             } else {
                 location.addActor(child);
             }
-
+            
             location.removeItem(this);
             display.println("A new " + child + " hatches from the " + this + "!");
         }
     }
-
+    
     /**
      * Allows the provided actor to consume the Egg and apply its specific effects.
      * The Egg is removed from the actor's inventory upon consumption.
@@ -102,19 +102,19 @@ public class Egg<C extends Creature & Hatchable> extends Item implements Consuma
     public String consume(Actor actor, GameMap map) {
         StringBuilder result = new StringBuilder();
         actor.removeItemFromInventory(this);
-
+        
         for (Effect effect : effects) {
             result.append("\n").append(effect.applyEffect(actor, map));
-
+            
             if (!actor.isConscious()) {
                 actor.unconscious(map);
                 return result + "\n" + actor + " met their demise at the hands of the " + this;
             }
         }
-
+        
         return result.toString();
     }
-
+    
     /**
      * Appends the contents of another Effects list to the EffectList
      * tied to consuming the Egg
@@ -124,7 +124,7 @@ public class Egg<C extends Creature & Hatchable> extends Item implements Consuma
     public void addEffect(EffectList effects) {
         this.effects.add(effects);
     }
-
+    
     /**
      * Appends the contents of any List&lt;Effect&gt; to the EffectList
      * tied to the stock
@@ -134,7 +134,7 @@ public class Egg<C extends Creature & Hatchable> extends Item implements Consuma
     public void addEffect(List<Effect> effects) {
         this.effects.add(effects);
     }
-
+    
     /**
      * Appends a single Effect to the EffectList tied to the stock
      *
@@ -143,7 +143,7 @@ public class Egg<C extends Creature & Hatchable> extends Item implements Consuma
     public void addEffect(Effect effect) {
         this.effects.add(effect);
     }
-
+    
     /**
      * List of allowable actions that the egg can perform to its owner.
      *
@@ -154,11 +154,11 @@ public class Egg<C extends Creature & Hatchable> extends Item implements Consuma
     @Override
     public ActionList allowableActions(Actor owner, GameMap map) {
         ActionList actions = new ActionList();
-
+        
         if (owner.hasCapability(Ability.CONSUME)) {
             actions.add(new ConsumeAction(this));
         }
-
+        
         return actions;
     }
 }

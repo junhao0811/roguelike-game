@@ -1,7 +1,7 @@
 package game.conditions;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 
 public class CounterCondition extends Condition {
 
@@ -13,7 +13,7 @@ public class CounterCondition extends Condition {
     }
 
     @Override
-    public boolean check(Actor actor, GameMap map) {
+    public boolean check(Actor actor, Location location) {
         counter ++;
         return counter % value == 0;
     }
