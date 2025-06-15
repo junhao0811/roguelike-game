@@ -96,7 +96,18 @@ public abstract class Creature extends Actor {
     public BehaviourSelection getSelection() {
         return selection;
     }
-
+    
+    /**
+     * Determines and executes the action to be performed by the creature during its turn.
+     * The action is selected based on the set of behaviours the creature has and its behaviour selection strategy.
+     * If no behaviours are applicable or no action is selected, a DoNothingAction is returned.
+     *
+     * @param actions A list of allowable actions the creature can perform.
+     * @param lastAction The action the creature performed in the last turn.
+     * @param map The current game map where the creature is located.
+     * @param display The display used to show output to the user.
+     * @return The selected action for the current turn, or a DoNothingAction if no actions are determined.
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         Action selectedAction = null;
