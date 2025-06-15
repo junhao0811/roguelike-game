@@ -1,6 +1,5 @@
 package game.capabilities;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 /**
  * Interface defining a contract for how items can affect NPC affection levels

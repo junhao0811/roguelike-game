@@ -11,9 +11,8 @@ import game.enums.Ability;
 /**
  * Abstract base class for consumable items
  * Follows DRY principle by providing common consumable functionality
- * Template Method pattern for consumption behavior
  *
- * @author Ng Jun Xian
+ * @author Ng Jun Xian, modified by Chong Jun Hao
  */
 public abstract class ConsumableItem extends Item implements Consumable {
     
@@ -34,6 +33,14 @@ public abstract class ConsumableItem extends Item implements Consumable {
         this.effectType = effectType;
     }
     
+    /**
+     * Consumes the item, applying its effect to the actor
+     * This method is called when the item is consumed
+     *
+     * @param actor the actor consuming the item
+     * @param map the game map
+     * @return a description of the consumption effect
+     */
     @Override
     public String consume(Actor actor, GameMap map) {
         // Remove item from actor's inventory
@@ -44,11 +51,19 @@ public abstract class ConsumableItem extends Item implements Consumable {
     }
     
     /**
-     * Template method for specific consumption effects
+     * Abstract method for specific consumption effects
      * Subclasses override this for their unique effects
      */
     protected abstract String applyConsumptionEffect(Actor actor, GameMap map);
     
+    /**
+     * Returns a list of actions that can be performed with this item
+     * This method is called to populate the action menu for the item
+     *
+     * @param owner the actor owning the item
+     * @param map the current game map
+     * @return a list of allowable actions for this item
+     */
     @Override
     public ActionList allowableActions(Actor owner, GameMap map) {
         ActionList actions = new ActionList();
@@ -61,6 +76,12 @@ public abstract class ConsumableItem extends Item implements Consumable {
         return actions;
     }
     
+    /**
+     * Returns a string representation of the consumable item
+     * This is used for displaying the item in menus and descriptions
+     *
+     * @return a string representation of the consumable item
+     */
     @Override
     public String toString() {
         return super.toString() + " (" + effectType + " " + effectValue + ")";

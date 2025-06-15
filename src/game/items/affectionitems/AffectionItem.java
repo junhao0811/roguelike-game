@@ -12,9 +12,9 @@ import game.enums.Ability;
 import game.enums.Status;
 
 /**
- * Abstract base class for all items that can influence NPC affection
- * Implements the Affection interface and extends Item
- * Follows Template Method pattern for common affection item behavior
+ * This abstract class represents an item that can be given to another actor and affects their affection levels.
+ * This is an abstract class that mandates implementation of specific affection effects for subclasses.
+ * The affection value can be positive or negative, influencing how the target actor perceives the giver.
  *
  * @author Chong Jun Hao
  */
@@ -34,6 +34,14 @@ public abstract class AffectionItem extends Item implements Giveable {
         this.affectionValue = affectionValue;
     }
     
+    /**
+     * Gives the affection item to another npc, applying the specific affection effect.
+     *
+     * @param giver the actor giving the affection item
+     * @param target the target actor receiving the affection item
+     * @param map the game map
+     * @return a description of the affection change
+     */
     public String give(Actor giver, Actor target, GameMap map) {
         StringBuilder result = new StringBuilder();
         
@@ -54,13 +62,22 @@ public abstract class AffectionItem extends Item implements Giveable {
     }
     
     /**
-     * Template method for specific affection effects
+     * Abstract method for specific affection effects
      * Subclasses override this for unique behaviors
+     *
+     * @param giver the actor giving the item
+     * @param receiver the actor receiving the item
+     * @param map the game map
+     * @return a description of the specific effect applied
      */
     protected abstract String applySpecificEffect(Actor giver, Actor receiver, GameMap map);
     
     /**
-     * Gets the appropriate affection message
+     * Generates a message based on the affection value after giving the item.
+     * Positive values indicate increased affection, negative values indicate decreased affection.
+     *
+     * @param target the target actor receiving the item
+     * @return a message indicating the affection change
      */
     private String getAffectionMessage(Actor target) {
         if (this.affectionValue > 0) {

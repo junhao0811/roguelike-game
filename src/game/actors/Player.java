@@ -17,7 +17,7 @@ import game.enums.Status;
 /**
  * Class representing the Player
  *
- * @author Adrian Kristanto
+ * @author Adrian Kristanto, modified by Chong Jun Hao
  */
 public class Player extends Actor {
     

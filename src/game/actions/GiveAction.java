@@ -7,7 +7,6 @@ import game.items.affectionitems.AffectionItem;
 
 /**
  * Action for giving items to NPCs
- * Completely avoids downcasting using polymorphism
  *
  * @author Ng Jun Xian, modified by Chong Jun Hao
  */
@@ -17,12 +16,25 @@ public class GiveAction extends Action {
     private final AffectionItem gift;
     private String direction = "";
     
+    /**
+     * Constructor for GiveAction
+     *
+     * @param target the actor receiving the gift
+     * @param gift the item being given
+     * @param direction the direction to the target, if applicable
+     */
     public GiveAction(Actor target, AffectionItem gift, String direction) {
         this.target = target;
         this.gift = gift;
         this.direction = " at " + direction;
     }
     
+    /**
+     * Constructor for GiveAction without direction
+     *
+     * @param target the actor receiving the gift
+     * @param gift the item being given
+     */
     public GiveAction(Actor target, AffectionItem gift) {
         this.target = target;
         this.gift = gift;

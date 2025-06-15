@@ -7,9 +7,8 @@ import game.capabilities.Consumable;
 
 /**
  * Class representing an action to consume an item
- * Follows the same pattern as EatAction
  *
- * @author Ng Jun Xian
+ * @author Ng Jun Xian, modified by Chong Jun Hao
  */
 public class ConsumeAction extends Action {
     

@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 /**
  * Special Stamina potion given by Guts at high affection
  * Extends ConsumableItem for common consumption behavior
+ *
+ * @author Chong Jun Hao
  */
 public class StaminaTonic extends ConsumableItem {
     
@@ -17,6 +19,13 @@ public class StaminaTonic extends ConsumableItem {
         super("Stamina Tonic", 'S', STAMINA_RESTORE, "restores");
     }
     
+    /**
+     * Applies the stamina restoration effect to the actor consuming the tonic.
+     *
+     * @param actor the actor consuming the tonic
+     * @param map the current game map
+     * @return a message indicating the stamina restoration
+     */
     @Override
     protected String applyConsumptionEffect(Actor actor, GameMap map) {
         if (actor.hasAttribute(BaseActorAttributes.STAMINA)) {
@@ -24,6 +33,6 @@ public class StaminaTonic extends ConsumableItem {
                     ActorAttributeOperations.INCREASE, effectValue);
         }
 
-        return "";
+        return actor + " restores " + effectValue + " stamina.";
     }
 }

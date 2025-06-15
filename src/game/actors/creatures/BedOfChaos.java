@@ -91,10 +91,14 @@ public class BedOfChaos extends Creature implements Growable {
         String result = growthDescription.toString().trim();
         return result.isEmpty() ? this + " cannot grow further" : result;
     }
-
+    
     /**
-     * Applies the effects of a grown part
+     * Applies effects through the part's effect system
+     * Returns a string describing the effects applied
      *
+     * @param part the BossPart being applied
+     * @param map the current game map
+     * @return a string describing the effects applied by the part
      */
     private String applyPartEffects(BossPart part, GameMap map) {
         StringBuilder effects = new StringBuilder();
@@ -112,6 +116,8 @@ public class BedOfChaos extends Creature implements Growable {
      * Calculates total attack bonus from all grown parts
      * Uses the getAttackBonus() method instead of effects system
      * Refactored for better readability and performance
+     *
+     * @return the total attack bonus from all growth parts
      */
     private int getTotalAttackBonus() {
         int totalBonus = 0;
@@ -140,7 +146,10 @@ public class BedOfChaos extends Creature implements Growable {
     /**
      * Returns the behaviours of the Bed of Chaos
      * Overrides the getBehaviours method to include growth and smack behaviours
+     * drops a BossTrophy when unconscious
      *
+     * @param actor the actor causing the Bed of Chaos to become unconscious
+     * @param map the game map where the Bed of Chaos is located
      * @return a list of behaviours for the Bed of Chaos
      */
     @Override
@@ -155,24 +164,6 @@ public class BedOfChaos extends Creature implements Growable {
             BossTrophy bossTrophy = new BossTrophy();
             currentLocation.addItem(bossTrophy);
             result = this + " drops a trophy as a proof of your victory!";
-        }
-        
-        return result;
-    }
-    
-    /**
-     * Handles dropping BossTrophy when Bed of Chaos dies
-     * Always drops (100% drop rate)
-     */
-    private String dropBossTrophy(GameMap map) {
-        String result = null;
-        Location currentLocation = map.locationOf(this);
-        if (currentLocation != null) {
-            BossTrophy bossTrophy = new BossTrophy();
-            currentLocation.addItem(bossTrophy);
-            
-            
-            result = "The " + this + " drops a Boss Trophy as proof of your victory!";
         }
         
         return result;

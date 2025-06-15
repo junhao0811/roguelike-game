@@ -5,14 +5,13 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * Interface representing a Consumable item
- * Follows the same pattern as Edible interface
  *
- * @author Ng Jun Xian
+ * @author Ng Jun Xian, modified by Chong Jun Hao
  */
 public interface Consumable {
     
     /**
-     * Method to house the consumption logic
+     * the consumption logic
      *
      * @param actor the actor consuming the item
      * @param map the current game map

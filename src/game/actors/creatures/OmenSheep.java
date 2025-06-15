@@ -59,6 +59,15 @@ public class OmenSheep extends Creature implements Curable, Reproducible, Hatcha
         this.addCapability(Status.CURSED);
     }
     
+    /**
+     * Handles the unconscious state of the Omen Sheep by removing it from the map,
+     * and potentially dropping a Sacred Tear at its current location.
+     *
+     * @param actor The actor causing the Omen Sheep to become unconscious.
+     * @param map The game map where the unconscious action takes place.
+     * @return A string message indicating the result of the unconscious action,
+     *         including details about the Sacred Tear drop if applicable.
+     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
         // Get the location before removing the sheep

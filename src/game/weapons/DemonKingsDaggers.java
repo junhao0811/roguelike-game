@@ -13,6 +13,9 @@ import game.effects.attributeeffects.IncreaseMaxAttributeEffect;
  */
 public class DemonKingsDaggers extends WeaponItem implements Sellable {
     
+    /**
+     * Constructor for the Demon King's Daggers
+     */
     public DemonKingsDaggers() {
         super("Demon King's Daggers", 'V', 999, "slashes", 90);
     }

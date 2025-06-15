@@ -45,6 +45,15 @@ public class Guts extends NPC {
         
     }
     
+    /**
+     * Generates and returns a list of monologues for Guts based on the affection level
+     * between the actor and Guts. The monologues may vary depending on predefined
+     * affection thresholds and certain capabilities.
+     *
+     * @param actor the actor interacting with Guts
+     * @param map   the current game map
+     * @return a MonologueList containing Guts' monologues
+     */
     @Override
     public MonologueList getMonologues(Actor actor, GameMap map) {
         MonologueList monologues = new MonologueList(actor, map);

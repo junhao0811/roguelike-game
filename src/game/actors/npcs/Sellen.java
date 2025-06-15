@@ -59,6 +59,13 @@ public class Sellen extends NPC implements Merchant {
         return stocks;
     }
     
+    /**
+     * Returns a list of monologues based on the actor's affection level towards Sellen.
+     *
+     * @param actor the actor interacting with Sellen
+     * @param map   the current game map
+     * @return a MonologueList containing Sellen's monologues
+     */
     @Override
     public MonologueList getMonologues(Actor actor, GameMap map) {
         MonologueList monologues = new MonologueList(actor, map);

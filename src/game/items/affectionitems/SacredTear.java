@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * A sacred tear that provides positive affection
- * Random drop from OmenSheep with low drop rate
+ * Heals the receiver slightly and boosts affection
  *
  * @author Chong Jun Hao
  */
@@ -21,6 +21,14 @@ public class SacredTear extends AffectionItem {
         super("Sacred Tear", 'S', POSITIVE_AFFECTION);
     }
     
+    /**
+     * Applies the specific effect of the Sacred Tear when given to an actor
+     *
+     * @param giver     the actor giving the item
+     * @param receiver  the actor receiving the item
+     * @param map       the current game map
+     * @return a string describing the effect of giving the item
+     */
     @Override
     protected String applySpecificEffect(Actor giver, Actor receiver, GameMap map) {
         StringBuilder result = new StringBuilder();

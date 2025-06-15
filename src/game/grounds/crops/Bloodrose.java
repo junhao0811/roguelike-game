@@ -49,6 +49,7 @@ public class Bloodrose extends Crop {
                 actor.hurt(damage);
                 display.println(this + " hurts " + actor + " by " + damage + " points");
                 
+                // attach a ThornedBloom to the actor whenever they stand nearby a Bloodrose
                 ThornedBloom thornedBloom = new ThornedBloom();
                 
                 actor.addItemToInventory(thornedBloom);

@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.items.Item;
 
 /**
- *
  * A thorned bloom that causes bleeding and negative affection
  * Dropped from Bloodrose when farmer is hurt
  *
@@ -30,6 +29,14 @@ public class ThornedBloom extends AffectionItem {
         this.addCapability(Ability.CAUSE_BLEEDING);
     }
     
+    /**
+     * Applies the specific effect of the Thorned Bloom when given to an actor
+     *
+     * @param giver     the actor giving the item
+     * @param receiver  the actor receiving the item
+     * @param map       the current game map
+     * @return a string describing the effect of giving the item
+     */
     @Override
     protected String applySpecificEffect(Actor giver, Actor receiver, GameMap map) {
         StringBuilder result = new StringBuilder();
@@ -55,7 +62,12 @@ public class ThornedBloom extends AffectionItem {
     }
     
     /**
-     * Causes bleeding damage to the carrier each turn
+     * Applies the bleeding effect to the actor if they have the ability to bleed
+     * and are not already bleeding.
+     * If the actor is already bleeding, it continues to apply damage.
+     *
+     * @param currentLocation the current location of the actor
+     * @param actor           the actor that may bleed
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {

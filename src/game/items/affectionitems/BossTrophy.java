@@ -20,6 +20,15 @@ public class BossTrophy extends AffectionItem {
         super("Boss Trophy", 'B', POSITIVE_AFFECTION);
     }
     
+    /**
+     * Applies the specific effect of giving the trophy to an NPC
+     * Increases affection and provides a prestige boost
+     *
+     * @param giver    the actor giving the trophy
+     * @param receiver the actor receiving the trophy
+     * @param map      the current game map
+     * @return a message describing the effect of giving the trophy
+     */
     @Override
     protected String applySpecificEffect(Actor giver, Actor receiver, GameMap map) {
         return receiver + " is impressed by the legendary trophy" +

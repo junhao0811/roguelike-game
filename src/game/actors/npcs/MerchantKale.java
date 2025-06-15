@@ -54,12 +54,21 @@ public class MerchantKale extends NPC implements Merchant {
         return stocks;
     }
     
+    /**
+     * Generates and returns a list of monologues for the merchant based on the affection level
+     * between the actor and the merchant. The monologues may vary depending on predefined
+     * affection thresholds and certain merchant capabilities.
+     *
+     * @param actor The actor interacting with the merchant
+     * @param map The game map where the interaction is taking place
+     * @return A MonologueList containing various monologues specific to the current affection level
+     *         and conditions
+     */
     @Override
     public MonologueList getMonologues(Actor actor, GameMap map) {
         MonologueList monologues = new MonologueList(actor, map);
         
         // Different monologues based on affection level
-        // INITIAL >= 50
         if (getAttribute(Status.AFFECTION) >= 50 && !this.hasCapability(Status.DELIVERED_SECRET_WEAPON)) {
             // Delivers secret weapon
             DemonKingsDaggers secretWeapon = new DemonKingsDaggers();
